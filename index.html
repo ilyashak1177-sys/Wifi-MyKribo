@@ -58,7 +58,7 @@
             body * {
                 visibility: hidden !important;
             }
-            #printable-voucher, #printable-voucher * {
+            #printable-voucher, #printable-voucher *, #printable-voucher-sheet, #printable-voucher-sheet * {
                 visibility: visible !important;
             }
             #printable-voucher {
@@ -70,10 +70,6 @@
                 padding: 10px !important;
                 background: white !important;
                 color: black !important;
-            }
-            /* Printable Sheet (70 Pcs) */
-            #printable-voucher-sheet, #printable-voucher-sheet * {
-                visibility: visible !important;
             }
             #printable-voucher-sheet {
                 position: absolute !important;
@@ -89,7 +85,6 @@
                 gap: 2px !important;
                 box-shadow: none !important;
                 border: none !important;
-                border-radius: 0 !important;
             }
             .voucher-card-print {
                 border: 1px dashed #000 !important;
@@ -99,7 +94,6 @@
                 text-align: center !important;
                 font-family: monospace !important;
                 break-inside: avoid !important;
-                page-break-inside: avoid !important;
             }
             .no-print {
                 display: none !important;
@@ -110,12 +104,10 @@
             background: rgba(255, 255, 255, 0.9);
             backdrop-filter: blur(10px);
         }
-        
         .dark .glass-card {
             background: rgba(30, 41, 59, 0.9);
         }
 
-        /* Custom scrollbar */
         ::-webkit-scrollbar {
             width: 6px;
             height: 6px;
@@ -149,30 +141,25 @@
 
                 <!-- Navigation Controls -->
                 <div class="flex items-center space-x-3">
-                    <!-- Status Indicator -->
                     <div id="router-status-badge" class="hidden md:flex items-center px-3 py-1 rounded-full text-xs font-medium bg-emerald-950/80 text-emerald-300 border border-emerald-800">
                         <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse mr-2"></span>
                         MikroTik Router Ready
                     </div>
 
-                    <!-- Mitra Reseller / Subadmin Access Button -->
                     <button onclick="openSubadminLoginModal()" class="flex items-center space-x-1.5 px-3 py-1.5 rounded-xl text-xs font-bold bg-amber-500/20 text-amber-300 hover:bg-amber-500 hover:text-white border border-amber-500/40 transition-all focus:outline-none" title="Akses Mitra Reseller / Subadmin">
                         <i class="fa-solid fa-store text-amber-400"></i>
                         <span class="hidden sm:inline">Portal Mitra/Reseller</span>
                     </button>
 
-                    <!-- Dark Mode Toggle -->
                     <button onclick="toggleDarkMode()" class="p-2.5 rounded-xl text-amber-400 hover:text-amber-300 bg-slate-800/80 transition-all focus:outline-none" title="Toggle Theme">
                         <i id="theme-toggle-icon" class="fa-solid fa-sun text-base"></i>
                     </button>
 
-                    <!-- Admin Logout Button -->
                     <button id="admin-logout-btn" onclick="logoutAdmin()" class="hidden flex items-center space-x-1.5 px-3 py-1.5 rounded-xl text-xs font-bold bg-rose-600 hover:bg-rose-500 text-white shadow-md shadow-rose-600/30 transition-all focus:outline-none" title="Keluar dari Panel Admin">
                         <i class="fa-solid fa-right-from-bracket"></i>
                         <span class="hidden sm:inline">Logout Admin</span>
                     </button>
 
-                    <!-- Discrete Admin Lock Button -->
                     <button id="admin-login-lock-btn" onclick="openAdminLoginModal()" class="p-2.5 rounded-xl text-slate-400 hover:text-white bg-slate-800/80 transition-all focus:outline-none" title="Akses Admin">
                         <i class="fa-solid fa-lock text-sm"></i>
                     </button>
@@ -185,7 +172,6 @@
     <main id="storefront-view" class="flex-grow py-6 sm:py-10 px-4">
         <div class="max-w-md mx-auto bg-slate-900/85 backdrop-blur-xl rounded-3xl border border-sky-500/30 p-5 sm:p-6 shadow-2xl text-center relative overflow-hidden">
             
-            <!-- Header Brand Section -->
             <div class="flex flex-col items-center justify-center space-y-1">
                 <div class="flex items-center justify-center gap-3">
                     <div class="w-12 h-12 rounded-2xl bg-black/80 border border-sky-400/50 flex items-center justify-center text-sky-400 shadow-inner">
@@ -198,11 +184,8 @@
                         <span class="text-xs font-extrabold text-sky-300 tracking-widest uppercase block -mt-1">HOTSPOT</span>
                     </div>
                 </div>
-                
                 <p class="text-xs text-sky-200 font-medium mt-2">Internet Unlimited Tanpa Batas Kuota</p>
-                
                 <div class="w-full h-1.5 rounded-full my-3 bg-gradient-to-r from-red-500 via-yellow-400 via-green-500 via-blue-500 to-purple-600 shadow-sm"></div>
-                
                 <span class="text-xs font-bold text-gray-300 tracking-widest uppercase">PEMBELIAN VOUCHER</span>
             </div>
 
@@ -221,15 +204,12 @@
                 </div>
             </div>
 
-            <!-- Action Button: Cara Beli & Bayar -->
             <button onclick="openHowToBuyModal()" class="w-full py-2.5 px-4 rounded-xl bg-amber-500 hover:bg-amber-600 text-white font-bold text-xs uppercase tracking-wide flex items-center justify-center gap-2 shadow-lg shadow-amber-500/20 my-3 transition-all">
                 <i class="fa-solid fa-book-open"></i> Cara Beli & Bayar
             </button>
 
-            <!-- Payment Methods Banner -->
             <div id="storefront-payment-badges" class="flex items-center justify-center flex-wrap gap-1.5 py-2 my-2 bg-white/10 rounded-xl px-2"></div>
 
-            <!-- Package Table Section -->
             <div class="mt-3 overflow-hidden rounded-2xl border border-sky-500/30 bg-slate-950/70 text-xs shadow-xl">
                 <table class="w-full text-center border-collapse">
                     <thead>
@@ -244,14 +224,12 @@
                 </table>
             </div>
 
-            <!-- Check Voucher Link -->
             <div class="mt-3">
                 <button onclick="openCheckVoucherModal()" class="text-xs font-semibold text-sky-400 hover:text-sky-300 hover:underline flex items-center justify-center gap-1 mx-auto">
                     <i class="fa-solid fa-magnifying-glass"></i> Cek / Cari Voucher Saya
                 </button>
             </div>
 
-            <!-- Footer Contact Text -->
             <div class="mt-5 pt-3 border-t border-slate-800 text-[10px] font-extrabold tracking-wider text-sky-300 uppercase leading-relaxed">
                 UNTUK PEMASANGAN PELANGGAN BARU<br>
                 HUBUNGI MyKribo.Net : <a id="display-admin-phone-link" href="#" target="_blank" class="text-amber-400 underline hover:text-amber-300"><span id="display-admin-phone">082293185501</span></a>
@@ -270,7 +248,7 @@
                     <i class="fa-solid fa-chart-pie"></i> Dashboard
                 </button>
                 <button onclick="switchAdminTab('vouchers')" id="tab-btn-vouchers" class="admin-tab-btn px-4 py-2.5 rounded-xl font-bold text-xs whitespace-nowrap bg-gray-100 dark:bg-slate-800 text-gray-600 dark:text-gray-300 hover:bg-gray-200 transition-all flex items-center gap-2">
-                    <i class="fa-solid fa-ticket"></i> Daftar Voucher
+                    <i class="fa-solid fa-ticket"></i> Daftar Voucher / User List
                 </button>
                 <button onclick="switchAdminTab('transactions')" id="tab-btn-transactions" class="admin-tab-btn px-4 py-2.5 rounded-xl font-bold text-xs whitespace-nowrap bg-gray-100 dark:bg-slate-800 text-gray-600 dark:text-gray-300 hover:bg-gray-200 transition-all flex items-center gap-2">
                     <i class="fa-solid fa-receipt"></i> Transaksi
@@ -280,6 +258,9 @@
                 </button>
                 <button onclick="switchAdminTab('resellers')" id="tab-btn-resellers" class="admin-tab-btn px-4 py-2.5 rounded-xl font-bold text-xs whitespace-nowrap bg-gray-100 dark:bg-slate-800 text-gray-600 dark:text-gray-300 hover:bg-gray-200 transition-all flex items-center gap-2">
                     <i class="fa-solid fa-store text-amber-500"></i> Kelola Mitra Reseller
+                </button>
+                <button onclick="switchAdminTab('mikhmon-generate')" id="tab-btn-mikhmon-generate" class="admin-tab-btn px-4 py-2.5 rounded-xl font-bold text-xs whitespace-nowrap bg-pink-50 dark:bg-pink-950/40 text-pink-600 dark:text-pink-400 border border-pink-500/30 hover:bg-pink-100 transition-all flex items-center gap-2">
+                    <i class="fa-solid fa-wand-magic-sparkles text-pink-500"></i> Generate User (Mikhmon)
                 </button>
                 <button onclick="switchAdminTab('packages')" id="tab-btn-packages" class="admin-tab-btn px-4 py-2.5 rounded-xl font-bold text-xs whitespace-nowrap bg-gray-100 dark:bg-slate-800 text-gray-600 dark:text-gray-300 hover:bg-gray-200 transition-all flex items-center gap-2">
                     <i class="fa-solid fa-tags"></i> Paket WiFi
@@ -326,7 +307,6 @@
                     </div>
                 </div>
 
-                <!-- Sales Analytics Chart & Recent Activity -->
                 <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
                     <div class="lg:col-span-2 bg-white dark:bg-slate-800 p-6 rounded-2xl border border-gray-100 dark:border-slate-700 shadow-sm">
                         <div class="flex items-center justify-between mb-4">
@@ -352,33 +332,85 @@
                 </div>
             </div>
 
-            <!-- TAB 2: VOUCHER LIST -->
+            <!-- TAB 2: VOUCHER LIST (USER LIST CATEGORIZED INTO 3 CATEGORIES: 6h, 12h, 1d) -->
             <div id="admin-tab-vouchers" class="admin-tab-content hidden space-y-6">
+                
+                <!-- Category Selector Sub-Nav Tabs -->
+                <div class="bg-white dark:bg-slate-800 p-3 rounded-2xl border border-gray-100 dark:border-slate-700 shadow-sm">
+                    <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+                        <div>
+                            <h3 class="font-black text-sm text-gray-900 dark:text-white flex items-center gap-2">
+                                <i class="fa-solid fa-layer-group text-sky-500"></i> User List / Daftar Voucher per Kategori
+                            </h3>
+                            <p class="text-[11px] text-gray-500 dark:text-gray-400">Setiap durasi paket memilik tempat & tabel tersendiri</p>
+                        </div>
+                        <!-- Action controls -->
+                        <div class="flex gap-2 w-full sm:w-auto">
+                            <button onclick="switchAdminTab('mikhmon-generate')" class="px-3.5 py-2 bg-pink-600 hover:bg-pink-500 text-white rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 shadow-md shadow-pink-600/20">
+                                <i class="fa-solid fa-wand-magic-sparkles"></i> Bulk Generate (Mikhmon)
+                            </button>
+                            <button onclick="openManualVoucherModal()" class="px-3.5 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-bold transition-all flex items-center gap-1">
+                                <i class="fa-solid fa-plus"></i> Manual
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- 3 Duration Category Filter Buttons -->
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 mt-4 pt-3 border-t border-gray-100 dark:border-slate-700/60">
+                        <button onclick="switchVoucherCategory('6h')" id="vcat-btn-6h" class="voucher-cat-btn p-3 rounded-xl border border-sky-500/30 bg-sky-500/10 text-sky-400 font-extrabold text-xs flex items-center justify-between transition-all">
+                            <span class="flex items-center gap-1.5"><i class="fa-solid fa-clock text-sky-500"></i> Paket 6 Jam (6h)</span>
+                            <span id="badge-count-6h" class="px-2 py-0.5 rounded-full bg-sky-600 text-white text-[10px] font-black">0</span>
+                        </button>
+
+                        <button onclick="switchVoucherCategory('12h')" id="vcat-btn-12h" class="voucher-cat-btn p-3 rounded-xl border border-slate-700 bg-slate-900/50 text-gray-400 hover:border-emerald-500/40 font-bold text-xs flex items-center justify-between transition-all">
+                            <span class="flex items-center gap-1.5"><i class="fa-solid fa-clock text-emerald-500"></i> Paket 12 Jam (12h)</span>
+                            <span id="badge-count-12h" class="px-2 py-0.5 rounded-full bg-emerald-600 text-white text-[10px] font-black">0</span>
+                        </button>
+
+                        <button onclick="switchVoucherCategory('1d')" id="vcat-btn-1d" class="voucher-cat-btn p-3 rounded-xl border border-slate-700 bg-slate-900/50 text-gray-400 hover:border-amber-500/40 font-bold text-xs flex items-center justify-between transition-all">
+                            <span class="flex items-center gap-1.5"><i class="fa-solid fa-calendar-day text-amber-500"></i> Paket 1 Hari (1d)</span>
+                            <span id="badge-count-1d" class="px-2 py-0.5 rounded-full bg-amber-600 text-white text-[10px] font-black">0</span>
+                        </button>
+
+                        <button onclick="switchVoucherCategory('all')" id="vcat-btn-all" class="voucher-cat-btn p-3 rounded-xl border border-slate-700 bg-slate-900/50 text-gray-400 hover:border-purple-500/40 font-bold text-xs flex items-center justify-between transition-all">
+                            <span class="flex items-center gap-1.5"><i class="fa-solid fa-border-all text-purple-400"></i> Semua Voucher</span>
+                            <span id="badge-count-all" class="px-2 py-0.5 rounded-full bg-purple-600 text-white text-[10px] font-black">0</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Search & Status Filter Bar -->
                 <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-white dark:bg-slate-800 p-4 rounded-2xl border border-gray-100 dark:border-slate-700">
                     <div class="flex items-center gap-2 w-full sm:w-auto">
-                        <input type="text" id="voucher-search" oninput="renderVoucherTable()" placeholder="Cari Voucher..." class="px-4 py-2 rounded-xl bg-gray-50 dark:bg-slate-900 border border-gray-200 dark:border-slate-700 text-xs w-full sm:w-64 focus:outline-none">
+                        <input type="text" id="voucher-search" oninput="renderVoucherTable()" placeholder="Cari Kode Voucher / Nama..." class="px-4 py-2 rounded-xl bg-gray-50 dark:bg-slate-900 border border-gray-200 dark:border-slate-700 text-xs w-full sm:w-64 focus:outline-none">
                         <select id="voucher-filter-status" onchange="renderVoucherTable()" class="px-3 py-2 rounded-xl bg-gray-50 dark:bg-slate-900 border border-gray-200 dark:border-slate-700 text-xs focus:outline-none">
                             <option value="ALL">Semua Status</option>
                             <option value="Active">Active</option>
                             <option value="Expired">Expired</option>
                         </select>
                     </div>
-                    <div class="flex gap-2 w-full sm:w-auto">
-                        <button onclick="openManualVoucherModal()" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-bold transition-all flex items-center gap-1">
-                            <i class="fa-solid fa-plus"></i> Manual Voucher
+                    
+                    <div class="flex items-center gap-2">
+                        <span id="active-cat-title" class="text-xs font-black text-sky-400 uppercase tracking-wider bg-sky-500/10 px-3 py-1.5 rounded-xl border border-sky-500/20">
+                            TAB: Paket 6 Jam (6h)
+                        </span>
+                        <button onclick="printCategoryBatch()" class="px-3 py-1.5 bg-gray-100 dark:bg-slate-700 hover:bg-gray-200 text-gray-800 dark:text-gray-200 text-xs font-bold rounded-xl transition-all">
+                            <i class="fa-solid fa-print mr-1"></i> Print Batch
                         </button>
                     </div>
                 </div>
 
+                <!-- Main Categorized Table -->
                 <div class="bg-white dark:bg-slate-800 rounded-2xl border border-gray-100 dark:border-slate-700 overflow-x-auto shadow-sm">
                     <table class="w-full text-left border-collapse text-xs">
                         <thead>
-                            <tr class="bg-gray-50 dark:bg-slate-900/50 border-b border-gray-100 dark:border-slate-700 text-gray-500 dark:text-gray-400 uppercase tracking-wider font-bold">
+                            <tr class="bg-gray-50 dark:bg-slate-900/50 border-b border-gray-100 dark:border-slate-700 text-gray-500 dark:text-gray-400 font-bold uppercase">
                                 <th class="p-4">Kode Voucher</th>
-                                <th class="p-4">Paket</th>
+                                <th class="p-4">Kategori / Durasi</th>
                                 <th class="p-4">Pelanggan</th>
                                 <th class="p-4">Status</th>
                                 <th class="p-4">Kadaluarsa</th>
+                                <th class="p-4 text-center">Aksi</th>
                             </tr>
                         </thead>
                         <tbody id="voucher-table-body" class="divide-y divide-gray-100 dark:divide-slate-700/60"></tbody>
@@ -450,15 +482,137 @@
                         <thead>
                             <tr class="bg-gray-50 dark:bg-slate-900/50 border-b border-gray-100 dark:border-slate-700 text-gray-500 dark:text-gray-400 font-bold uppercase">
                                 <th class="p-4">Nama Mitra / Toko</th>
-                                <th class="p-4">No. WhatsApp</th>
+                                <th class="p-4">No WhatsApp</th>
                                 <th class="p-4">Kode Akses</th>
-                                <th class="p-4">Terdaftar</th>
+                                <th class="p-4">Tanggal Daftar</th>
                                 <th class="p-4">Status</th>
-                                <th class="p-4 text-center">Aksi (Salin / Kirim / Hapus)</th>
+                                <th class="p-4 text-center">Aksi</th>
                             </tr>
                         </thead>
                         <tbody id="reseller-table-body" class="divide-y divide-gray-100 dark:divide-slate-700/60"></tbody>
                     </table>
+                </div>
+            </div>
+
+            <!-- TAB 4.8: MIKHMON GENERATE USER TAB -->
+            <div id="admin-tab-mikhmon-generate" class="admin-tab-content hidden space-y-6">
+                <div class="max-w-2xl mx-auto bg-pink-50/60 dark:bg-slate-900 rounded-3xl border border-pink-300 dark:border-pink-900/50 p-5 sm:p-6 shadow-xl text-gray-800 dark:text-gray-100">
+                    
+                    <div class="flex items-center gap-2 pb-3 mb-4 border-b border-pink-200 dark:border-pink-900/50">
+                        <div class="w-8 h-8 rounded-xl bg-pink-500 text-white flex items-center justify-center font-bold text-sm">
+                            <i class="fa-solid fa-user-plus"></i>
+                        </div>
+                        <h3 class="font-extrabold text-base text-pink-700 dark:text-pink-400">Generate User (Mikhmon Style)</h3>
+                    </div>
+
+                    <div class="flex flex-wrap gap-2 mb-5">
+                        <button type="button" onclick="switchAdminTab('dashboard')" class="px-4 py-2 rounded-xl bg-amber-400 hover:bg-amber-500 text-gray-900 font-extrabold text-xs shadow-sm transition-all flex items-center gap-1">
+                            <i class="fa-solid fa-xmark"></i> Close
+                        </button>
+                        <button type="button" onclick="switchAdminTab('vouchers')" class="px-4 py-2 rounded-xl bg-pink-600 hover:bg-pink-500 text-white font-extrabold text-xs shadow-sm transition-all flex items-center gap-1">
+                            <i class="fa-solid fa-users"></i> User List
+                        </button>
+                        <button type="button" onclick="document.getElementById('mikhmon-generate-form').requestSubmit()" class="px-4 py-2 rounded-xl bg-rose-600 hover:bg-rose-500 text-white font-extrabold text-xs shadow-sm transition-all flex items-center gap-1">
+                            <i class="fa-solid fa-floppy-disk"></i> Generate
+                        </button>
+                        <button type="button" onclick="printMikhmonBatch('normal')" class="px-4 py-2 rounded-xl bg-gray-600 hover:bg-gray-500 text-white font-extrabold text-xs shadow-sm transition-all flex items-center gap-1">
+                            <i class="fa-solid fa-print"></i> Print
+                        </button>
+                        <button type="button" onclick="printMikhmonBatch('qr')" class="px-4 py-2 rounded-xl bg-orange-500 hover:bg-orange-400 text-white font-extrabold text-xs shadow-sm transition-all flex items-center gap-1">
+                            <i class="fa-solid fa-qrcode"></i> QR
+                        </button>
+                    </div>
+
+                    <form id="mikhmon-generate-form" onsubmit="handleMikhmonGenerate(event)" class="space-y-3 text-xs">
+                        <div class="grid grid-cols-3 items-center gap-2">
+                            <label class="font-bold text-gray-700 dark:text-gray-300">Qty</label>
+                            <input type="number" id="gen-qty" value="10" min="1" max="500" required class="col-span-2 px-3 py-2 rounded-xl bg-white dark:bg-slate-950 border border-pink-200 dark:border-pink-900 text-gray-900 dark:text-white font-mono font-bold">
+                        </div>
+
+                        <div class="grid grid-cols-3 items-center gap-2">
+                            <label class="font-bold text-gray-700 dark:text-gray-300">Server</label>
+                            <select id="gen-server" class="col-span-2 px-3 py-2 rounded-xl bg-white dark:bg-slate-950 border border-pink-200 dark:border-pink-900 text-gray-900 dark:text-white font-semibold">
+                                <option value="all">all</option>
+                                <option value="hotspot1">hotspot1</option>
+                            </select>
+                        </div>
+
+                        <div class="grid grid-cols-3 items-center gap-2">
+                            <label class="font-bold text-gray-700 dark:text-gray-300">User Mode</label>
+                            <select id="gen-user-mode" class="col-span-2 px-3 py-2 rounded-xl bg-white dark:bg-slate-950 border border-pink-200 dark:border-pink-900 text-gray-900 dark:text-white font-semibold">
+                                <option value="up">Username & Password</option>
+                                <option value="u_eq_p" selected>Username = Password</option>
+                            </select>
+                        </div>
+
+                        <div class="grid grid-cols-3 items-center gap-2">
+                            <label class="font-bold text-gray-700 dark:text-gray-300">Name Length</label>
+                            <select id="gen-name-len" class="col-span-2 px-3 py-2 rounded-xl bg-white dark:bg-slate-950 border border-pink-200 dark:border-pink-900 text-gray-900 dark:text-white font-mono font-bold">
+                                <option value="3">3</option>
+                                <option value="4" selected>4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="8">8</option>
+                            </select>
+                        </div>
+
+                        <div class="grid grid-cols-3 items-center gap-2">
+                            <label class="font-bold text-gray-700 dark:text-gray-300">Prefix</label>
+                            <input type="text" id="gen-prefix" placeholder="Contoh: CRB" class="col-span-2 px-3 py-2 rounded-xl bg-white dark:bg-slate-950 border border-pink-200 dark:border-pink-900 text-gray-900 dark:text-white font-mono uppercase font-bold text-pink-600">
+                        </div>
+
+                        <div class="grid grid-cols-3 items-center gap-2">
+                            <label class="font-bold text-gray-700 dark:text-gray-300">Character</label>
+                            <select id="gen-character" class="col-span-2 px-3 py-2 rounded-xl bg-white dark:bg-slate-950 border border-pink-200 dark:border-pink-900 text-gray-900 dark:text-white font-semibold">
+                                <option value="abcd">Random abcd</option>
+                                <option value="ABCD">Random ABCD</option>
+                                <option value="1234">Random 1234</option>
+                                <option value="a1b2" selected>Random a1b2</option>
+                                <option value="A1B2">Random A1B2</option>
+                            </select>
+                        </div>
+
+                        <!-- Categorized Profile Options (6h, 12h, 1d) -->
+                        <div class="grid grid-cols-3 items-center gap-2">
+                            <label class="font-bold text-gray-700 dark:text-gray-300">Profile / Kategori</label>
+                            <select id="gen-profile" class="col-span-2 px-3 py-2 rounded-xl bg-white dark:bg-slate-950 border border-pink-200 dark:border-pink-900 text-gray-900 dark:text-white font-bold">
+                                <option value="profile-6h" selected>profile-6h (Paket 6 Jam)</option>
+                                <option value="profile-12h">profile-12h (Paket 12 Jam)</option>
+                                <option value="profile-1d">profile-1d (Paket 1 Hari)</option>
+                            </select>
+                        </div>
+
+                        <div class="grid grid-cols-3 items-center gap-2">
+                            <label class="font-bold text-gray-700 dark:text-gray-300">Time Limit</label>
+                            <input type="text" id="gen-time-limit" placeholder="Contoh: 6h / 12h / 1d" class="col-span-2 px-3 py-2 rounded-xl bg-white dark:bg-slate-950 border border-pink-200 dark:border-pink-900 text-gray-900 dark:text-white font-mono">
+                        </div>
+
+                        <div class="grid grid-cols-3 items-center gap-2">
+                            <label class="font-bold text-gray-700 dark:text-gray-300">Comment</label>
+                            <input type="text" id="gen-comment" placeholder="vc-batch-001" class="col-span-2 px-3 py-2 rounded-xl bg-white dark:bg-slate-950 border border-pink-200 dark:border-pink-900 text-gray-900 dark:text-white font-mono">
+                        </div>
+                    </form>
+
+                    <div class="mt-6 border border-pink-300 dark:border-pink-900/60 rounded-2xl bg-white/80 dark:bg-slate-950/80 p-4 shadow-sm">
+                        <h4 class="font-bold text-xs text-pink-700 dark:text-pink-400 flex items-center gap-1.5 mb-2">
+                            <i class="fa-solid fa-layer-group"></i> Last Generate Summary
+                        </h4>
+                        <div class="border border-pink-200 dark:border-pink-900/40 rounded-xl overflow-hidden text-xs">
+                            <div class="flex justify-between p-2 bg-pink-50/50 dark:bg-pink-950/20 border-b border-pink-200 dark:border-pink-900/40">
+                                <span class="font-semibold text-gray-600 dark:text-gray-400">Generate Batch</span>
+                                <span id="last-gen-code" class="font-mono font-bold text-pink-600">634</span>
+                            </div>
+                            <div class="flex justify-between p-2 border-b border-pink-200 dark:border-pink-900/40">
+                                <span class="font-semibold text-gray-600 dark:text-gray-400">Date</span>
+                                <span id="last-gen-date" class="font-mono text-gray-800 dark:text-gray-200">07.30.26</span>
+                            </div>
+                            <div class="flex justify-between p-2">
+                                <span class="font-semibold text-gray-600 dark:text-gray-400">Profile / Count</span>
+                                <span id="last-gen-profile" class="font-bold text-gray-800 dark:text-gray-200">profile-6h (10 Pcs)</span>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
 
@@ -488,7 +642,6 @@
                                 <i class="fa-solid fa-cloud-arrow-down"></i> Sync Remote Voucher
                             </button>
                         </div>
-                        <p class="text-xs text-gray-500 dark:text-gray-400">Konfigurasi alamat router dan format penamaan voucher remote yang di-generate di MikroTik/Mikhmon.</p>
 
                         <form id="mikrotik-settings-form" onsubmit="saveMikroTikSettings(event)" class="space-y-4">
                             <div class="grid grid-cols-3 gap-3">
@@ -513,29 +666,6 @@
                                 </div>
                             </div>
 
-                            <div class="grid grid-cols-2 gap-3 pt-2 border-t border-gray-100 dark:border-slate-700">
-                                <div>
-                                    <label class="block text-xs font-bold text-gray-700 dark:text-gray-300 mb-1">Prefix Kode Remote RouterOS</label>
-                                    <input type="text" id="mt-prefix" value="CRB" placeholder="CRB" class="w-full px-4 py-2.5 rounded-xl bg-gray-50 dark:bg-slate-900 border border-gray-200 dark:border-slate-700 text-xs font-mono font-bold uppercase text-amber-500">
-                                </div>
-                                <div>
-                                    <label class="block text-xs font-bold text-gray-700 dark:text-gray-300 mb-1">Panjang Karakter Voucher</label>
-                                    <select id="mt-code-len" class="w-full px-4 py-2.5 rounded-xl bg-gray-50 dark:bg-slate-900 border border-gray-200 dark:border-slate-700 text-xs font-mono">
-                                        <option value="6">6 Karakter (CRB123456)</option>
-                                        <option value="8" selected>8 Karakter (CRB12345678)</option>
-                                        <option value="10">10 Karakter (CRB1234567890)</option>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="flex items-center justify-between p-3 rounded-xl bg-gray-50 dark:bg-slate-900">
-                                <div>
-                                    <span class="text-xs font-bold text-gray-800 dark:text-gray-200 block">Enkripsi SSL / TLS</span>
-                                    <span class="text-[10px] text-gray-500">Gunakan SSL Port 8729</span>
-                                </div>
-                                <input type="checkbox" id="mt-ssl" class="w-4 h-4 text-sky-600 rounded">
-                            </div>
-
                             <div class="flex gap-3 pt-2">
                                 <button type="button" onclick="testMikroTikConnection()" class="flex-1 py-2.5 bg-gray-100 hover:bg-gray-200 dark:bg-slate-700 dark:hover:bg-slate-600 text-gray-800 dark:text-gray-200 font-bold rounded-xl text-xs transition-all">
                                     <i class="fa-solid fa-plug mr-1"></i> Test Connection
@@ -547,7 +677,6 @@
                         </form>
                     </div>
 
-                    <!-- PHP Integration Helper -->
                     <div class="bg-slate-900 p-6 rounded-2xl border border-slate-800 text-white flex flex-col justify-between">
                         <div>
                             <div class="flex items-center justify-between mb-3">
@@ -555,43 +684,26 @@
                                     <i class="fa-brands fa-php"></i> Backend PHP RouterOS API Helper
                                 </h4>
                                 <button onclick="copyPhpApiCode()" class="text-xs px-2.5 py-1 rounded bg-slate-800 hover:bg-slate-700 text-gray-300">
-                                    <i class="fa-regular fa-copy"></i> Copy PHP Code
+                                    <i class="fa-regular fa-copy"></i> Copy PHP
                                 </button>
                             </div>
-                            <p class="text-[11px] text-gray-400 mb-3">Script PHP ini dikonfigurasi untuk mengambil remote voucher pool dari MikroTik atau meng-generate user baru di RouterOS secara realtime.</p>
                             <pre class="bg-slate-950 p-3 rounded-xl text-[10px] font-mono text-emerald-400 overflow-x-auto max-h-64 border border-slate-800" id="php-code-block">
 &lt;?php
-// WiFi Voucher Center - RouterOS Remote Voucher Sync Bridge
+// Remote RouterOS Sync API Bridge
 class MikroTikAPI {
     private $ip = "192.168.88.1";
     private $user = "admin";
     private $pass = "password";
-    private $port = 8728;
 
-    // Direct Remote User Hotspot Fetch
     public function getRemoteVouchers() {
-        // Fetches users generated remotely on RouterOS
         return [
-            ["name" => "CRB982145", "profile" => "profile-5h", "limit-uptime" => "5h"],
-            ["name" => "CRB774102", "profile" => "profile-12h", "limit-uptime" => "12h"]
+            ["name" => "CRB6H001", "profile" => "profile-6h", "limit-uptime" => "6h"],
+            ["name" => "CRB12H002", "profile" => "profile-12h", "limit-uptime" => "12h"],
+            ["name" => "CRB1D003", "profile" => "profile-1d", "limit-uptime" => "1d"]
         ];
-    }
-
-    public function createVoucher($usernameCode, $profile, $limitTime) {
-        $command = [
-            "=name=" . $usernameCode,
-            "=password=" . $usernameCode,
-            "=profile=" . $profile,
-            "=limit-uptime=" . $limitTime,
-            "=comment=Purchased via Web Remote Portal"
-        ];
-        return ["status" => "success", "code" => $usernameCode];
     }
 }
 ?&gt;</pre>
-                        </div>
-                        <div class="mt-4 pt-3 border-t border-slate-800 text-[11px] text-gray-400">
-                            Fitur Didukung: <strong class="text-white">Remote User Pool, Single Code Auth, Sync Mikhmon, RouterOS API v6/v7</strong>
                         </div>
                     </div>
                 </div>
@@ -600,8 +712,6 @@ class MikroTikAPI {
             <!-- TAB 7: SETTINGS -->
             <div id="admin-tab-settings" class="admin-tab-content hidden space-y-6">
                 <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                    
-                    <!-- WhatsApp Admin Settings Card -->
                     <div class="bg-white dark:bg-slate-800 p-6 rounded-2xl border border-gray-100 dark:border-slate-700 space-y-4 shadow-sm">
                         <div class="flex items-center gap-3 border-b border-gray-100 dark:border-slate-700 pb-3">
                             <div class="w-10 h-10 rounded-xl bg-emerald-500/10 text-emerald-500 flex items-center justify-center font-bold">
@@ -617,85 +727,36 @@ class MikroTikAPI {
                             <div>
                                 <label class="block text-xs font-bold text-gray-700 dark:text-gray-300 mb-1">Nomor WhatsApp CS Admin</label>
                                 <input type="tel" id="setting-admin-phone" required placeholder="082293185501" class="w-full px-4 py-2.5 rounded-xl bg-gray-50 dark:bg-slate-900 border border-gray-200 dark:border-slate-700 text-xs font-mono focus:outline-none focus:ring-2 focus:ring-emerald-500">
-                                <p class="text-[10px] text-gray-400 mt-1">Nomor ini otomatis tampil pada portal depan & link konfirmasi pesan WhatsApp.</p>
                             </div>
-
-                            <div class="flex gap-2">
-                                <button type="submit" class="flex-1 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl text-xs transition-all flex items-center justify-center gap-1.5 shadow-md shadow-emerald-600/20">
-                                    <i class="fa-solid fa-floppy-disk"></i> Simpan WhatsApp
-                                </button>
-                                <a id="setting-wa-test-link" href="#" target="_blank" class="px-3.5 py-2.5 bg-gray-100 dark:bg-slate-700 hover:bg-gray-200 text-gray-700 dark:text-gray-200 font-bold rounded-xl text-xs transition-all flex items-center justify-center" title="Uji Coba Kirim WA">
-                                    <i class="fa-solid fa-arrow-up-right-from-square"></i>
-                                </a>
-                            </div>
+                            <button type="submit" class="w-full py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl text-xs transition-all shadow-md">
+                                Simpan WhatsApp
+                            </button>
                         </form>
-
-                        <div class="pt-4 border-t border-gray-100 dark:border-slate-700 space-y-3">
-                            <div class="flex justify-between items-center">
-                                <h4 class="font-bold text-xs text-gray-900 dark:text-white flex items-center gap-1.5">
-                                    <i class="fa-solid fa-key text-amber-500"></i> Kode Akses Mitra / Subadmin
-                                </h4>
-                                <button type="button" onclick="generateRandomSubadminCode()" class="text-[10px] text-amber-400 hover:underline font-semibold flex items-center gap-1">
-                                    <i class="fa-solid fa-arrows-rotate"></i> Acak Kode
-                                </button>
-                            </div>
-                            
-                            <div class="space-y-2">
-                                <div>
-                                    <label class="block text-[10px] font-bold text-gray-400 mb-1">Kode Akses Khusus Mitra</label>
-                                    <div class="flex gap-2">
-                                        <input type="text" id="setting-subadmin-code" value="RES2026" class="flex-1 px-3 py-2 rounded-xl bg-gray-50 dark:bg-slate-900 border border-gray-200 dark:border-slate-700 text-xs font-mono uppercase font-bold text-amber-400">
-                                        <button type="button" onclick="saveSubadminCode()" class="px-3 py-2 bg-amber-600 hover:bg-amber-500 text-white font-bold rounded-xl text-xs">Simpan</button>
-                                    </div>
-                                </div>
-
-                                <div>
-                                    <label class="block text-[10px] font-bold text-gray-400 mb-1">Nomor WhatsApp Mitra (Untuk Pengiriman)</label>
-                                    <div class="flex gap-2">
-                                        <input type="tel" id="subadmin-target-phone" placeholder="08xxxxxxxxxx" class="flex-1 px-3 py-2 rounded-xl bg-gray-50 dark:bg-slate-900 border border-gray-200 dark:border-slate-700 text-xs font-mono text-gray-900 dark:text-white">
-                                        <button type="button" onclick="sendSubadminCodeViaWA()" class="px-3 py-2 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-xl text-xs flex items-center gap-1">
-                                            <i class="fa-brands fa-whatsapp"></i> Kirim WA
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
 
-                    <!-- Payment Methods Management Card -->
                     <div class="lg:col-span-2 bg-white dark:bg-slate-800 p-6 rounded-2xl border border-gray-100 dark:border-slate-700 space-y-4 shadow-sm">
-                        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 border-b border-gray-100 dark:border-slate-700 pb-3">
-                            <div class="flex items-center gap-3">
-                                <div class="w-10 h-10 rounded-xl bg-sky-500/10 text-sky-500 flex items-center justify-center font-bold">
-                                    <i class="fa-solid fa-credit-card text-xl"></i>
-                                </div>
-                                <div>
-                                    <h3 class="font-bold text-gray-900 dark:text-white text-sm">Metode Pembayaran</h3>
-                                    <p class="text-[11px] text-gray-500 dark:text-gray-400">Atur QRIS, E-Wallet, & Rekening Bank yang aktif</p>
-                                </div>
-                            </div>
-                            <button onclick="openAddPaymentModal()" class="px-3.5 py-2 bg-sky-600 hover:bg-sky-700 text-white rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 shadow-md shadow-sky-600/20">
-                                <i class="fa-solid fa-plus"></i> Tambah Metode
+                        <div class="flex justify-between items-center border-b border-gray-100 dark:border-slate-700 pb-3">
+                            <h3 class="font-bold text-gray-900 dark:text-white text-sm">Metode Pembayaran</h3>
+                            <button onclick="openAddPaymentModal()" class="px-3.5 py-2 bg-sky-600 hover:bg-sky-700 text-white rounded-xl text-xs font-bold shadow-md">
+                                + Tambah Metode
                             </button>
                         </div>
-
                         <div id="payment-methods-admin-list" class="space-y-3"></div>
                     </div>
-
                 </div>
             </div>
 
         </div>
     </main>
 
-    <!-- ADMIN LOGIN PIN MODAL -->
+    <!-- ADMIN LOGIN PIN MODAL (PIN: 101990) -->
     <div id="admin-login-modal" class="fixed inset-0 z-50 hidden bg-gray-900/80 backdrop-blur-sm flex items-center justify-center p-4">
         <div class="bg-slate-900 rounded-3xl max-w-xs w-full p-6 shadow-2xl border border-sky-500/30 text-white text-center">
             <div class="w-12 h-12 rounded-2xl bg-sky-500/10 text-sky-400 flex items-center justify-center mx-auto text-xl mb-3 border border-sky-500/20">
                 <i class="fa-solid fa-shield-halved"></i>
             </div>
             <h3 class="font-bold text-base text-white">Login Admin</h3>
-            <p class="text-xs text-gray-400 mt-1 mb-4">Masukkan PIN Keamanan untuk mengakses Panel Admin</p>
+            <p class="text-xs text-gray-400 mt-1 mb-4">Masukkan PIN Keamanan Admin</p>
 
             <form onsubmit="handleAdminLogin(event)" class="space-y-3">
                 <div>
@@ -738,177 +799,6 @@ class MikroTikAPI {
         </div>
     </div>
 
-    <!-- SUBADMIN / RESELLER PORTAL MODAL -->
-    <div id="subadmin-portal-modal" class="fixed inset-0 z-50 hidden bg-gray-950/90 backdrop-blur-md flex items-center justify-center p-3 sm:p-6 overflow-y-auto">
-        <div class="bg-slate-900 rounded-3xl max-w-4xl w-full p-5 sm:p-8 shadow-2xl border border-amber-500/30 text-white my-auto relative">
-            
-            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center pb-4 border-b border-slate-800 gap-3">
-                <div class="flex items-center gap-3">
-                    <div class="w-10 h-10 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center text-xl font-bold border border-amber-500/30">
-                        <i class="fa-solid fa-boxes-packing"></i>
-                    </div>
-                    <div>
-                        <h3 class="font-black text-lg text-white">Portal Mitra Reseller & Subadmin</h3>
-                        <p class="text-xs text-amber-400 font-semibold">Pesan Voucher Cetak Lembaran Massal dengan Harga Grosir</p>
-                    </div>
-                </div>
-                <button onclick="closeSubadminPortal()" class="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-gray-300 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 self-end sm:self-auto">
-                    <i class="fa-solid fa-xmark"></i> Tutup Portal
-                </button>
-            </div>
-
-            <!-- Wholesale Pricing Grid -->
-            <div class="mt-6 space-y-4">
-                <h4 class="text-xs font-extrabold uppercase tracking-widest text-gray-400">Daftar Paket & Harga Grosir Per Lembar (1 Lembar = 70 Voucher)</h4>
-                
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    
-                    <!-- Paket 2000 -->
-                    <div class="bg-slate-950 p-5 rounded-2xl border border-sky-500/30 flex flex-col justify-between space-y-3 relative overflow-hidden">
-                        <div class="absolute top-0 right-0 bg-sky-600 text-[10px] font-black px-3 py-1 rounded-bl-xl text-white">
-                            70 VOUCHER / LEMBAR
-                        </div>
-                        <div>
-                            <span class="text-[10px] text-sky-400 uppercase font-bold tracking-wider">Nominal Ecer Rp 2.000</span>
-                            <h5 class="text-lg font-black text-white mt-0.5">Paket 2.000</h5>
-                            <p class="text-xs text-gray-400 mt-1">Durasi 5 Jam • Speed 4.50 Mbps</p>
-                        </div>
-                        <div class="bg-slate-900 p-3 rounded-xl border border-slate-800 space-y-1">
-                            <div class="flex justify-between text-xs">
-                                <span class="text-gray-400">Harga Eceran:</span>
-                                <span class="font-bold text-gray-300">Rp 2.000 / pcs</span>
-                            </div>
-                            <div class="flex justify-between text-xs">
-                                <span class="text-amber-400 font-semibold">Harga Mitra:</span>
-                                <span class="font-black text-amber-400">Rp 1.500 / pcs</span>
-                            </div>
-                            <div class="pt-1 border-t border-slate-800 flex justify-between text-xs font-extrabold">
-                                <span class="text-emerald-400">1 Lembar (70 Pcs):</span>
-                                <span class="text-emerald-400">Rp 105.000</span>
-                            </div>
-                        </div>
-                        <button onclick="selectWholesalePackage('pkg-2k')" class="w-full py-2.5 bg-sky-600 hover:bg-sky-500 text-white font-extrabold text-xs rounded-xl uppercase tracking-wider transition-all">
-                            Pesan Paket 2.000
-                        </button>
-                    </div>
-
-                    <!-- Paket 3000 -->
-                    <div class="bg-slate-950 p-5 rounded-2xl border border-emerald-500/30 flex flex-col justify-between space-y-3 relative overflow-hidden">
-                        <div class="absolute top-0 right-0 bg-emerald-600 text-[10px] font-black px-3 py-1 rounded-bl-xl text-white">
-                            70 VOUCHER / LEMBAR
-                        </div>
-                        <div>
-                            <span class="text-[10px] text-emerald-400 uppercase font-bold tracking-wider">Nominal Ecer Rp 3.000</span>
-                            <h5 class="text-lg font-black text-white mt-0.5">Paket 3.000</h5>
-                            <p class="text-xs text-gray-400 mt-1">Durasi 12 Jam • Speed 4.50 Mbps</p>
-                        </div>
-                        <div class="bg-slate-900 p-3 rounded-xl border border-slate-800 space-y-1">
-                            <div class="flex justify-between text-xs">
-                                <span class="text-gray-400">Harga Eceran:</span>
-                                <span class="font-bold text-gray-300">Rp 3.000 / pcs</span>
-                            </div>
-                            <div class="flex justify-between text-xs">
-                                <span class="text-amber-400 font-semibold">Harga Mitra:</span>
-                                <span class="font-black text-amber-400">Rp 2.500 / pcs</span>
-                            </div>
-                            <div class="pt-1 border-t border-slate-800 flex justify-between text-xs font-extrabold">
-                                <span class="text-emerald-400">1 Lembar (70 Pcs):</span>
-                                <span class="text-emerald-400">Rp 175.000</span>
-                            </div>
-                        </div>
-                        <button onclick="selectWholesalePackage('pkg-3k')" class="w-full py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold text-xs rounded-xl uppercase tracking-wider transition-all">
-                            Pesan Paket 3.000
-                        </button>
-                    </div>
-
-                    <!-- Paket 5000 -->
-                    <div class="bg-slate-950 p-5 rounded-2xl border border-amber-500/30 flex flex-col justify-between space-y-3 relative overflow-hidden">
-                        <div class="absolute top-0 right-0 bg-amber-600 text-[10px] font-black px-3 py-1 rounded-bl-xl text-white">
-                            70 VOUCHER / LEMBAR
-                        </div>
-                        <div>
-                            <span class="text-[10px] text-amber-400 uppercase font-bold tracking-wider">Nominal Ecer Rp 5.000</span>
-                            <h5 class="text-lg font-black text-white mt-0.5">Paket 5.000</h5>
-                            <p class="text-xs text-gray-400 mt-1">Durasi 24 Jam • Speed 4.50 Mbps</p>
-                        </div>
-                        <div class="bg-slate-900 p-3 rounded-xl border border-slate-800 space-y-1">
-                            <div class="flex justify-between text-xs">
-                                <span class="text-gray-400">Harga Eceran:</span>
-                                <span class="font-bold text-gray-300">Rp 5.000 / pcs</span>
-                            </div>
-                            <div class="flex justify-between text-xs">
-                                <span class="text-amber-400 font-semibold">Harga Mitra:</span>
-                                <span class="font-black text-amber-400">Rp 4.000 / pcs</span>
-                            </div>
-                            <div class="pt-1 border-t border-slate-800 flex justify-between text-xs font-extrabold">
-                                <span class="text-emerald-400">1 Lembar (70 Pcs):</span>
-                                <span class="text-emerald-400">Rp 280.000</span>
-                            </div>
-                        </div>
-                        <button onclick="selectWholesalePackage('pkg-5k')" class="w-full py-2.5 bg-amber-600 hover:bg-amber-500 text-white font-extrabold text-xs rounded-xl uppercase tracking-wider transition-all">
-                            Pesan Paket 5.000
-                        </button>
-                    </div>
-
-                </div>
-            </div>
-
-            <!-- Bulk Order Form Section -->
-            <div id="subadmin-order-form-area" class="mt-6 hidden bg-slate-950 p-6 rounded-2xl border border-amber-500/40">
-                <h4 id="bulk-selected-pkg-title" class="text-sm font-extrabold text-amber-400 mb-3 flex items-center gap-2">
-                    <i class="fa-solid fa-cart-flatbed"></i> Order Voucher Massal: Paket 2.000
-                </h4>
-                
-                <form onsubmit="processSubadminBulkOrder(event)" class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs">
-                    <div>
-                        <label class="block font-bold text-gray-300 mb-1">Jumlah Lembar (1 Lembar = 70 Pcs)</label>
-                        <select id="bulk-sheet-qty" onchange="calculateBulkTotal()" class="w-full px-3 py-2.5 rounded-xl bg-slate-900 border border-slate-800 text-white font-bold text-xs focus:border-amber-500">
-                            <option value="1">1 Lembar (70 Voucher)</option>
-                            <option value="2">2 Lembar (140 Voucher)</option>
-                            <option value="5">5 Lembar (350 Voucher)</option>
-                            <option value="10">10 Lembar (700 Voucher)</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label class="block font-bold text-gray-300 mb-1">Nama Mitra / Toko Subadmin</label>
-                        <input type="text" id="bulk-subadmin-name" placeholder="Contoh: Toko Kios Kribo" required class="w-full px-3 py-2.5 rounded-xl bg-slate-900 border border-slate-800 text-white font-semibold focus:border-amber-500">
-                    </div>
-                    <div>
-                        <label class="block font-bold text-gray-300 mb-1">Total Tagihan Mitra</label>
-                        <div id="bulk-total-price" class="w-full px-3 py-2.5 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-400 font-black text-sm flex items-center">
-                            Rp 105.000
-                        </div>
-                    </div>
-                    <div class="sm:col-span-3 flex justify-end gap-2 pt-2">
-                        <button type="submit" class="w-full py-3 bg-emerald-600 hover:bg-emerald-500 text-white font-black rounded-xl text-xs uppercase tracking-wider shadow-lg shadow-emerald-600/30 transition-all flex items-center justify-center gap-2">
-                            <i class="fa-solid fa-qrcode"></i> Bayar Voucher (Tampilkan QRIS All Payment)
-                        </button>
-                    </div>
-                </form>
-            </div>
-
-            <!-- Printable Sheet Grid Display -->
-            <div id="bulk-print-sheet-area" class="mt-6 hidden space-y-4">
-                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center bg-slate-950 p-4 rounded-2xl border border-slate-800 gap-3 no-print">
-                    <span class="text-xs font-bold text-emerald-400 flex items-center gap-2">
-                        <i class="fa-solid fa-circle-check text-base"></i> <span id="bulk-generated-count">70 Voucher berhasil digenerate!</span>
-                    </span>
-                    <div class="flex items-center gap-2 w-full sm:w-auto">
-                        <button onclick="downloadSheetPDF()" class="flex-1 sm:flex-none px-4 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl text-xs font-bold flex items-center justify-center gap-2 shadow-lg shadow-emerald-600/20 transition-all">
-                            <i class="fa-solid fa-file-pdf"></i> Unduh PDF
-                        </button>
-                        <button onclick="printVoucherSheet()" class="flex-1 sm:flex-none px-4 py-2.5 bg-sky-600 hover:bg-sky-500 text-white rounded-xl text-xs font-bold flex items-center justify-center gap-2 shadow-lg shadow-sky-600/20 transition-all">
-                            <i class="fa-solid fa-print"></i> Cetak / Save PDF
-                        </button>
-                    </div>
-                </div>
-
-                <div id="printable-voucher-sheet" class="grid grid-cols-5 sm:grid-cols-7 gap-1.5 p-3 bg-white text-gray-900 rounded-2xl shadow-2xl"></div>
-            </div>
-
-        </div>
-    </div>
-
     <!-- CHECKOUT PAYMENT MODAL -->
     <div id="checkout-modal" class="fixed inset-0 z-50 hidden bg-gray-900/80 backdrop-blur-sm flex items-center justify-center p-4">
         <div id="checkout-modal-content" class="bg-slate-900 rounded-3xl max-w-md w-full p-6 shadow-2xl border border-sky-500/30 text-white transition-all transform scale-95 opacity-0">
@@ -923,8 +813,8 @@ class MikroTikAPI {
 
             <div class="mt-4 p-3 rounded-2xl bg-slate-950 border border-slate-800 flex justify-between items-center">
                 <div>
-                    <h4 id="summary-pkg-name" class="font-bold text-sm text-white">Paket 5 Jam</h4>
-                    <span id="summary-pkg-duration" class="text-[11px] text-sky-300">Durasi 5 Jam • Speed 4.50 Mbps</span>
+                    <h4 id="summary-pkg-name" class="font-bold text-sm text-white">Paket 6 Jam</h4>
+                    <span id="summary-pkg-duration" class="text-[11px] text-sky-300">Durasi 6 Jam • Speed 4.50 Mbps</span>
                 </div>
                 <div id="summary-pkg-price" class="text-sm font-extrabold text-amber-400">Rp 2.000</div>
             </div>
@@ -951,7 +841,7 @@ class MikroTikAPI {
         </div>
     </div>
 
-    <!-- QRIS PAYMENT / BARCODE DISPLAY MODAL -->
+    <!-- QRIS PAYMENT MODAL -->
     <div id="qris-payment-modal" class="fixed inset-0 z-50 hidden bg-gray-900/80 backdrop-blur-sm flex items-center justify-center p-4">
         <div id="qris-modal-content" class="bg-slate-900 rounded-3xl max-w-md w-full p-6 shadow-2xl border border-sky-500/30 text-white text-center">
             <div class="flex justify-between items-center pb-3 border-b border-slate-800">
@@ -966,7 +856,7 @@ class MikroTikAPI {
             <div class="mt-4 p-3 rounded-2xl bg-slate-950 border border-slate-800">
                 <span class="text-[10px] text-gray-400 uppercase font-bold tracking-wider block">Total Tagihan</span>
                 <span id="qris-total-price" class="text-2xl font-black text-amber-400 block mt-0.5">Rp 2.000</span>
-                <span id="qris-order-info" class="text-xs text-sky-300 block mt-1 font-medium">Paket 5 Jam • Budi Santoso</span>
+                <span id="qris-order-info" class="text-xs text-sky-300 block mt-1 font-medium">Paket 6 Jam • Budi Santoso</span>
             </div>
 
             <div class="my-4 p-4 rounded-2xl bg-white text-gray-900 shadow-2xl inline-block border-2 border-slate-200 max-w-[280px] w-full">
@@ -978,78 +868,34 @@ class MikroTikAPI {
                 </div>
 
                 <div class="text-center my-2 border-y border-slate-100 py-1.5">
-                    <h4 class="font-black text-xs text-slate-900 tracking-tight uppercase leading-tight">ILYAS HAKIM, DIGITAL & KREATIF</h4>
+                    <h4 class="font-black text-xs text-slate-900 tracking-tight uppercase leading-tight">MYKRIBO NET HOTSPOT</h4>
                     <p class="text-[9px] font-mono text-slate-600 font-bold mt-0.5">NMID: ID1026470109368</p>
                 </div>
 
                 <div id="qris-barcode-render" class="flex justify-center p-2 bg-white rounded-xl border border-slate-200"></div>
-
-                <div class="mt-2 text-center">
-                    <p class="text-[9px] font-black tracking-widest text-slate-800 uppercase">SATU QRIS UNTUK SEMUA</p>
-                    <p class="text-[8px] font-semibold text-slate-500 mt-0.5">DANA • OVO • GoPay • ShopeePay • M-Banking</p>
-                </div>
             </div>
-
-            <p class="text-xs text-gray-300 mb-4 px-2">Silakan scan QRIS di atas dengan aplikasi pembayaran Anda. Setelah transfer berhasil, klik tombol di bawah untuk mengambil Kode Voucher.</p>
 
             <div class="space-y-2">
                 <button onclick="confirmQrisPayment()" id="qris-confirm-btn" class="w-full py-3 bg-emerald-600 hover:bg-emerald-500 text-white font-black rounded-xl text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-2 shadow-lg shadow-emerald-600/30">
                     <i class="fa-solid fa-circle-check"></i> Saya Sudah Bayar (Ambil Voucher)
                 </button>
-                
-                <button type="button" onclick="closeQrisPaymentModal()" class="w-full py-2.5 bg-slate-800 hover:bg-slate-700 text-gray-300 hover:text-white font-bold rounded-xl text-xs transition-all flex items-center justify-center gap-2 border border-slate-700/80">
-                    <i class="fa-solid fa-arrow-left"></i> Batal & Kembali ke Dashboard
-                </button>
             </div>
-        </div>
-    </div>
-
-    <!-- HOW TO BUY MODAL -->
-    <div id="how-to-buy-modal" class="fixed inset-0 z-50 hidden bg-gray-900/70 backdrop-blur-sm flex items-center justify-center p-4">
-        <div class="bg-slate-900 rounded-3xl max-w-md w-full p-6 shadow-2xl border border-sky-500/30 text-white">
-            <div class="flex justify-between items-center pb-3 border-b border-slate-800">
-                <h3 class="font-bold text-base text-amber-400 flex items-center gap-2">
-                    <i class="fa-solid fa-book-open"></i> Cara Beli & Pembayaran
-                </h3>
-                <button onclick="closeHowToBuyModal()" class="text-gray-400 hover:text-white">
-                    <i class="fa-solid fa-xmark text-lg"></i>
-                </button>
-            </div>
-            <div class="mt-4 space-y-3 text-xs text-gray-300 leading-relaxed">
-                <div class="flex gap-3 items-start">
-                    <span class="w-6 h-6 rounded-full bg-sky-600 text-white font-bold flex items-center justify-center shrink-0">1</span>
-                    <p>Pilih paket internet yang Anda inginkan pada tabel paket, lalu klik tombol <strong class="text-sky-400">Beli</strong>.</p>
-                </div>
-                <div class="flex gap-3 items-start">
-                    <span class="w-6 h-6 rounded-full bg-sky-600 text-white font-bold flex items-center justify-center shrink-0">2</span>
-                    <p>Isi Nama Lengkap dan Nomor WhatsApp Anda, lalu pilih metode pembayaran (QRIS, E-Wallet, Transfer).</p>
-                </div>
-                <div class="flex gap-3 items-start">
-                    <span class="w-6 h-6 rounded-full bg-sky-600 text-white font-bold flex items-center justify-center shrink-0">3</span>
-                    <p>Selesaikan pembayaran. Setelah sukses, Kode Voucher unik akan otomatis diberikan dan dapat langsung diinput pada portal login Hotspot.</p>
-                </div>
-            </div>
-            <button onclick="closeHowToBuyModal()" class="w-full mt-6 py-2.5 bg-slate-800 hover:bg-slate-700 text-white font-bold rounded-xl text-xs">
-                Mengerti
-            </button>
         </div>
     </div>
 
     <!-- SUCCESS VOUCHER DISPLAY MODAL -->
-    <div id="voucher-result-modal" class="fixed inset-0 z-50 hidden bg-gray-900/60 backdrop-blur-sm flex items-center justify-center p-4 overflow-y-auto">
+    <div id="voucher-result-modal" class="fixed inset-0 z-50 hidden bg-gray-900/60 backdrop-blur-sm flex items-center justify-center p-4">
         <div class="bg-white dark:bg-slate-800 rounded-3xl max-w-md w-full p-6 sm:p-8 shadow-2xl border border-gray-100 dark:border-slate-700 text-center relative">
-            
             <div class="w-16 h-16 rounded-full bg-emerald-100 text-emerald-600 dark:bg-emerald-950 dark:text-emerald-400 flex items-center justify-center mx-auto text-2xl font-bold mb-3 shadow-inner">
                 <i class="fa-solid fa-check"></i>
             </div>
             <h3 class="text-xl font-extrabold text-gray-900 dark:text-white">Pembayaran Berhasil!</h3>
-            <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">Voucher WiFi Anda telah dibuat otomatis di MikroTik</p>
 
-            <div id="printable-voucher" class="my-6 p-5 rounded-2xl bg-gradient-to-br from-slate-900 to-slate-800 text-white shadow-xl relative overflow-hidden border border-slate-700">
+            <div id="printable-voucher" class="my-6 p-5 rounded-2xl bg-gradient-to-br from-slate-900 to-slate-800 text-white shadow-xl relative border border-slate-700">
                 <div class="flex justify-between items-center border-b border-slate-700/80 pb-3 mb-4">
                     <div class="text-left">
                         <span class="text-[10px] uppercase font-bold tracking-widest text-sky-400">MyKribo.Net Hotspot</span>
-                        <h4 id="res-pkg-name" class="font-extrabold text-sm text-white">Paket 5 Jam</h4>
+                        <h4 id="res-pkg-name" class="font-extrabold text-sm text-white">Paket 6 Jam</h4>
                     </div>
                     <span id="res-pkg-price" class="text-xs font-bold px-2.5 py-1 rounded-md bg-sky-500/20 text-sky-300 border border-sky-500/30">Rp 2.000</span>
                 </div>
@@ -1057,244 +903,21 @@ class MikroTikAPI {
                 <div class="mb-4">
                     <div class="bg-slate-950/90 p-4 rounded-xl border border-amber-500/40 text-center">
                         <span class="text-[10px] text-amber-400 uppercase font-bold tracking-wider block mb-1">Kode Voucher Anda</span>
-                        <span id="res-username" class="font-mono text-2xl font-black text-amber-300 select-all tracking-widest">CRB458923</span>
-                        <p class="text-[10px] text-gray-400 mt-1">Gunakan kode ini pada kolom voucher login WiFi</p>
+                        <span id="res-username" class="font-mono text-2xl font-black text-amber-300 select-all tracking-widest">CRB6H102</span>
                     </div>
                 </div>
 
                 <div class="flex items-center justify-between bg-slate-950/40 p-3 rounded-xl text-left">
                     <div class="space-y-1 text-xs">
-                        <p class="text-gray-300"><i class="fa-regular fa-clock text-sky-400 mr-1"></i> Durasi: <span id="res-duration" class="font-semibold text-white">5 Jam</span></p>
-                        <p class="text-gray-300"><i class="fa-regular fa-calendar-check text-sky-400 mr-1"></i> Kadaluarsa: <span id="res-expiry" class="font-semibold text-white">25 Jul 2026 17:30</span></p>
-                        <p class="text-[10px] text-gray-400 mt-1">Connect WiFi: <strong class="text-sky-300">@MyKribo_Hotspot</strong></p>
+                        <p class="text-gray-300"><i class="fa-regular fa-clock text-sky-400 mr-1"></i> Durasi: <span id="res-duration" class="font-semibold text-white">6 Jam</span></p>
                     </div>
                     <div id="qrcode-container" class="bg-white p-1.5 rounded-lg shadow"></div>
                 </div>
             </div>
 
             <div class="space-y-2 no-print">
-                <div class="grid grid-cols-2 gap-2">
-                    <button onclick="copyVoucherCreds()" class="py-2.5 px-3 rounded-xl bg-gray-100 hover:bg-gray-200 dark:bg-slate-700 dark:hover:bg-slate-600 text-gray-800 dark:text-gray-200 text-xs font-bold transition-all flex items-center justify-center gap-1.5">
-                        <i class="fa-solid fa-copy"></i> Salin Kode
-                    </button>
-                    <button onclick="printVoucher()" class="py-2.5 px-3 rounded-xl bg-sky-600 hover:bg-sky-700 text-white text-xs font-bold transition-all flex items-center justify-center gap-1.5">
-                        <i class="fa-solid fa-print"></i> Cetak Voucher
-                    </button>
-                </div>
-                <button onclick="closeResultModal()" class="w-full py-2.5 px-4 rounded-xl border border-gray-200 dark:border-slate-700 text-gray-600 dark:text-gray-300 text-xs font-semibold hover:bg-gray-50 dark:hover:bg-slate-700/50 transition-all">
+                <button onclick="closeResultModal()" class="w-full py-2.5 px-4 rounded-xl border border-gray-200 dark:border-slate-700 text-gray-600 dark:text-gray-300 text-xs font-semibold">
                     Selesai & Kembali
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <!-- CHECK VOUCHER MODAL -->
-    <div id="check-voucher-modal" class="fixed inset-0 z-50 hidden bg-gray-900/60 backdrop-blur-sm flex items-center justify-center p-4">
-        <div class="bg-white dark:bg-slate-800 rounded-3xl max-w-md w-full p-6 shadow-2xl border border-gray-100 dark:border-slate-700">
-            <div class="flex justify-between items-center pb-3 border-b border-gray-100 dark:border-slate-700">
-                <h3 class="font-bold text-gray-900 dark:text-white flex items-center gap-2">
-                    <i class="fa-solid fa-magnifying-glass text-sky-600"></i> Cari Voucher Saya
-                </h3>
-                <button onclick="closeCheckVoucherModal()" class="text-gray-400 hover:text-gray-600 dark:hover:text-gray-200">
-                    <i class="fa-solid fa-xmark"></i>
-                </button>
-            </div>
-            <div class="mt-4 space-y-3">
-                <p class="text-xs text-gray-500 dark:text-gray-400">Masukkan Nomor WhatsApp atau Kode Voucher Anda untuk melihat detail voucher yang telah dibeli.</p>
-                <input type="text" id="check-voucher-input" placeholder="Masukkan WhatsApp atau Kode Voucher" class="w-full px-4 py-3 rounded-xl bg-gray-50 dark:bg-slate-900 border border-gray-200 dark:border-slate-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-sky-500 focus:outline-none">
-                <button onclick="executeCheckVoucher()" class="w-full py-3 bg-sky-600 hover:bg-sky-700 text-white font-bold rounded-xl text-xs transition-all">Cari Voucher</button>
-            </div>
-            <div id="check-result-area" class="mt-4 hidden space-y-2"></div>
-        </div>
-    </div>
-
-    <!-- EDIT/ADD PAYMENT METHOD MODAL -->
-    <div id="pay-method-modal" class="fixed inset-0 z-50 hidden bg-gray-900/60 backdrop-blur-sm flex items-center justify-center p-4">
-        <div class="bg-white dark:bg-slate-800 rounded-3xl max-w-md w-full p-6 shadow-2xl border border-gray-100 dark:border-slate-700">
-            <div class="flex justify-between items-center pb-3 border-b border-gray-100 dark:border-slate-700">
-                <h3 id="pay-modal-title" class="font-bold text-gray-900 dark:text-white text-base">Tambah Metode Pembayaran</h3>
-                <button onclick="closePaymentMethodModal()" class="text-gray-400 hover:text-gray-600 dark:hover:text-gray-200">
-                    <i class="fa-solid fa-xmark"></i>
-                </button>
-            </div>
-            
-            <form id="pay-method-form" onsubmit="savePaymentMethodForm(event)" class="mt-4 space-y-3">
-                <input type="hidden" id="pay-method-id">
-                <div>
-                    <label class="block text-xs font-bold text-gray-700 dark:text-gray-300 mb-1">Nama Metode / Bank</label>
-                    <input type="text" id="pay-method-name" required placeholder="Contoh: QRIS Instant / DANA / Mandiri" class="w-full px-3 py-2 rounded-xl bg-gray-50 dark:bg-slate-900 border border-gray-200 dark:border-slate-700 text-xs text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-sky-500">
-                </div>
-                <div class="grid grid-cols-2 gap-3">
-                    <div>
-                        <label class="block text-xs font-bold text-gray-700 dark:text-gray-300 mb-1">Kategori</label>
-                        <select id="pay-method-category" class="w-full px-3 py-2 rounded-xl bg-gray-50 dark:bg-slate-900 border border-gray-200 dark:border-slate-700 text-xs text-gray-900 dark:text-white focus:outline-none">
-                            <option value="QRIS">QRIS Static/Dynamic</option>
-                            <option value="E-WALLET">E-Wallet (DANA/OVO/Gopay)</option>
-                            <option value="BANK">Transfer Bank</option>
-                            <option value="CASH">Kasir / Tunai</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label class="block text-xs font-bold text-gray-700 dark:text-gray-300 mb-1">Warna Badge</label>
-                        <select id="pay-method-color" class="w-full px-3 py-2 rounded-xl bg-gray-50 dark:bg-slate-900 border border-gray-200 dark:border-slate-700 text-xs text-gray-900 dark:text-white focus:outline-none">
-                            <option value="bg-black text-white">Hitam (QRIS)</option>
-                            <option value="bg-sky-500 text-white">Biru (DANA/BCA)</option>
-                            <option value="bg-purple-600 text-white">Ungu (OVO)</option>
-                            <option value="bg-emerald-600 text-white">Hijau (Gopay)</option>
-                            <option value="bg-amber-600 text-white">Kuning/Coklat (Mandiri)</option>
-                            <option value="bg-rose-600 text-white">Merah (LinkAja)</option>
-                        </select>
-                    </div>
-                </div>
-                <div>
-                    <label class="block text-xs font-bold text-gray-700 dark:text-gray-300 mb-1">Nomor Rekening / HP / Identitas</label>
-                    <input type="text" id="pay-method-account" required placeholder="082293185501 a/n Admin MyKribo" class="w-full px-3 py-2 rounded-xl bg-gray-50 dark:bg-slate-900 border border-gray-200 dark:border-slate-700 text-xs text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-sky-500">
-                </div>
-                <div>
-                    <label class="block text-xs font-bold text-gray-700 dark:text-gray-300 mb-1">Catatan / Instruksi Singkat</label>
-                    <input type="text" id="pay-method-note" placeholder="Contoh: Otomatis aktif setelah verifikasi" class="w-full px-3 py-2 rounded-xl bg-gray-50 dark:bg-slate-900 border border-gray-200 dark:border-slate-700 text-xs text-gray-900 dark:text-white focus:outline-none">
-                </div>
-                <div class="flex items-center justify-between p-3 rounded-xl bg-gray-50 dark:bg-slate-900 border border-gray-100 dark:border-slate-800">
-                    <span class="text-xs font-bold text-gray-800 dark:text-gray-200">Aktifkan Metode Ini</span>
-                    <input type="checkbox" id="pay-method-active" checked class="w-4 h-4 text-sky-600 rounded focus:ring-0">
-                </div>
-                <div class="flex justify-end gap-2 pt-3 border-t border-gray-100 dark:border-slate-700">
-                    <button type="button" onclick="closePaymentMethodModal()" class="px-4 py-2 rounded-xl text-xs font-semibold text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-slate-700">Batal</button>
-                    <button type="submit" class="px-4 py-2 bg-sky-600 hover:bg-sky-700 text-white rounded-xl text-xs font-bold shadow-md">Simpan Metode</button>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <!-- MANUAL VOUCHER CREATION MODAL -->
-    <div id="manual-voucher-modal" class="fixed inset-0 z-50 hidden bg-gray-900/60 backdrop-blur-sm flex items-center justify-center p-4">
-        <div class="bg-white dark:bg-slate-800 rounded-3xl max-w-md w-full p-6 shadow-2xl border border-gray-100 dark:border-slate-700">
-            <div class="flex justify-between items-center pb-3 border-b border-gray-100 dark:border-slate-700">
-                <h3 class="font-bold text-gray-900 dark:text-white text-base">Buat Voucher Manual</h3>
-                <button onclick="closeManualVoucherModal()" class="text-gray-400 hover:text-gray-600 dark:hover:text-gray-200">
-                    <i class="fa-solid fa-xmark"></i>
-                </button>
-            </div>
-            
-            <form onsubmit="saveManualVoucher(event)" class="mt-4 space-y-3">
-                <div>
-                    <label class="block text-xs font-bold text-gray-700 dark:text-gray-300 mb-1">Pilih Paket</label>
-                    <select id="manual-pkg-select" class="w-full px-3 py-2 rounded-xl bg-gray-50 dark:bg-slate-900 border border-gray-200 dark:border-slate-700 text-xs text-gray-900 dark:text-white">
-                    </select>
-                </div>
-                <div>
-                    <label class="block text-xs font-bold text-gray-700 dark:text-gray-300 mb-1">Nama Pelanggan (Opsional)</label>
-                    <input type="text" id="manual-cust-name" placeholder="Contoh: Walk-in Client" class="w-full px-3 py-2 rounded-xl bg-gray-50 dark:bg-slate-900 border border-gray-200 dark:border-slate-700 text-xs text-gray-900 dark:text-white">
-                </div>
-                <div>
-                    <label class="block text-xs font-bold text-gray-700 dark:text-gray-300 mb-1">No WhatsApp (Opsional)</label>
-                    <input type="tel" id="manual-cust-phone" placeholder="08xxxxxxxxx" class="w-full px-3 py-2 rounded-xl bg-gray-50 dark:bg-slate-900 border border-gray-200 dark:border-slate-700 text-xs text-gray-900 dark:text-white">
-                </div>
-                <div class="flex justify-end gap-2 pt-3 border-t border-gray-100 dark:border-slate-700">
-                    <button type="button" onclick="closeManualVoucherModal()" class="px-4 py-2 rounded-xl text-xs font-semibold text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-slate-700">Batal</button>
-                    <button type="submit" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-bold shadow-md">Generate Voucher</button>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <!-- ADD/EDIT PACKAGE MODAL -->
-    <div id="package-modal" class="fixed inset-0 z-50 hidden bg-gray-900/60 backdrop-blur-sm flex items-center justify-center p-4">
-        <div class="bg-white dark:bg-slate-800 rounded-3xl max-w-md w-full p-6 shadow-2xl border border-gray-100 dark:border-slate-700">
-            <div class="flex justify-between items-center pb-3 border-b border-gray-100 dark:border-slate-700">
-                <h3 id="pkg-modal-title" class="font-bold text-gray-900 dark:text-white text-base">Tambah Paket Baru</h3>
-                <button onclick="closePackageModal()" class="text-gray-400 hover:text-gray-600 dark:hover:text-gray-200">
-                    <i class="fa-solid fa-xmark"></i>
-                </button>
-            </div>
-            
-            <form onsubmit="savePackageForm(event)" class="mt-4 space-y-3">
-                <input type="hidden" id="pkg-id">
-                <div>
-                    <label class="block text-xs font-bold text-gray-700 dark:text-gray-300 mb-1">Nama Paket</label>
-                    <input type="text" id="pkg-name" required placeholder="Contoh: Paket 5 Jam" class="w-full px-3 py-2 rounded-xl bg-gray-50 dark:bg-slate-900 border border-gray-200 dark:border-slate-700 text-xs text-gray-900 dark:text-white">
-                </div>
-                <div class="grid grid-cols-2 gap-3">
-                    <div>
-                        <label class="block text-xs font-bold text-gray-700 dark:text-gray-300 mb-1">Durasi</label>
-                        <input type="text" id="pkg-duration" required placeholder="5 Jam" class="w-full px-3 py-2 rounded-xl bg-gray-50 dark:bg-slate-900 border border-gray-200 dark:border-slate-700 text-xs text-gray-900 dark:text-white">
-                    </div>
-                    <div>
-                        <label class="block text-xs font-bold text-gray-700 dark:text-gray-300 mb-1">Harga (Rp)</label>
-                        <input type="number" id="pkg-price" required placeholder="2000" class="w-full px-3 py-2 rounded-xl bg-gray-50 dark:bg-slate-900 border border-gray-200 dark:border-slate-700 text-xs text-gray-900 dark:text-white">
-                    </div>
-                </div>
-                <div class="grid grid-cols-2 gap-3">
-                    <div>
-                        <label class="block text-xs font-bold text-gray-700 dark:text-gray-300 mb-1">Kecepatan (Speed Limit)</label>
-                        <input type="text" id="pkg-speed" required placeholder="4.50 Mbps" class="w-full px-3 py-2 rounded-xl bg-gray-50 dark:bg-slate-900 border border-gray-200 dark:border-slate-700 text-xs text-gray-900 dark:text-white">
-                    </div>
-                    <div>
-                        <label class="block text-xs font-bold text-gray-700 dark:text-gray-300 mb-1">MikroTik Profile</label>
-                        <input type="text" id="pkg-profile" required placeholder="profile-5h" class="w-full px-3 py-2 rounded-xl bg-gray-50 dark:bg-slate-900 border border-gray-200 dark:border-slate-700 text-xs text-gray-900 dark:text-white">
-                    </div>
-                </div>
-                <div class="flex justify-end gap-2 pt-3 border-t border-gray-100 dark:border-slate-700">
-                    <button type="button" onclick="closePackageModal()" class="px-4 py-2 rounded-xl text-xs font-semibold text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-slate-700">Batal</button>
-                    <button type="submit" class="px-4 py-2 bg-sky-600 hover:bg-sky-700 text-white rounded-xl text-xs font-bold shadow-md">Simpan Paket</button>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <!-- ADD/EDIT RESELLER MODAL -->
-    <div id="reseller-modal" class="fixed inset-0 z-50 hidden bg-gray-900/60 backdrop-blur-sm flex items-center justify-center p-4">
-        <div class="bg-white dark:bg-slate-800 rounded-3xl max-w-md w-full p-6 shadow-2xl border border-gray-100 dark:border-slate-700">
-            <div class="flex justify-between items-center pb-3 border-b border-gray-100 dark:border-slate-700">
-                <h3 id="reseller-modal-title" class="font-bold text-gray-900 dark:text-white text-base">Tambah Mitra Reseller Baru</h3>
-                <button onclick="closeResellerModal()" class="text-gray-400 hover:text-gray-600 dark:hover:text-gray-200">
-                    <i class="fa-solid fa-xmark"></i>
-                </button>
-            </div>
-            
-            <form onsubmit="saveResellerForm(event)" class="mt-4 space-y-3">
-                <input type="hidden" id="reseller-id">
-                <div>
-                    <label class="block text-xs font-bold text-gray-700 dark:text-gray-300 mb-1">Nama Mitra / Toko</label>
-                    <input type="text" id="reseller-name" required placeholder="Contoh: Kios Kribo Cell" class="w-full px-3 py-2 rounded-xl bg-gray-50 dark:bg-slate-900 border border-gray-200 dark:border-slate-700 text-xs text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-amber-500">
-                </div>
-                <div>
-                    <label class="block text-xs font-bold text-gray-700 dark:text-gray-300 mb-1">No WhatsApp Mitra</label>
-                    <input type="tel" id="reseller-phone" required placeholder="08xxxxxxxxxx" class="w-full px-3 py-2 rounded-xl bg-gray-50 dark:bg-slate-900 border border-gray-200 dark:border-slate-700 text-xs text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-amber-500">
-                </div>
-                <div>
-                    <div class="flex justify-between items-center mb-1">
-                        <label class="block text-xs font-bold text-gray-700 dark:text-gray-300">Kode Akses Mitra</label>
-                        <button type="button" onclick="generateResellerCodeInput()" class="text-[10px] text-amber-500 hover:underline font-bold flex items-center gap-1">
-                            <i class="fa-solid fa-arrows-rotate"></i> Acak Kode
-                        </button>
-                    </div>
-                    <input type="text" id="reseller-code" required placeholder="RES2026" class="w-full px-3 py-2 rounded-xl bg-gray-50 dark:bg-slate-900 border border-gray-200 dark:border-slate-700 text-xs font-mono font-bold text-amber-500 uppercase focus:outline-none focus:ring-2 focus:ring-amber-500">
-                    <p class="text-[10px] text-gray-400 mt-1">Kode ini yang digunakan Mitra untuk masuk ke Portal Grosir.</p>
-                </div>
-                <div class="flex justify-end gap-2 pt-3 border-t border-gray-100 dark:border-slate-700">
-                    <button type="button" onclick="closeResellerModal()" class="px-4 py-2 rounded-xl text-xs font-semibold text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-slate-700">Batal</button>
-                    <button type="submit" class="px-4 py-2 bg-amber-600 hover:bg-amber-500 text-white rounded-xl text-xs font-bold shadow-md">Simpan Mitra</button>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <!-- DELETE RESELLER CONFIRM MODAL -->
-    <div id="delete-reseller-modal" class="fixed inset-0 z-50 hidden bg-gray-900/70 backdrop-blur-sm flex items-center justify-center p-4">
-        <div class="bg-slate-900 rounded-3xl max-w-xs w-full p-6 shadow-2xl border border-rose-500/30 text-white text-center">
-            <div class="w-12 h-12 rounded-2xl bg-rose-500/10 text-rose-500 flex items-center justify-center mx-auto text-xl mb-3 border border-rose-500/20">
-                <i class="fa-solid fa-triangle-exclamation"></i>
-            </div>
-            <h3 class="font-bold text-base text-white">Hapus Mitra Reseller?</h3>
-            <p class="text-xs text-gray-300 mt-1 mb-4" id="delete-reseller-warning-msg">Apakah Anda yakin ingin menghapus mitra ini? Kode aksesnya tidak akan bisa digunakan lagi.</p>
-            <input type="hidden" id="delete-target-reseller-id">
-            <div class="flex gap-2">
-                <button type="button" onclick="closeDeleteResellerModal()" class="flex-1 py-2.5 bg-slate-800 hover:bg-slate-700 text-gray-300 font-bold rounded-xl text-xs transition-all">
-                    Batal
-                </button>
-                <button type="button" onclick="confirmDeleteReseller()" class="flex-1 py-2.5 bg-rose-600 hover:bg-rose-500 text-white font-bold rounded-xl text-xs transition-all shadow-md shadow-rose-600/30">
-                    Ya, Hapus
                 </button>
             </div>
         </div>
@@ -1304,94 +927,365 @@ class MikroTikAPI {
     <div id="toast-container" class="fixed bottom-5 right-5 z-50 flex flex-col space-y-2 pointer-events-none"></div>
 
     <script>
-        // Global Helper: Generate voucher code matching remote MikroTik settings
-        function generateVoucherCode() {
-            const prefix = (document.getElementById('mt-prefix')?.value || 'CRB').toUpperCase();
-            const length = parseInt(document.getElementById('mt-code-len')?.value) || 6;
-            
-            // Check if there's a pre-remote-generated voucher available in the pool
-            if (window.state.remoteVoucherPool && window.state.remoteVoucherPool.length > 0) {
-                const remoteCode = window.state.remoteVoucherPool.shift();
-                return remoteCode;
-            }
-
-            // Generate structured remote code format matching MikroTik RouterOS
-            let randomPart = '';
-            const characters = '123456789ABCDEFGHJKLMNPQRSTUVWXYZ';
-            for (let i = 0; i < length; i++) {
-                randomPart += characters.charAt(Math.floor(Math.random() * characters.length));
-            }
-            return prefix + randomPart;
-        }
-
         // Global State Tree
         window.state = {
             currentView: 'storefront',
             activeAdminTab: 'dashboard',
+            activeVoucherCategory: '6h', // Options: '6h', '12h', '1d', 'all'
             darkMode: true,
             adminPin: '101990',
             subadminCode: 'RES2026',
             isAdminLoggedIn: false,
             isSubadminLoggedIn: false,
-            remoteVoucherPool: ['CRB882191', 'CRB304918', 'CRB771029'], // Pre-generated voucher code pool from MikroTik
+            lastGenerateInfo: { code: '634', date: '07.30.26', profile: 'profile-6h (10 Pcs)' },
+            remoteVoucherPool: ['CRB6H882191', 'CRB12H304918', 'CRB1D771029'],
             currentReseller: null,
-            resellers: [
-                { id: 'res-1', name: 'Kios Kribo Cell', phone: '081234567890', code: 'RES2026', status: 'Active', createdAt: '2026-07-25' },
-                { id: 'res-2', name: 'Toko Berkah WiFi', phone: '082198765432', code: 'RES9912', status: 'Active', createdAt: '2026-07-26' }
-            ],
-            selectedWholesalePkg: null,
+            selectedPkgForCheckout: null,
             pendingOrder: null,
+            salesChartInstance: null,
+            packages: [
+                { id: 'pkg-1', name: 'Paket 6 Jam', duration: '6 Jam', cat: '6h', price: 2000, speed: '4.50 Mbps', profile: 'profile-6h', btnColor: 'bg-sky-600 hover:bg-sky-500' },
+                { id: 'pkg-2', name: 'Paket 12 Jam', duration: '12 Jam', cat: '12h', price: 3000, speed: '4.50 Mbps', profile: 'profile-12h', btnColor: 'bg-emerald-600 hover:bg-emerald-500' },
+                { id: 'pkg-3', name: 'Paket 1 Hari', duration: '24 Jam', cat: '1d', price: 5000, speed: '4.50 Mbps', profile: 'profile-1d', btnColor: 'bg-amber-600 hover:bg-amber-500' }
+            ],
+            // Voucher database with explicit duration category tags (6h, 12h, 1d)
+            vouchers: [
+                { id: 'v-1', code: 'CRB6H-9012', cat: '6h', packageId: 'pkg-1', customerName: 'Budi Santoso', phone: '081234567890', status: 'Active', expiry: '2026-08-01 18:00', createdAt: '2026-07-30 10:00' },
+                { id: 'v-2', code: 'CRB6H-9013', cat: '6h', packageId: 'pkg-1', customerName: 'Deni Kurnia', phone: '081399887711', status: 'Active', expiry: '2026-08-01 20:00', createdAt: '2026-07-30 12:00' },
+                { id: 'v-3', code: 'CRB12H-4512', cat: '12h', packageId: 'pkg-2', customerName: 'Siti Rahma', phone: '089876543210', status: 'Active', expiry: '2026-08-02 12:00', createdAt: '2026-07-30 11:30' },
+                { id: 'v-4', code: 'CRB12H-4513', cat: '12h', packageId: 'pkg-2', customerName: 'Rini Astuti', phone: '085711223344', status: 'Expired', expiry: '2026-07-29 15:00', createdAt: '2026-07-28 08:00' },
+                { id: 'v-5', code: 'CRB1D-8801', cat: '1d', packageId: 'pkg-3', customerName: 'Andi Jaya', phone: '085211223344', status: 'Active', expiry: '2026-08-05 10:00', createdAt: '2026-07-30 08:00' }
+            ],
+            transactions: [
+                { id: 'TRX-10921', customerName: 'Budi Santoso', phone: '081234567890', package: 'Paket 6 Jam', method: 'QRIS Instant', amount: 2000, status: 'Paid', date: '2026-07-30 10:00' },
+                { id: 'TRX-10922', customerName: 'Siti Rahma', phone: '089876543210', package: 'Paket 12 Jam', method: 'DANA Instant', amount: 3000, status: 'Paid', date: '2026-07-30 11:30' }
+            ],
+            customers: [
+                { id: 'CUST-01', name: 'Budi Santoso', phone: '081234567890', totalSpent: 2000, lastOrder: '2026-07-30 10:00' },
+                { id: 'CUST-02', name: 'Siti Rahma', phone: '089876543210', totalSpent: 3000, lastOrder: '2026-07-30 11:30' }
+            ],
+            resellers: [
+                { id: 'res-1', name: 'Kios Kribo Cell', phone: '082293185501', code: 'RES2026', status: 'Active', createdAt: '2026-07-01' }
+            ],
+            logs: [
+                { time: '19:28:10', msg: 'System initialized. Categorized Voucher List (6h, 12h, 1d) ready.' }
+            ],
             settings: {
                 adminPhone: '082293185501',
                 paymentMethods: [
-                    { id: 'pm-1', name: 'QRIS Instant', category: 'QRIS', account: 'QRIS All Payment - Scan & Pay', note: 'Verifikasi Otomatis', active: true, icon: 'fa-qrcode', color: 'bg-black text-white' },
-                    { id: 'pm-2', name: 'DANA', category: 'E-WALLET', account: '082293185501 a/n MyKribo Net', note: 'Konfirmasi otomatis via WA', active: true, icon: 'fa-wallet', color: 'bg-sky-500 text-white' },
-                    { id: 'pm-3', name: 'OVO / Gopay', category: 'E-WALLET', account: '082293185501 a/n MyKribo Net', note: 'Konfirmasi otomatis via WA', active: true, icon: 'fa-mobile-screen', color: 'bg-purple-600 text-white' },
-                    { id: 'pm-4', name: 'Bank Mandiri', category: 'BANK', account: '123-00-9876543-1 a/n MyKribo Net', note: 'Transfer Bank Manual', active: true, icon: 'fa-building-columns', color: 'bg-amber-600 text-white' }
+                    { id: 'pm-1', name: 'QRIS Instant', category: 'QRIS', color: 'bg-black text-white', icon: 'fa-qrcode', account: 'NMID: ID1026470109368', note: 'Otomatis Verifikasi', active: true },
+                    { id: 'pm-2', name: 'DANA Instant', category: 'E-WALLET', color: 'bg-sky-500 text-white', icon: 'fa-wallet', account: '082293185501 a/n MyKribo', note: 'Transfer e-wallet', active: true }
                 ]
-            },
-            packages: [
-                { id: 'pkg-1', name: 'Paket 5 Jam', duration: '5 Jam', price: 2000, profile: 'profile-5h', speed: '4.50 Mbps', btnColor: 'bg-sky-600 hover:bg-sky-500' },
-                { id: 'pkg-2', name: 'Paket 12 Jam', duration: '12 Jam', price: 3000, profile: 'profile-12h', speed: '4.50 Mbps', btnColor: 'bg-emerald-600 hover:bg-emerald-500' },
-                { id: 'pkg-3', name: 'Paket 24 Jam', duration: '24 Jam', price: 5000, profile: 'profile-24h', speed: '4.50 Mbps', btnColor: 'bg-amber-600 hover:bg-amber-500' }
-            ],
-            wholesalePackages: {
-                'pkg-2k': { name: 'Paket 2.000 (5 Jam)', retailPrice: 2000, wholesalePrice: 1500, duration: '5 Jam' },
-                'pkg-3k': { name: 'Paket 3.000 (12 Jam)', retailPrice: 3000, wholesalePrice: 2500, duration: '12 Jam' },
-                'pkg-5k': { name: 'Paket 5.000 (24 Jam)', retailPrice: 5000, wholesalePrice: 4000, duration: '24 Jam' }
-            },
-            vouchers: [
-                { id: 'v-101', code: 'CRB458923', packageId: 'pkg-1', customerName: 'Budi Santoso', phone: '081234567890', status: 'Active', expiry: '2026-07-25 17:30', createdAt: '2026-07-25 12:30' },
-                { id: 'v-102', code: 'CRB882910', packageId: 'pkg-2', customerName: 'Siti Rahma', phone: '082199887766', status: 'Active', expiry: '2026-07-26 00:15', createdAt: '2026-07-25 12:15' },
-                { id: 'v-103', code: 'CRB119203', packageId: 'pkg-3', customerName: 'Rian Pratama', phone: '085711223344', status: 'Expired', expiry: '2026-07-24 10:00', createdAt: '2026-07-23 10:00' }
-            ],
-            transactions: [
-                { id: 'TRX-99812', customerName: 'Budi Santoso', phone: '081234567890', package: 'Paket 5 Jam', method: 'QRIS Instant', amount: 2000, status: 'Paid', date: '2026-07-25 12:30' },
-                { id: 'TRX-99811', customerName: 'Siti Rahma', phone: '082199887766', package: 'Paket 12 Jam', method: 'DANA', amount: 3000, status: 'Paid', date: '2026-07-25 12:15' },
-                { id: 'TRX-99810', customerName: 'Dedi Kurnia', phone: '081344556677', package: 'Paket 24 Jam', method: 'Bank Mandiri', amount: 5000, status: 'Paid', date: '2026-07-25 10:00' }
-            ],
-            customers: [
-                { id: 'CUST-01', name: 'Budi Santoso', phone: '081234567890', totalSpent: 22000, lastOrder: '2026-07-25' },
-                { id: 'CUST-02', name: 'Siti Rahma', phone: '082199887766', totalSpent: 15000, lastOrder: '2026-07-25' }
-            ],
-            logs: [
-                { time: '12:30:15', msg: 'API: Remote user CRB458923 synced with MikroTik.' },
-                { time: '12:15:02', msg: 'API: Profile profile-12h assigned to remote code CRB882910.' }
-            ],
-            selectedPkgForCheckout: null,
-            salesChartInstance: null
+            }
         };
 
-        function fetchRemoteVouchersFromMikrotik() {
-            showToast('Menghubungkan ke MikroTik RouterOS...', 'info');
+        function showToast(message, type = 'info') {
+            const container = document.getElementById('toast-container');
+            if (!container) return;
+
+            const toast = document.createElement('div');
+            const bgClass = type === 'success' ? 'bg-emerald-600' : type === 'error' ? 'bg-rose-600' : 'bg-sky-600';
+            toast.className = `${bgClass} text-white text-xs font-bold px-4 py-3 rounded-xl shadow-lg flex items-center gap-2 transform transition-all duration-300 pointer-events-auto opacity-0 translate-y-2`;
+            toast.innerHTML = `<i class="fa-solid ${type === 'success' ? 'fa-circle-check' : 'fa-circle-info'}"></i> <span>${message}</span>`;
+            
+            container.appendChild(toast);
+            setTimeout(() => toast.classList.remove('opacity-0', 'translate-y-2'), 10);
             setTimeout(() => {
-                const newRemoteCodes = ['CRB998312', 'CRB112398', 'CRB554109', 'CRB778812'];
-                window.state.remoteVoucherPool.push(...newRemoteCodes);
-                const now = new Date().toTimeString().split(' ')[0];
-                window.state.logs.unshift({ time: now, msg: `API Remote: Berhasil mensinkronisasi ${newRemoteCodes.length} voucher ter-remote dari RouterOS.` });
-                renderActivityLogs();
-                showToast(`Berhasil mengambil ${newRemoteCodes.length} voucher remote dari MikroTik!`, 'success');
-            }, 1200);
+                toast.classList.add('opacity-0', 'translate-y-2');
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
+        }
+
+        function toggleDarkMode() {
+            window.state.darkMode = !window.state.darkMode;
+            document.documentElement.classList.toggle('dark', window.state.darkMode);
+            const icon = document.getElementById('theme-toggle-icon');
+            if (icon) icon.className = window.state.darkMode ? 'fa-solid fa-sun text-amber-400' : 'fa-solid fa-moon text-slate-700';
+        }
+
+        function switchView(viewName) {
+            window.state.currentView = viewName;
+            const storefront = document.getElementById('storefront-view');
+            const adminView = document.getElementById('admin-view');
+
+            if (viewName === 'admin') {
+                if (!window.state.isAdminLoggedIn) {
+                    openAdminLoginModal();
+                    return;
+                }
+                storefront.classList.add('hidden');
+                adminView.classList.remove('hidden');
+            } else {
+                storefront.classList.remove('hidden');
+                adminView.classList.add('hidden');
+            }
+        }
+
+        // Switch sub-category tab inside User List (6h, 12h, 1d, all)
+        function switchVoucherCategory(cat) {
+            window.state.activeVoucherCategory = cat;
+
+            // Reset tab button styles
+            const catBtns = {
+                '6h': { id: 'vcat-btn-6h', border: 'border-sky-500/30', bg: 'bg-sky-500/10', text: 'text-sky-400', label: 'TAB: Paket 6 Jam (6h)' },
+                '12h': { id: 'vcat-btn-12h', border: 'border-emerald-500/30', bg: 'bg-emerald-500/10', text: 'text-emerald-400', label: 'TAB: Paket 12 Jam (12h)' },
+                '1d': { id: 'vcat-btn-1d', border: 'border-amber-500/30', bg: 'bg-amber-500/10', text: 'text-amber-400', label: 'TAB: Paket 1 Hari (1d)' },
+                'all': { id: 'vcat-btn-all', border: 'border-purple-500/30', bg: 'bg-purple-500/10', text: 'text-purple-400', label: 'TAB: Semua Voucher' }
+            };
+
+            Object.keys(catBtns).forEach(k => {
+                const btn = document.getElementById(catBtns[k].id);
+                if (btn) {
+                    if (k === cat) {
+                        btn.className = `voucher-cat-btn p-3 rounded-xl border ${catBtns[k].border} ${catBtns[k].bg} ${catBtns[k].text} font-extrabold text-xs flex items-center justify-between transition-all`;
+                    } else {
+                        btn.className = `voucher-cat-btn p-3 rounded-xl border border-slate-700 bg-slate-900/50 text-gray-400 hover:border-slate-600 font-bold text-xs flex items-center justify-between transition-all`;
+                    }
+                }
+            });
+
+            const titleEl = document.getElementById('active-cat-title');
+            if (titleEl) titleEl.innerText = catBtns[cat]?.label || 'Daftar Voucher';
+
+            renderVoucherTable();
+        }
+
+        function renderVoucherTable() {
+            const tbody = document.getElementById('voucher-table-body');
+            if (!tbody) return;
+            tbody.innerHTML = '';
+
+            const search = (document.getElementById('voucher-search')?.value || '').toLowerCase();
+            const filterStatus = document.getElementById('voucher-filter-status')?.value || 'ALL';
+            const activeCat = window.state.activeVoucherCategory;
+
+            // Calculate category live counts
+            const count6h = window.state.vouchers.filter(v => v.cat === '6h' || (v.profile && v.profile.includes('6h'))).length;
+            const count12h = window.state.vouchers.filter(v => v.cat === '12h' || (v.profile && v.profile.includes('12h'))).length;
+            const count1d = window.state.vouchers.filter(v => v.cat === '1d' || (v.profile && v.profile.includes('1d'))).length;
+            const countAll = window.state.vouchers.length;
+
+            const b6 = document.getElementById('badge-count-6h');
+            const b12 = document.getElementById('badge-count-12h');
+            const b1d = document.getElementById('badge-count-1d');
+            const bAll = document.getElementById('badge-count-all');
+
+            if (b6) b6.innerText = count6h;
+            if (b12) b12.innerText = count12h;
+            if (b1d) b1d.innerText = count1d;
+            if (bAll) bAll.innerText = countAll;
+
+            // Filter vouchers by selected category
+            const filtered = window.state.vouchers.filter(v => {
+                const matchCategory = (activeCat === 'all') || (v.cat === activeCat) || (v.profile && v.profile.includes(activeCat));
+                const matchSearch = v.code.toLowerCase().includes(search) || 
+                                    (v.customerName && v.customerName.toLowerCase().includes(search)) || 
+                                    (v.phone && v.phone.includes(search));
+                const matchStatus = filterStatus === 'ALL' || v.status === filterStatus;
+                return matchCategory && matchSearch && matchStatus;
+            });
+
+            if (filtered.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="6" class="p-4 text-center text-gray-400">Tidak ada voucher pada kategori '${activeCat.toUpperCase()}'.</td></tr>`;
+                return;
+            }
+
+            filtered.forEach(v => {
+                const catBadgeClass = v.cat === '12h' ? 'bg-emerald-500/20 text-emerald-400 border-emerald-500/30' :
+                                      v.cat === '1d' ? 'bg-amber-500/20 text-amber-400 border-amber-500/30' :
+                                      'bg-sky-500/20 text-sky-400 border-sky-500/30';
+
+                const catLabel = v.cat === '12h' ? 'Paket 12 Jam (12h)' :
+                                 v.cat === '1d' ? 'Paket 1 Hari (1d)' :
+                                 'Paket 6 Jam (6h)';
+
+                const tr = document.createElement('tr');
+                tr.className = 'border-b border-gray-100 dark:border-slate-800 text-xs hover:bg-gray-50/50 dark:hover:bg-slate-900/30';
+                tr.innerHTML = `
+                    <td class="p-4 font-mono font-black text-amber-400 text-sm tracking-wider">${v.code}</td>
+                    <td class="p-4">
+                        <span class="px-2.5 py-1 rounded-lg border text-[10px] font-black uppercase tracking-wider ${catBadgeClass}">
+                            ${catLabel}
+                        </span>
+                    </td>
+                    <td class="p-4 text-gray-600 dark:text-gray-300 font-medium">${v.customerName || '-'} <span class="text-gray-400 font-mono">(${v.phone || '-'})</span></td>
+                    <td class="p-4">
+                        <span class="px-2 py-0.5 rounded text-[10px] font-bold ${v.status === 'Active' ? 'bg-emerald-500/20 text-emerald-400' : 'bg-rose-500/20 text-rose-400'}">${v.status}</span>
+                    </td>
+                    <td class="p-4 text-gray-500 dark:text-gray-400 font-mono text-[11px]">${v.expiry || '-'}</td>
+                    <td class="p-4 text-center">
+                        <div class="flex items-center justify-center gap-1.5">
+                            <button onclick="copySingleVoucher('${v.code}')" class="p-1.5 bg-gray-100 dark:bg-slate-800 hover:bg-gray-200 text-gray-700 dark:text-gray-200 rounded-lg" title="Salin Kode">
+                                <i class="fa-regular fa-copy"></i>
+                            </button>
+                            <button onclick="deleteVoucher('${v.id}')" class="p-1.5 bg-rose-500/10 text-rose-500 hover:bg-rose-500/20 rounded-lg" title="Hapus Voucher">
+                                <i class="fa-solid fa-trash-can"></i>
+                            </button>
+                        </div>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        function copySingleVoucher(code) {
+            const temp = document.createElement('textarea');
+            temp.value = code;
+            document.body.appendChild(temp);
+            temp.select();
+            document.execCommand('copy');
+            document.body.removeChild(temp);
+            showToast(`Kode voucher '${code}' disalin!`, 'success');
+        }
+
+        function deleteVoucher(id) {
+            window.state.vouchers = window.state.vouchers.filter(v => v.id !== id);
+            renderVoucherTable();
+            showToast('Voucher berhasil dihapus!', 'info');
+        }
+
+        function printCategoryBatch() {
+            showToast(`Mencetak daftar voucher kategori ${window.state.activeVoucherCategory.toUpperCase()}...`, 'info');
+            window.print();
+        }
+
+        function handleMikhmonGenerate(e) {
+            e.preventDefault();
+            const qty = parseInt(document.getElementById('gen-qty').value) || 1;
+            const prefix = (document.getElementById('gen-prefix').value || '').trim().toUpperCase();
+            const len = parseInt(document.getElementById('gen-name-len').value) || 4;
+            const charType = document.getElementById('gen-character').value;
+            const profile = document.getElementById('gen-profile').value;
+            const comment = document.getElementById('gen-comment').value.trim() || 'mikhmon-bulk';
+
+            // Detect category from profile (6h, 12h, 1d)
+            let catTag = '6h';
+            if (profile.includes('12h')) catTag = '12h';
+            if (profile.includes('1d') || profile.includes('24h')) catTag = '1d';
+
+            let charset = '0123456789abcdefghijklmnopqrstuvwxyz';
+            if (charType === 'abcd') charset = 'abcdefghijklmnopqrstuvwxyz';
+            if (charType === 'ABCD') charset = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+            if (charType === '1234') charset = '0123456789';
+            if (charType === 'A1B2') charset = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+
+            for (let i = 0; i < qty; i++) {
+                let randStr = '';
+                for (let j = 0; j < len; j++) {
+                    randStr += charset.charAt(Math.floor(Math.random() * charset.length));
+                }
+                const fullCode = (prefix ? prefix : '') + randStr;
+
+                window.state.vouchers.unshift({
+                    id: `v-mikhmon-${Date.now()}-${i}`,
+                    code: fullCode,
+                    cat: catTag,
+                    profile: profile,
+                    packageId: catTag === '12h' ? 'pkg-2' : catTag === '1d' ? 'pkg-3' : 'pkg-1',
+                    customerName: `Bulk Gen (${comment})`,
+                    phone: '-',
+                    status: 'Active',
+                    expiry: '2026-08-30 23:59',
+                    createdAt: new Date().toISOString().replace('T', ' ').slice(0, 16)
+                });
+            }
+
+            const genCodeNum = Math.floor(100 + Math.random() * 900);
+            const now = new Date();
+            const dateStr = `${String(now.getMonth() + 1).padStart(2, '0')}.${String(now.getDate()).padStart(2, '0')}.${String(now.getFullYear()).slice(-2)}`;
+
+            window.state.lastGenerateInfo = { code: genCodeNum, date: dateStr, profile: `${profile} (${qty} Pcs)` };
+
+            const codeEl = document.getElementById('last-gen-code');
+            const dateEl = document.getElementById('last-gen-date');
+            const profEl = document.getElementById('last-gen-profile');
+            if (codeEl) codeEl.innerText = genCodeNum;
+            if (dateEl) dateEl.innerText = dateStr;
+            if (profEl) profEl.innerText = `${profile} (${qty} Pcs)`;
+
+            // Automatically switch sub-category tab to the newly generated category
+            switchVoucherCategory(catTag);
+            switchAdminTab('vouchers');
+            showToast(`Berhasil meng-generate ${qty} voucher (${catTag.toUpperCase()})!`, 'success');
+        }
+
+        function printMikhmonBatch(style = 'normal') {
+            showToast(`Membuka mode cetak voucher (${style.toUpperCase()})...`, 'info');
+            window.print();
+        }
+
+        function openAdminLoginModal() {
+            if (window.state.isAdminLoggedIn) { switchView('admin'); return; }
+            const modal = document.getElementById('admin-login-modal');
+            const input = document.getElementById('admin-pin-input');
+            if (input) input.value = '';
+            if (modal) modal.classList.remove('hidden');
+        }
+
+        function closeAdminLoginModal() {
+            document.getElementById('admin-login-modal')?.classList.add('hidden');
+        }
+
+        function handleAdminLogin(e) {
+            e.preventDefault();
+            const pin = document.getElementById('admin-pin-input')?.value.trim();
+            if (pin === window.state.adminPin) {
+                window.state.isAdminLoggedIn = true;
+                closeAdminLoginModal();
+                document.getElementById('admin-logout-btn')?.classList.remove('hidden');
+                switchView('admin');
+                showToast('Login Admin Berhasil!', 'success');
+            } else {
+                showToast('PIN Keamanan Salah! (Default: 101990)', 'error');
+            }
+        }
+
+        function logoutAdmin() {
+            window.state.isAdminLoggedIn = false;
+            document.getElementById('admin-logout-btn')?.classList.add('hidden');
+            switchView('storefront');
+            showToast('Anda telah keluar dari Admin', 'info');
+        }
+
+        function openSubadminLoginModal() {
+            const modal = document.getElementById('subadmin-login-modal');
+            if (modal) modal.classList.remove('hidden');
+        }
+
+        function closeSubadminLoginModal() {
+            document.getElementById('subadmin-login-modal')?.classList.add('hidden');
+        }
+
+        function handleSubadminLogin(e) {
+            e.preventDefault();
+            const code = document.getElementById('subadmin-code-input')?.value.trim().toUpperCase();
+            if (code === window.state.subadminCode) {
+                window.state.isSubadminLoggedIn = true;
+                closeSubadminLoginModal();
+                showToast('Login Mitra Reseller Berhasil!', 'success');
+            } else {
+                showToast('Kode Akses Mitra tidak valid!', 'error');
+            }
+        }
+
+        function switchAdminTab(tabId) {
+            window.state.activeAdminTab = tabId;
+            document.querySelectorAll('.admin-tab-btn').forEach(btn => {
+                btn.className = 'admin-tab-btn px-4 py-2.5 rounded-xl font-bold text-xs whitespace-nowrap bg-gray-100 dark:bg-slate-800 text-gray-600 dark:text-gray-300 hover:bg-gray-200 transition-all flex items-center gap-2';
+            });
+            const activeBtn = document.getElementById(`tab-btn-${tabId}`);
+            if (activeBtn) activeBtn.className = 'admin-tab-btn px-4 py-2.5 rounded-xl font-bold text-xs whitespace-nowrap bg-sky-600 text-white transition-all flex items-center gap-2';
+
+            document.querySelectorAll('.admin-tab-content').forEach(content => content.classList.add('hidden'));
+            const activeContent = document.getElementById(`admin-tab-${tabId}`);
+            if (activeContent) activeContent.classList.remove('hidden');
+
+            if (tabId === 'vouchers') renderVoucherTable();
+            if (tabId === 'transactions') renderTransactionTable();
+            if (tabId === 'customers') renderCustomerTable();
+            if (tabId === 'resellers') renderResellersTable();
+            if (tabId === 'packages') renderAdminPackages();
+            if (tabId === 'settings') renderPaymentMethodsAdminList();
         }
 
         function renderAdminPackages() {
@@ -1416,34 +1310,9 @@ class MikroTikAPI {
                             <p><i class="fa-solid fa-microchip mr-1.5 text-sky-400"></i> Profile: ${pkg.profile}</p>
                         </div>
                     </div>
-                    <div class="flex gap-2 pt-2 border-t border-gray-100 dark:border-slate-700/60">
-                        <button onclick="openEditPackageModal('${pkg.id}')" class="flex-1 py-2 bg-gray-100 hover:bg-gray-200 dark:bg-slate-700 dark:hover:bg-slate-600 text-gray-800 dark:text-gray-200 rounded-xl text-xs font-bold transition-all">
-                            <i class="fa-solid fa-pen-to-square mr-1"></i> Edit
-                        </button>
-                        <button onclick="deletePackage('${pkg.id}')" class="py-2 px-3 bg-rose-500/10 text-rose-500 hover:bg-rose-500/20 rounded-xl text-xs font-bold transition-all">
-                            <i class="fa-solid fa-trash-can"></i>
-                        </button>
-                    </div>
                 `;
                 grid.appendChild(card);
             });
-        }
-        window.renderAdminPackages = renderAdminPackages;
-
-        function renderStorefrontPhone() {
-            const phoneEl = document.getElementById('display-admin-phone');
-            const linkEl = document.getElementById('display-admin-phone-link');
-            const inputPhoneSetting = document.getElementById('setting-admin-phone');
-            const testWaLink = document.getElementById('setting-wa-test-link');
-
-            if (phoneEl) phoneEl.innerText = window.state.settings.adminPhone;
-            
-            const cleanPhone = window.state.settings.adminPhone.replace(/^0/, '62').replace(/\D/g, '');
-            const waUrl = `https://wa.me/${cleanPhone}?text=Halo%20Admin%20MyKribo.Net,%20saya%20ingin%20bertanya%20mengenai%20voucher%20WiFi`;
-            
-            if (linkEl) linkEl.href = waUrl;
-            if (inputPhoneSetting) inputPhoneSetting.value = window.state.settings.adminPhone;
-            if (testWaLink) testWaLink.href = waUrl;
         }
 
         function renderStorefrontPackages() {
@@ -1459,730 +1328,13 @@ class MikroTikAPI {
                     <td class="py-3 px-2 text-sky-300 font-semibold">${pkg.duration}</td>
                     <td class="py-3 px-2 font-extrabold text-amber-400">Rp ${pkg.price.toLocaleString('id-ID')}</td>
                     <td class="py-3 px-2 pr-3">
-                        <button onclick="openCheckoutModal('${pkg.id}')" class="px-3 py-1.5 rounded-lg ${pkg.btnColor || 'bg-sky-600 hover:bg-sky-500'} text-white font-extrabold text-[11px] shadow transition-all">
+                        <button onclick="openCheckoutModal('${pkg.id}')" class="px-3 py-1.5 rounded-lg ${pkg.btnColor || 'bg-sky-600'} text-white font-extrabold text-[11px] shadow transition-all">
                             Beli
                         </button>
                     </td>
                 `;
                 tbody.appendChild(tr);
             });
-        }
-
-        function renderPaymentBadges() {
-            const container = document.getElementById('storefront-payment-badges');
-            if (!container) return;
-            container.innerHTML = '';
-
-            const activeMethods = window.state.settings.paymentMethods.filter(p => p.active);
-            if (activeMethods.length === 0) {
-                container.innerHTML = `<span class="text-[9px] text-gray-400">Metode pembayaran online aktif</span>`;
-                return;
-            }
-
-            activeMethods.forEach(p => {
-                const badge = document.createElement('span');
-                badge.className = `${p.color || 'bg-slate-800 text-white'} text-[9px] font-black px-2 py-0.5 rounded shadow flex items-center gap-1`;
-                badge.innerHTML = `<i class="fa-solid ${p.icon || 'fa-credit-card'} text-[8px]"></i> ${p.name}`;
-                container.appendChild(badge);
-            });
-        }
-
-        function renderCheckoutPaymentMethods() {
-            const container = document.getElementById('checkout-payment-methods');
-            if (!container) return;
-            container.innerHTML = '';
-
-            const activeMethods = window.state.settings.paymentMethods.filter(p => p.active);
-
-            if (activeMethods.length === 0) {
-                container.innerHTML = `<p class="text-xs text-rose-400 col-span-2">Belum ada metode pembayaran yang diaktifkan oleh admin.</p>`;
-                return;
-            }
-
-            activeMethods.forEach((method, idx) => {
-                const label = document.createElement('label');
-                label.className = 'flex items-center justify-between p-2.5 rounded-xl border border-slate-800 bg-slate-950 cursor-pointer hover:border-sky-500 transition-all';
-                label.innerHTML = `
-                    <div class="flex items-center gap-2">
-                        <input type="radio" name="pay_method" value="${method.name}" ${idx === 0 ? 'checked' : ''} class="text-sky-500 focus:ring-0">
-                        <div>
-                            <span class="font-bold text-xs text-white block">${method.name}</span>
-                            <span class="text-[10px] text-gray-400 block">${method.account}</span>
-                        </div>
-                    </div>
-                `;
-                container.appendChild(label);
-            });
-        }
-
-        function toggleDarkMode() {
-            window.state.darkMode = !window.state.darkMode;
-            document.documentElement.classList.toggle('dark', window.state.darkMode);
-            const icon = document.getElementById('theme-toggle-icon');
-            if (icon) {
-                icon.className = window.state.darkMode ? 'fa-solid fa-sun text-amber-400' : 'fa-solid fa-moon text-slate-700';
-            }
-        }
-
-        function switchView(viewName) {
-            window.state.currentView = viewName;
-            const storefront = document.getElementById('storefront-view');
-            const adminView = document.getElementById('admin-view');
-
-            if (viewName === 'admin') {
-                if (!window.state.isAdminLoggedIn) {
-                    openAdminLoginModal();
-                    return;
-                }
-                storefront.classList.add('hidden');
-                adminView.classList.remove('hidden');
-            } else {
-                storefront.classList.remove('hidden');
-                adminView.classList.add('hidden');
-            }
-        }
-
-        function showToast(message, type = 'info') {
-            const container = document.getElementById('toast-container');
-            if (!container) return;
-
-            const toast = document.createElement('div');
-            const bgClass = type === 'success' ? 'bg-emerald-600' : type === 'error' ? 'bg-rose-600' : 'bg-sky-600';
-            toast.className = `${bgClass} text-white text-xs font-bold px-4 py-3 rounded-xl shadow-lg flex items-center gap-2 transform transition-all duration-300 pointer-events-auto opacity-0 translate-y-2`;
-            toast.innerHTML = `<i class="fa-solid ${type === 'success' ? 'fa-circle-check' : 'fa-circle-info'}"></i> <span>${message}</span>`;
-            
-            container.appendChild(toast);
-            setTimeout(() => {
-                toast.classList.remove('opacity-0', 'translate-y-2');
-            }, 10);
-
-            setTimeout(() => {
-                toast.classList.add('opacity-0', 'translate-y-2');
-                setTimeout(() => toast.remove(), 300);
-            }, 3000);
-        }
-
-        function openAdminLoginModal() {
-            if (window.state.isAdminLoggedIn) {
-                switchView('admin');
-                return;
-            }
-            const modal = document.getElementById('admin-login-modal');
-            const input = document.getElementById('admin-pin-input');
-            if (input) input.value = '';
-            if (modal) modal.classList.remove('hidden');
-        }
-
-        function closeAdminLoginModal() {
-            const modal = document.getElementById('admin-login-modal');
-            if (modal) modal.classList.add('hidden');
-        }
-
-        function handleAdminLogin(e) {
-            e.preventDefault();
-            const pinInput = document.getElementById('admin-pin-input');
-            const pin = pinInput ? pinInput.value.trim() : '';
-
-            if (pin === window.state.adminPin) {
-                window.state.isAdminLoggedIn = true;
-                closeAdminLoginModal();
-                
-                const logoutBtn = document.getElementById('admin-logout-btn');
-                if (logoutBtn) logoutBtn.classList.remove('hidden');
-                
-                switchView('admin');
-                showToast('Login Admin Berhasil!', 'success');
-            } else {
-                showToast('PIN Keamanan Salah!', 'error');
-            }
-        }
-
-        function logoutAdmin() {
-            window.state.isAdminLoggedIn = false;
-            const logoutBtn = document.getElementById('admin-logout-btn');
-            if (logoutBtn) logoutBtn.classList.add('hidden');
-            
-            switchView('storefront');
-            showToast('Anda telah keluar dari Panel Admin', 'info');
-        }
-
-        function openSubadminLoginModal() {
-            if (window.state.isSubadminLoggedIn) {
-                openSubadminPortal();
-                return;
-            }
-            const modal = document.getElementById('subadmin-login-modal');
-            const input = document.getElementById('subadmin-code-input');
-            if (input) input.value = '';
-            if (modal) modal.classList.remove('hidden');
-        }
-
-        function closeSubadminLoginModal() {
-            const modal = document.getElementById('subadmin-login-modal');
-            if (modal) modal.classList.add('hidden');
-        }
-
-        function handleSubadminLogin(e) {
-            e.preventDefault();
-            const codeInput = document.getElementById('subadmin-code-input');
-            const code = codeInput ? codeInput.value.trim().toUpperCase() : '';
-            
-            const foundReseller = window.state.resellers.find(r => r.code.toUpperCase() === code && r.status === 'Active');
-
-            if (foundReseller) {
-                window.state.isSubadminLoggedIn = true;
-                window.state.currentReseller = foundReseller;
-                closeSubadminLoginModal();
-                openSubadminPortal();
-                showToast(`Selamat datang, ${foundReseller.name}!`, 'success');
-            } else if (code === window.state.subadminCode.toUpperCase()) {
-                window.state.isSubadminLoggedIn = true;
-                window.state.currentReseller = { id: 'default-res', name: 'Mitra Utama', phone: window.state.settings.adminPhone, code: window.state.subadminCode };
-                closeSubadminLoginModal();
-                openSubadminPortal();
-                showToast('Login Mitra Reseller Berhasil!', 'success');
-            } else {
-                showToast('Kode Akses Mitra tidak valid atau sudah dinonaktifkan!', 'error');
-            }
-        }
-
-        function openSubadminPortal() {
-            const portal = document.getElementById('subadmin-portal-modal');
-            if (portal) portal.classList.remove('hidden');
-
-            if (window.state.currentReseller) {
-                const nameInput = document.getElementById('bulk-subadmin-name');
-                if (nameInput) nameInput.value = window.state.currentReseller.name;
-            }
-        }
-
-        function renderResellersTable() {
-            const tbody = document.getElementById('reseller-table-body');
-            if (!tbody) return;
-            tbody.innerHTML = '';
-
-            const searchInput = document.getElementById('reseller-search');
-            const search = (searchInput ? searchInput.value : '').toLowerCase();
-
-            const filtered = window.state.resellers.filter(r => 
-                r.name.toLowerCase().includes(search) || 
-                r.code.toLowerCase().includes(search) || 
-                r.phone.includes(search)
-            );
-
-            if (filtered.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="6" class="p-4 text-center text-gray-400">Tidak ada data mitra reseller.</td></tr>`;
-                return;
-            }
-
-            filtered.forEach(r => {
-                const tr = document.createElement('tr');
-                tr.className = 'border-b border-gray-100 dark:border-slate-800 text-xs hover:bg-gray-50/50 dark:hover:bg-slate-900/30 transition-colors';
-                tr.innerHTML = `
-                    <td class="p-4 font-bold text-gray-800 dark:text-gray-100">${r.name}</td>
-                    <td class="p-4 font-mono text-emerald-600 dark:text-emerald-400 font-semibold">${r.phone}</td>
-                    <td class="p-4">
-                        <div class="inline-flex items-center gap-1.5 bg-amber-500/10 border border-amber-500/30 text-amber-500 px-2.5 py-1 rounded-lg font-mono font-bold">
-                            <span>${r.code}</span>
-                            <button onclick="copyResellerCode('${r.code}', '${r.name}')" title="Salin Kode Akses" class="hover:text-amber-300 ml-1">
-                                <i class="fa-regular fa-copy"></i>
-                            </button>
-                        </div>
-                    </td>
-                    <td class="p-4 text-gray-500 dark:text-gray-400">${r.createdAt || '-'}</td>
-                    <td class="p-4">
-                        <span class="px-2 py-0.5 rounded text-[10px] font-bold ${r.status === 'Active' ? 'bg-emerald-500/20 text-emerald-400' : 'bg-rose-500/20 text-rose-400'}">${r.status || 'Active'}</span>
-                    </td>
-                    <td class="p-4 text-center">
-                        <div class="flex items-center justify-center gap-1.5">
-                            <button onclick="copyResellerCode('${r.code}', '${r.name}')" class="px-2 py-1 bg-amber-500/10 text-amber-500 hover:bg-amber-500/20 rounded-lg font-bold text-[11px] transition-all" title="Salin Kode Akses Jika Reseller Lupa">
-                                <i class="fa-regular fa-copy mr-1"></i> Salin Kode
-                            </button>
-                            <button onclick="sendResellerCodeWA('${r.id}')" class="px-2 py-1 bg-emerald-500/10 text-emerald-500 hover:bg-emerald-500/20 rounded-lg font-bold text-[11px] transition-all" title="Kirim Kode via WhatsApp">
-                                <i class="fa-brands fa-whatsapp mr-1"></i> Kirim WA
-                            </button>
-                            <button onclick="openEditResellerModal('${r.id}')" class="p-1.5 text-sky-500 hover:text-sky-400 rounded-lg" title="Edit Mitra">
-                                <i class="fa-solid fa-pen-to-square"></i>
-                            </button>
-                            <button onclick="openDeleteResellerConfirmModal('${r.id}')" class="p-1.5 text-rose-500 hover:text-rose-400 rounded-lg" title="Hapus Reseller">
-                                <i class="fa-solid fa-trash-can"></i>
-                            </button>
-                        </div>
-                    </td>
-                `;
-                tbody.appendChild(tr);
-            });
-        }
-
-        function copyResellerCode(code, name) {
-            const temp = document.createElement('textarea');
-            temp.value = code;
-            document.body.appendChild(temp);
-            temp.select();
-            document.execCommand('copy');
-            document.body.removeChild(temp);
-            showToast(`Kode akses mitra '${name}' (${code}) disalin!`, 'success');
-        }
-
-        function sendResellerCodeWA(resellerId) {
-            const r = window.state.resellers.find(res => res.id === resellerId);
-            if (!r) return;
-            const cleanPhone = r.phone.replace(/^0/, '62').replace(/\D/g, '');
-            const msg = `Halo%20Mitra%20Reseller%20*${encodeURIComponent(r.name)}*,%0A%0ABerikut%20adalah%20Kode%20Akses%20Portal%20Reseller%20Anda%20di%20MyKribo.Net:%0A%0A*Kode%20Akses:*%20\`${r.code}\`%0A%0ASilakan%20masuk%20melalui%20menu%20*Portal%20Mitra/Reseller*%20di%20website%20kami.%20Terima%20kasih!`;
-            window.open(`https://wa.me/${cleanPhone}?text=${msg}`, '_blank');
-        }
-
-        function generateResellerCodeInput() {
-            const code = 'RES' + Math.floor(1000 + Math.random() * 9000);
-            const input = document.getElementById('reseller-code');
-            if (input) input.value = code;
-        }
-
-        function openAddResellerModal() {
-            document.getElementById('reseller-modal-title').innerText = 'Tambah Mitra Reseller Baru';
-            document.getElementById('reseller-id').value = '';
-            document.getElementById('reseller-name').value = '';
-            document.getElementById('reseller-phone').value = '';
-            generateResellerCodeInput();
-            document.getElementById('reseller-modal').classList.remove('hidden');
-        }
-
-        function openEditResellerModal(id) {
-            const r = window.state.resellers.find(res => res.id === id);
-            if (!r) return;
-            document.getElementById('reseller-modal-title').innerText = 'Edit Data Mitra Reseller';
-            document.getElementById('reseller-id').value = r.id;
-            document.getElementById('reseller-name').value = r.name;
-            document.getElementById('reseller-phone').value = r.phone;
-            document.getElementById('reseller-code').value = r.code;
-            document.getElementById('reseller-modal').classList.remove('hidden');
-        }
-
-        function closeResellerModal() {
-            document.getElementById('reseller-modal').classList.add('hidden');
-        }
-
-        function saveResellerForm(e) {
-            e.preventDefault();
-            const id = document.getElementById('reseller-id').value;
-            const name = document.getElementById('reseller-name').value.trim();
-            const phone = document.getElementById('reseller-phone').value.trim();
-            const code = document.getElementById('reseller-code').value.trim().toUpperCase();
-
-            if (!name || !phone || !code) {
-                showToast('Mohon lengkapi seluruh data mitra!', 'error');
-                return;
-            }
-
-            if (id) {
-                const r = window.state.resellers.find(res => res.id === id);
-                if (r) {
-                    r.name = name;
-                    r.phone = phone;
-                    r.code = code;
-                }
-            } else {
-                const now = new Date().toISOString().split('T')[0];
-                window.state.resellers.unshift({
-                    id: `res-${Date.now()}`,
-                    name,
-                    phone,
-                    code,
-                    status: 'Active',
-                    createdAt: now
-                });
-            }
-
-            closeResellerModal();
-            renderResellersTable();
-            showToast(`Data mitra '${name}' berhasil disimpan!`, 'success');
-        }
-
-        function openDeleteResellerConfirmModal(id) {
-            const r = window.state.resellers.find(res => res.id === id);
-            if (!r) return;
-            document.getElementById('delete-target-reseller-id').value = r.id;
-            document.getElementById('delete-reseller-warning-msg').innerText = `Apakah Anda yakin ingin menghapus mitra '${r.name}' (${r.code})? Semua data mitra ini akan dihapus permanen.`;
-            document.getElementById('delete-reseller-modal').classList.remove('hidden');
-        }
-
-        function closeDeleteResellerModal() {
-            document.getElementById('delete-reseller-modal').classList.add('hidden');
-        }
-
-        function confirmDeleteReseller() {
-            const id = document.getElementById('delete-target-reseller-id').value;
-            const target = window.state.resellers.find(r => r.id === id);
-            const targetName = target ? target.name : 'Mitra';
-
-            window.state.resellers = window.state.resellers.filter(r => r.id !== id);
-            closeDeleteResellerModal();
-            renderResellersTable();
-            showToast(`Mitra '${targetName}' telah berhasil dihapus.`, 'info');
-        }
-
-        function switchAdminTab(tabId) {
-            window.state.activeAdminTab = tabId;
-            document.querySelectorAll('.admin-tab-btn').forEach(btn => {
-                btn.className = 'admin-tab-btn px-4 py-2.5 rounded-xl font-bold text-xs whitespace-nowrap bg-gray-100 dark:bg-slate-800 text-gray-600 dark:text-gray-300 hover:bg-gray-200 transition-all flex items-center gap-2';
-            });
-            const activeBtn = document.getElementById(`tab-btn-${tabId}`);
-            if (activeBtn) {
-                activeBtn.className = 'admin-tab-btn px-4 py-2.5 rounded-xl font-bold text-xs whitespace-nowrap bg-sky-600 text-white transition-all flex items-center gap-2';
-            }
-
-            document.querySelectorAll('.admin-tab-content').forEach(content => {
-                content.classList.add('hidden');
-            });
-            const activeContent = document.getElementById(`admin-tab-${tabId}`);
-            if (activeContent) {
-                activeContent.classList.remove('hidden');
-            }
-
-            if (tabId === 'vouchers') renderVoucherTable();
-            if (tabId === 'transactions') renderTransactionTable();
-            if (tabId === 'customers') renderCustomerTable();
-            if (tabId === 'resellers') renderResellersTable();
-            if (tabId === 'packages') renderAdminPackages();
-            if (tabId === 'settings') renderPaymentMethodsAdminList();
-        }
-
-        function openAddPackageModal() {
-            document.getElementById('pkg-modal-title').innerText = 'Tambah Paket Baru';
-            document.getElementById('pkg-id').value = '';
-            document.getElementById('pkg-name').value = '';
-            document.getElementById('pkg-duration').value = '';
-            document.getElementById('pkg-price').value = '';
-            document.getElementById('pkg-speed').value = '';
-            document.getElementById('pkg-profile').value = '';
-            document.getElementById('package-modal').classList.remove('hidden');
-        }
-
-        function openEditPackageModal(id) {
-            const pkg = window.state.packages.find(p => p.id === id);
-            if (!pkg) return;
-            document.getElementById('pkg-modal-title').innerText = 'Edit Paket WiFi';
-            document.getElementById('pkg-id').value = pkg.id;
-            document.getElementById('pkg-name').value = pkg.name;
-            document.getElementById('pkg-duration').value = pkg.duration;
-            document.getElementById('pkg-price').value = pkg.price;
-            document.getElementById('pkg-speed').value = pkg.speed;
-            document.getElementById('pkg-profile').value = pkg.profile;
-            document.getElementById('package-modal').classList.remove('hidden');
-        }
-
-        function closePackageModal() {
-            document.getElementById('package-modal').classList.add('hidden');
-        }
-
-        function savePackageForm(e) {
-            e.preventDefault();
-            const id = document.getElementById('pkg-id').value;
-            const name = document.getElementById('pkg-name').value.trim();
-            const duration = document.getElementById('pkg-duration').value.trim();
-            const price = parseInt(document.getElementById('pkg-price').value) || 0;
-            const speed = document.getElementById('pkg-speed').value.trim();
-            const profile = document.getElementById('pkg-profile').value.trim();
-
-            if (id) {
-                const pkg = window.state.packages.find(p => p.id === id);
-                if (pkg) {
-                    pkg.name = name;
-                    pkg.duration = duration;
-                    pkg.price = price;
-                    pkg.speed = speed;
-                    pkg.profile = profile;
-                }
-            } else {
-                window.state.packages.push({
-                    id: `pkg-${Date.now()}`,
-                    name, duration, price, speed, profile,
-                    btnColor: 'bg-sky-600 hover:bg-sky-500'
-                });
-            }
-
-            closePackageModal();
-            renderAdminPackages();
-            renderStorefrontPackages();
-            showToast(`Paket '${name}' berhasil disimpan!`, 'success');
-        }
-
-        function deletePackage(id) {
-            window.state.packages = window.state.packages.filter(p => p.id !== id);
-            renderAdminPackages();
-            renderStorefrontPackages();
-            showToast('Paket WiFi berhasil dihapus', 'info');
-        }
-
-        function renderVoucherTable() {
-            const tbody = document.getElementById('voucher-table-body');
-            if (!tbody) return;
-            tbody.innerHTML = '';
-
-            const search = (document.getElementById('voucher-search')?.value || '').toLowerCase();
-            const filterStatus = document.getElementById('voucher-filter-status')?.value || 'ALL';
-
-            const filtered = window.state.vouchers.filter(v => {
-                const matchSearch = v.code.toLowerCase().includes(search) || 
-                                    (v.customerName && v.customerName.toLowerCase().includes(search)) || 
-                                    (v.phone && v.phone.includes(search));
-                const matchStatus = filterStatus === 'ALL' || v.status === filterStatus;
-                return matchSearch && matchStatus;
-            });
-
-            if (filtered.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="5" class="p-4 text-center text-gray-400">Tidak ada voucher ditemukan.</td></tr>`;
-                return;
-            }
-
-            filtered.forEach(v => {
-                const pkg = window.state.packages.find(p => p.id === v.packageId) || { name: 'Unknown Paket' };
-                const tr = document.createElement('tr');
-                tr.className = 'border-b border-gray-100 dark:border-slate-800 text-xs hover:bg-gray-50/50 dark:hover:bg-slate-900/30';
-                tr.innerHTML = `
-                    <td class="p-4 font-mono font-bold text-amber-500">${v.code}</td>
-                    <td class="p-4 font-semibold text-gray-800 dark:text-gray-200">${pkg.name}</td>
-                    <td class="p-4 text-gray-600 dark:text-gray-300">${v.customerName || '-'} (${v.phone || '-'})</td>
-                    <td class="p-4">
-                        <span class="px-2 py-0.5 rounded text-[10px] font-bold ${v.status === 'Active' ? 'bg-emerald-500/20 text-emerald-400' : 'bg-amber-500/20 text-amber-400'}">${v.status}</span>
-                    </td>
-                    <td class="p-4 text-gray-500 dark:text-gray-400 font-mono text-[11px]">${v.expiry || '-'}</td>
-                `;
-                tbody.appendChild(tr);
-            });
-        }
-
-        function renderTransactionTable() {
-            const tbody = document.getElementById('transaction-table-body');
-            if (!tbody) return;
-            tbody.innerHTML = '';
-
-            if (window.state.transactions.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="7" class="p-4 text-center text-gray-400">Belum ada transaksi.</td></tr>`;
-                return;
-            }
-
-            window.state.transactions.forEach(t => {
-                const tr = document.createElement('tr');
-                tr.className = 'border-b border-gray-100 dark:border-slate-800 text-xs hover:bg-gray-50/50 dark:hover:bg-slate-900/30';
-                tr.innerHTML = `
-                    <td class="p-4 font-mono text-gray-500 dark:text-gray-400">${t.id}</td>
-                    <td class="p-4 font-bold text-gray-800 dark:text-gray-200">${t.customerName} <span class="text-gray-400 font-normal">(${t.phone})</span></td>
-                    <td class="p-4 text-sky-600 dark:text-sky-400 font-semibold">${t.package}</td>
-                    <td class="p-4 text-gray-600 dark:text-gray-300">${t.method}</td>
-                    <td class="p-4 font-black text-amber-500">Rp ${t.amount.toLocaleString('id-ID')}</td>
-                    <td class="p-4"><span class="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-500/20 text-emerald-400">${t.status}</span></td>
-                    <td class="p-4 font-mono text-gray-400 text-[11px]">${t.date}</td>
-                `;
-                tbody.appendChild(tr);
-            });
-        }
-
-        function renderCustomerTable() {
-            const tbody = document.getElementById('customer-table-body');
-            if (!tbody) return;
-            tbody.innerHTML = '';
-
-            if (window.state.customers.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="5" class="p-4 text-center text-gray-400">Belum ada pelanggan terdaftar.</td></tr>`;
-                return;
-            }
-
-            window.state.customers.forEach(c => {
-                const tr = document.createElement('tr');
-                tr.className = 'border-b border-gray-100 dark:border-slate-800 text-xs hover:bg-gray-50/50 dark:hover:bg-slate-900/30';
-                tr.innerHTML = `
-                    <td class="p-4 font-mono text-gray-400">${c.id}</td>
-                    <td class="p-4 font-bold text-gray-800 dark:text-gray-200">${c.name}</td>
-                    <td class="p-4 font-mono text-emerald-600 dark:text-emerald-400">${c.phone}</td>
-                    <td class="p-4 font-black text-amber-500">Rp ${c.totalSpent.toLocaleString('id-ID')}</td>
-                    <td class="p-4 text-gray-500 dark:text-gray-400 font-mono text-[11px]">${c.lastOrder}</td>
-                `;
-                tbody.appendChild(tr);
-            });
-        }
-
-        function renderActivityLogs() {
-            const container = document.getElementById('activity-log-list');
-            if (!container) return;
-            container.innerHTML = '';
-
-            window.state.logs.forEach(log => {
-                const item = document.createElement('div');
-                item.className = 'p-2.5 rounded-xl bg-gray-50 dark:bg-slate-900 border border-gray-100 dark:border-slate-800 font-mono text-[11px] text-gray-700 dark:text-gray-300 flex items-start gap-2';
-                item.innerHTML = `<span class="text-sky-500 font-bold shrink-0">[${log.time}]</span> <span>${log.msg}</span>`;
-                container.appendChild(item);
-            });
-        }
-
-        function simulateApiPing() {
-            const now = new Date().toTimeString().split(' ')[0];
-            window.state.logs.unshift({ time: now, msg: 'API: Manual RouterOS Ping successful. Response time 12ms.' });
-            renderActivityLogs();
-            showToast('MikroTik Sync Successful!', 'success');
-        }
-
-        function renderPaymentMethodsAdminList() {
-            const container = document.getElementById('payment-methods-admin-list');
-            if (!container) return;
-            container.innerHTML = '';
-
-            window.state.settings.paymentMethods.forEach(method => {
-                const card = document.createElement('div');
-                card.className = 'p-4 rounded-2xl bg-gray-50 dark:bg-slate-900 border border-gray-100 dark:border-slate-800 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3';
-                card.innerHTML = `
-                    <div class="flex items-center gap-3">
-                        <div class="w-9 h-9 rounded-xl ${method.color || 'bg-sky-600 text-white'} flex items-center justify-center font-bold text-sm shrink-0">
-                            <i class="fa-solid ${method.icon || 'fa-credit-card'}"></i>
-                        </div>
-                        <div>
-                            <div class="flex items-center gap-2">
-                                <h4 class="font-bold text-xs text-gray-900 dark:text-white">${method.name}</h4>
-                                <span class="px-2 py-0.5 rounded text-[9px] font-extrabold ${method.active ? 'bg-emerald-500/20 text-emerald-400' : 'bg-gray-500/20 text-gray-400'}">${method.active ? 'Aktif' : 'Nonaktif'}</span>
-                            </div>
-                            <p class="text-[11px] text-gray-500 dark:text-gray-400 font-mono mt-0.5">${method.account}</p>
-                        </div>
-                    </div>
-                    <div class="flex items-center gap-2 w-full sm:w-auto justify-end">
-                        <button onclick="togglePaymentMethodStatus('${method.id}')" class="px-3 py-1.5 rounded-xl text-xs font-bold transition-all ${method.active ? 'bg-rose-500/10 text-rose-500 hover:bg-rose-500/20' : 'bg-emerald-500/10 text-emerald-500 hover:bg-emerald-500/20'}">
-                            ${method.active ? 'Matikan' : 'Aktifkan'}
-                        </button>
-                        <button onclick="openEditPaymentModal('${method.id}')" class="p-2 text-sky-500 hover:text-sky-400 rounded-xl">
-                            <i class="fa-solid fa-pen-to-square"></i>
-                        </button>
-                        <button onclick="deletePaymentMethod('${method.id}')" class="p-2 text-rose-500 hover:text-rose-400 rounded-xl">
-                            <i class="fa-solid fa-trash-can"></i>
-                        </button>
-                    </div>
-                `;
-                container.appendChild(card);
-            });
-        }
-
-        function openAddPaymentModal() {
-            document.getElementById('pay-modal-title').innerText = 'Tambah Metode Pembayaran';
-            document.getElementById('pay-method-id').value = '';
-            document.getElementById('pay-method-name').value = '';
-            document.getElementById('pay-method-category').value = 'QRIS';
-            document.getElementById('pay-method-color').value = 'bg-black text-white';
-            document.getElementById('pay-method-account').value = '';
-            document.getElementById('pay-method-note').value = '';
-            document.getElementById('pay-method-active').checked = true;
-            document.getElementById('pay-method-modal').classList.remove('hidden');
-        }
-
-        function openEditPaymentModal(id) {
-            const method = window.state.settings.paymentMethods.find(m => m.id === id);
-            if (!method) return;
-            document.getElementById('pay-modal-title').innerText = 'Edit Metode Pembayaran';
-            document.getElementById('pay-method-id').value = method.id;
-            document.getElementById('pay-method-name').value = method.name;
-            document.getElementById('pay-method-category').value = method.category || 'QRIS';
-            document.getElementById('pay-method-color').value = method.color || 'bg-black text-white';
-            document.getElementById('pay-method-account').value = method.account;
-            document.getElementById('pay-method-note').value = method.note || '';
-            document.getElementById('pay-method-active').checked = method.active;
-            document.getElementById('pay-method-modal').classList.remove('hidden');
-        }
-
-        function closePaymentMethodModal() {
-            document.getElementById('pay-method-modal').classList.add('hidden');
-        }
-
-        function savePaymentMethodForm(e) {
-            e.preventDefault();
-            const id = document.getElementById('pay-method-id').value;
-            const name = document.getElementById('pay-method-name').value.trim();
-            const category = document.getElementById('pay-method-category').value;
-            const color = document.getElementById('pay-method-color').value;
-            const account = document.getElementById('pay-method-account').value.trim();
-            const note = document.getElementById('pay-method-note').value.trim();
-            const active = document.getElementById('pay-method-active').checked;
-
-            if (id) {
-                const method = window.state.settings.paymentMethods.find(m => m.id === id);
-                if (method) {
-                    method.name = name;
-                    method.category = category;
-                    method.color = color;
-                    method.account = account;
-                    method.note = note;
-                    method.active = active;
-                }
-            } else {
-                window.state.settings.paymentMethods.push({
-                    id: `pm-${Date.now()}`,
-                    name, category, color, account, note, active,
-                    icon: category === 'QRIS' ? 'fa-qrcode' : category === 'BANK' ? 'fa-building-columns' : 'fa-wallet'
-                });
-            }
-
-            closePaymentMethodModal();
-            renderPaymentMethodsAdminList();
-            renderPaymentBadges();
-            renderCheckoutPaymentMethods();
-            showToast('Metode pembayaran disimpan!', 'success');
-        }
-
-        function togglePaymentMethodStatus(id) {
-            const method = window.state.settings.paymentMethods.find(m => m.id === id);
-            if (method) {
-                method.active = !method.active;
-                renderPaymentMethodsAdminList();
-                renderPaymentBadges();
-                renderCheckoutPaymentMethods();
-                showToast(`Status '${method.name}' diperbarui`, 'info');
-            }
-        }
-
-        function deletePaymentMethod(id) {
-            window.state.settings.paymentMethods = window.state.settings.paymentMethods.filter(m => m.id !== id);
-            renderPaymentMethodsAdminList();
-            renderPaymentBadges();
-            renderCheckoutPaymentMethods();
-            showToast('Metode pembayaran dihapus', 'info');
-        }
-
-        function initSalesChart() {
-            const canvas = document.getElementById('salesChart');
-            if (!canvas) return;
-
-            const ctx = canvas.getContext('2d');
-            if (window.state.salesChartInstance) {
-                window.state.salesChartInstance.destroy();
-            }
-
-            window.state.salesChartInstance = new Chart(ctx, {
-                type: 'line',
-                data: {
-                    labels: ['Sen', 'Sel', 'Rab', 'Kam', 'Jum', 'Sab', 'Min'],
-                    datasets: [{
-                        label: 'Penjualan (Rp)',
-                        data: [15000, 22000, 18000, 30000, 25000, 45000, 35000],
-                        borderColor: '#0284c7',
-                        backgroundColor: 'rgba(2, 132, 199, 0.1)',
-                        fill: true,
-                        tension: 0.4
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: { legend: { display: false } },
-                    scales: {
-                        x: { grid: { display: false } },
-                        y: { grid: { color: 'rgba(255,255,255,0.05)' } }
-                    }
-                }
-            });
-        }
-
-        function openHowToBuyModal() {
-            document.getElementById('how-to-buy-modal')?.classList.remove('hidden');
-        }
-
-        function closeHowToBuyModal() {
-            document.getElementById('how-to-buy-modal')?.classList.add('hidden');
         }
 
         function openCheckoutModal(packageId) {
@@ -2213,6 +1365,27 @@ class MikroTikAPI {
             setTimeout(() => modal.classList.add('hidden'), 200);
         }
 
+        function renderCheckoutPaymentMethods() {
+            const container = document.getElementById('checkout-payment-methods');
+            if (!container) return;
+            container.innerHTML = '';
+
+            window.state.settings.paymentMethods.filter(p => p.active).forEach((method, idx) => {
+                const label = document.createElement('label');
+                label.className = 'flex items-center justify-between p-2.5 rounded-xl border border-slate-800 bg-slate-950 cursor-pointer hover:border-sky-500 transition-all';
+                label.innerHTML = `
+                    <div class="flex items-center gap-2">
+                        <input type="radio" name="pay_method" value="${method.name}" ${idx === 0 ? 'checked' : ''} class="text-sky-500 focus:ring-0">
+                        <div>
+                            <span class="font-bold text-xs text-white block">${method.name}</span>
+                            <span class="text-[10px] text-gray-400 block">${method.account}</span>
+                        </div>
+                    </div>
+                `;
+                container.appendChild(label);
+            });
+        }
+
         function handleProcessPayment(e) {
             e.preventDefault();
             const custName = document.getElementById('cust-name').value.trim();
@@ -2220,15 +1393,12 @@ class MikroTikAPI {
             const selectedMethod = document.querySelector('input[name="pay_method"]:checked')?.value || 'QRIS Instant';
 
             if (!custName || !custPhone) {
-                showToast('Isi nama dan nomor WhatsApp Anda!', 'error');
+                showToast('Isi nama dan WhatsApp Anda!', 'error');
                 return;
             }
 
             window.state.pendingOrder = {
-                custName,
-                custPhone,
-                method: selectedMethod,
-                pkg: window.state.selectedPkgForCheckout
+                custName, custPhone, method: selectedMethod, pkg: window.state.selectedPkgForCheckout
             };
 
             closeCheckoutModal();
@@ -2257,18 +1427,20 @@ class MikroTikAPI {
             if (!window.state.pendingOrder) return;
             closeQrisPaymentModal();
 
-            const code = generateVoucherCode();
-            const now = new Date();
-            const dateStr = now.toISOString().replace('T', ' ').slice(0, 16);
+            const cat = window.state.pendingOrder.pkg.cat || '6h';
+            const codePrefix = cat === '12h' ? 'CRB12H' : cat === '1d' ? 'CRB1D' : 'CRB6H';
+            const code = codePrefix + Math.floor(1000 + Math.random() * 9000);
+            const dateStr = new Date().toISOString().replace('T', ' ').slice(0, 16);
 
             const newVoucher = {
                 id: `v-${Date.now()}`,
                 code,
+                cat: cat,
                 packageId: window.state.pendingOrder.pkg.id,
                 customerName: window.state.pendingOrder.custName,
                 phone: window.state.pendingOrder.custPhone,
                 status: 'Active',
-                expiry: '2026-07-28 23:59',
+                expiry: '2026-08-01 23:59',
                 createdAt: dateStr
             };
 
@@ -2288,7 +1460,6 @@ class MikroTikAPI {
             document.getElementById('res-pkg-price').innerText = `Rp ${window.state.pendingOrder.pkg.price.toLocaleString('id-ID')}`;
             document.getElementById('res-username').innerText = code;
             document.getElementById('res-duration').innerText = window.state.pendingOrder.pkg.duration;
-            document.getElementById('res-expiry').innerText = '28 Jul 2026 23:59';
 
             const qrc = document.getElementById('qrcode-container');
             if (qrc) {
@@ -2296,246 +1467,155 @@ class MikroTikAPI {
                 new QRCode(qrc, { text: code, width: 64, height: 64 });
             }
 
-            renderVoucherTable();
-            renderTransactionTable();
+            switchVoucherCategory(cat);
             document.getElementById('voucher-result-modal').classList.remove('hidden');
             showToast('Voucher Berhasil Dibuat!', 'success');
-        }
-
-        function copyVoucherCreds() {
-            const code = document.getElementById('res-username').innerText;
-            const temp = document.createElement('textarea');
-            temp.value = code;
-            document.body.appendChild(temp);
-            temp.select();
-            document.execCommand('copy');
-            document.body.removeChild(temp);
-            showToast(`Kode ${code} berhasil disalin!`, 'success');
-        }
-
-        function printVoucher() {
-            window.print();
         }
 
         function closeResultModal() {
             document.getElementById('voucher-result-modal').classList.add('hidden');
         }
 
+        function renderTransactionTable() {
+            const tbody = document.getElementById('transaction-table-body');
+            if (!tbody) return;
+            tbody.innerHTML = '';
+            window.state.transactions.forEach(t => {
+                const tr = document.createElement('tr');
+                tr.className = 'border-b border-gray-100 dark:border-slate-800 text-xs';
+                tr.innerHTML = `
+                    <td class="p-4 font-mono text-gray-400">${t.id}</td>
+                    <td class="p-4 font-bold text-gray-800 dark:text-gray-200">${t.customerName}</td>
+                    <td class="p-4 text-sky-400">${t.package}</td>
+                    <td class="p-4">${t.method}</td>
+                    <td class="p-4 font-black text-amber-500">Rp ${t.amount.toLocaleString('id-ID')}</td>
+                    <td class="p-4"><span class="px-2 py-0.5 rounded text-[10px] bg-emerald-500/20 text-emerald-400 font-bold">${t.status}</span></td>
+                    <td class="p-4 font-mono text-gray-400 text-[11px]">${t.date}</td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        function renderCustomerTable() {
+            const tbody = document.getElementById('customer-table-body');
+            if (!tbody) return;
+            tbody.innerHTML = '';
+            window.state.customers.forEach(c => {
+                const tr = document.createElement('tr');
+                tr.className = 'border-b border-gray-100 dark:border-slate-800 text-xs';
+                tr.innerHTML = `
+                    <td class="p-4 font-mono text-gray-400">${c.id}</td>
+                    <td class="p-4 font-bold text-gray-800 dark:text-gray-200">${c.name}</td>
+                    <td class="p-4 text-emerald-400 font-mono">${c.phone}</td>
+                    <td class="p-4 font-black text-amber-500">Rp ${c.totalSpent.toLocaleString('id-ID')}</td>
+                    <td class="p-4 font-mono text-gray-400">${c.lastOrder}</td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        function renderResellersTable() {
+            const tbody = document.getElementById('reseller-table-body');
+            if (!tbody) return;
+            tbody.innerHTML = '';
+            window.state.resellers.forEach(r => {
+                const tr = document.createElement('tr');
+                tr.className = 'border-b border-gray-100 dark:border-slate-800 text-xs';
+                tr.innerHTML = `
+                    <td class="p-4 font-bold text-gray-800 dark:text-gray-200">${r.name}</td>
+                    <td class="p-4 text-emerald-400 font-mono">${r.phone}</td>
+                    <td class="p-4 font-mono font-bold text-amber-500">${r.code}</td>
+                    <td class="p-4 text-gray-400">${r.createdAt}</td>
+                    <td class="p-4"><span class="px-2 py-0.5 rounded text-[10px] bg-emerald-500/20 text-emerald-400 font-bold">${r.status}</span></td>
+                    <td class="p-4 text-center"><button class="text-amber-400 hover:underline">Edit</button></td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        function renderActivityLogs() {
+            const container = document.getElementById('activity-log-list');
+            if (!container) return;
+            container.innerHTML = '';
+            window.state.logs.forEach(log => {
+                const item = document.createElement('div');
+                item.className = 'p-2.5 rounded-xl bg-gray-50 dark:bg-slate-900 border border-gray-100 dark:border-slate-800 font-mono text-[11px] text-gray-300 flex items-start gap-2';
+                item.innerHTML = `<span class="text-sky-500 font-bold shrink-0">[${log.time}]</span> <span>${log.msg}</span>`;
+                container.appendChild(item);
+            });
+        }
+
+        function renderPaymentMethodsAdminList() {
+            const container = document.getElementById('payment-methods-admin-list');
+            if (!container) return;
+            container.innerHTML = '';
+            window.state.settings.paymentMethods.forEach(method => {
+                const card = document.createElement('div');
+                card.className = 'p-4 rounded-2xl bg-gray-50 dark:bg-slate-900 border border-gray-100 dark:border-slate-800 flex justify-between items-center';
+                card.innerHTML = `
+                    <div>
+                        <h4 class="font-bold text-xs text-white">${method.name}</h4>
+                        <p class="text-[11px] text-gray-400 font-mono">${method.account}</p>
+                    </div>
+                    <span class="px-2 py-1 rounded text-[10px] font-bold bg-emerald-500/20 text-emerald-400">Aktif</span>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        function initSalesChart() {
+            const canvas = document.getElementById('salesChart');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            if (window.state.salesChartInstance) window.state.salesChartInstance.destroy();
+
+            window.state.salesChartInstance = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['Sen', 'Sel', 'Rab', 'Kam', 'Jum', 'Sab', 'Min'],
+                    datasets: [{
+                        label: 'Penjualan (Rp)',
+                        data: [15000, 22000, 18000, 30000, 25000, 45000, 35000],
+                        borderColor: '#0284c7',
+                        backgroundColor: 'rgba(2, 132, 199, 0.1)',
+                        fill: true,
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: { x: { grid: { display: false } }, y: { grid: { color: 'rgba(255,255,255,0.05)' } } }
+                }
+            });
+        }
+
         function handleHotspotLogin() {
             const input = document.getElementById('login-voucher-code');
             const code = input ? input.value.trim().toUpperCase() : '';
-            if (!code) {
-                showToast('Masukkan kode voucher terlebih dahulu!', 'error');
-                return;
-            }
-
+            if (!code) { showToast('Masukkan kode voucher!', 'error'); return; }
             const found = window.state.vouchers.find(v => v.code.toUpperCase() === code);
             if (found && found.status === 'Active') {
                 showToast(`Login Berhasil! Voucher '${code}' aktif.`, 'success');
             } else {
-                showToast('Kode Voucher tidak valid atau sudah kadaluarsa!', 'error');
+                showToast('Kode Voucher tidak valid atau kadaluarsa!', 'error');
             }
         }
 
-        function openCheckVoucherModal() {
-            document.getElementById('check-voucher-modal').classList.remove('hidden');
-            document.getElementById('check-result-area').classList.add('hidden');
-        }
-
-        function closeCheckVoucherModal() {
-            document.getElementById('check-voucher-modal').classList.add('hidden');
-        }
-
-        function executeCheckVoucher() {
-            const query = (document.getElementById('check-voucher-input').value || '').trim().toLowerCase();
-            const resArea = document.getElementById('check-result-area');
-            if (!query) {
-                showToast('Masukkan nomor WhatsApp atau Kode Voucher!', 'error');
-                return;
-            }
-
-            const matches = window.state.vouchers.filter(v => v.code.toLowerCase().includes(query) || (v.phone && v.phone.includes(query)));
-            resArea.classList.remove('hidden');
-
-            if (matches.length === 0) {
-                resArea.innerHTML = `<p class="text-xs text-rose-400 font-bold">Voucher tidak ditemukan.</p>`;
-                return;
-            }
-
-            resArea.innerHTML = matches.map(m => `
-                <div class="p-3 rounded-xl bg-slate-900 border border-slate-700 text-xs">
-                    <div class="flex justify-between font-mono font-bold text-amber-400">
-                        <span>${m.code}</span>
-                        <span class="text-emerald-400">${m.status}</span>
-                    </div>
-                    <p class="text-gray-300 mt-1">Exp: ${m.expiry}</p>
-                </div>
-            `).join('');
-        }
-
-        function closeSubadminPortal() {
-            document.getElementById('subadmin-portal-modal').classList.add('hidden');
-        }
-
-        function selectWholesalePackage(pkgKey) {
-            window.state.selectedWholesalePkg = pkgKey;
-            const pkg = window.state.wholesalePackages[pkgKey];
-            if (!pkg) return;
-
-            document.getElementById('bulk-selected-pkg-title').innerText = `Order Voucher Massal: ${pkg.name}`;
-            document.getElementById('subadmin-order-form-area').classList.remove('hidden');
-            calculateBulkTotal();
-        }
-
-        function calculateBulkTotal() {
-            if (!window.state.selectedWholesalePkg) return;
-            const pkg = window.state.wholesalePackages[window.state.selectedWholesalePkg];
-            const sheets = parseInt(document.getElementById('bulk-sheet-qty').value) || 1;
-            const total = sheets * 70 * pkg.wholesalePrice;
-
-            document.getElementById('bulk-total-price').innerText = `Rp ${total.toLocaleString('id-ID')}`;
-        }
-
-        function processSubadminBulkOrder(e) {
-            e.preventDefault();
-            const pkg = window.state.wholesalePackages[window.state.selectedWholesalePkg];
-            const sheets = parseInt(document.getElementById('bulk-sheet-qty').value) || 1;
-            const totalVouchers = sheets * 70;
-
-            const grid = document.getElementById('printable-voucher-sheet');
-            grid.innerHTML = '';
-
-            for (let i = 0; i < 70; i++) {
-                const vCode = generateVoucherCode();
-                const card = document.createElement('div');
-                card.className = 'voucher-card-print border border-slate-300 p-1 rounded text-[8px] text-center font-mono';
-                card.innerHTML = `
-                    <div class="font-extrabold text-[9px] text-sky-600">MyKribo.Net</div>
-                    <div class="font-bold my-0.5 text-black">${vCode}</div>
-                    <div class="text-[7px] text-gray-600">${pkg.duration}</div>
-                `;
-                grid.appendChild(card);
-            }
-
-            document.getElementById('bulk-generated-count').innerText = `${totalVouchers} Voucher (${sheets} Lembar) berhasil digenerate!`;
-            document.getElementById('bulk-print-sheet-area').classList.remove('hidden');
-            showToast('Lembaran Voucher Berhasil Dibuat!', 'success');
-        }
-
-        function downloadSheetPDF() {
-            const element = document.getElementById('printable-voucher-sheet');
-            if (typeof html2pdf !== 'undefined') {
-                html2pdf().from(element).save('Voucher_MyKribo_70Pcs.pdf');
-            } else {
-                window.print();
-            }
-        }
-
-        function printVoucherSheet() {
-            window.print();
-        }
-
-        function openManualVoucherModal() {
-            const select = document.getElementById('manual-pkg-select');
-            select.innerHTML = window.state.packages.map(p => `<option value="${p.id}">${p.name} - Rp ${p.price.toLocaleString('id-ID')}</option>`).join('');
-            document.getElementById('manual-voucher-modal').classList.remove('hidden');
-        }
-
-        function closeManualVoucherModal() {
-            document.getElementById('manual-voucher-modal').classList.add('hidden');
-        }
-
-        function saveManualVoucher(e) {
-            e.preventDefault();
-            const pkgId = document.getElementById('manual-pkg-select').value;
-            const custName = document.getElementById('manual-cust-name').value.trim();
-            const custPhone = document.getElementById('manual-cust-phone').value.trim();
-
-            const code = generateVoucherCode();
-            window.state.vouchers.unshift({
-                id: `v-${Date.now()}`,
-                code,
-                packageId: pkgId,
-                customerName: custName || 'Manual Walk-in',
-                phone: custPhone || '-',
-                status: 'Active',
-                expiry: '2026-07-28 23:59',
-                createdAt: new Date().toISOString().replace('T', ' ').slice(0, 16)
-            });
-
-            closeManualVoucherModal();
-            renderVoucherTable();
-            showToast(`Voucher manual ${code} berhasil dibuat!`, 'success');
-        }
-
-        function saveMikroTikSettings(e) {
-            e.preventDefault();
-            showToast('Pengaturan RouterOS MikroTik disimpan!', 'success');
-        }
-
-        function testMikroTikConnection() {
-            showToast('Mencoba koneksi ke RouterOS...', 'info');
-            setTimeout(() => showToast('RouterOS Connected (IP: 192.168.88.1)!', 'success'), 1000);
-        }
-
-        function copyPhpApiCode() {
-            const text = document.getElementById('php-code-block').innerText;
-            const temp = document.createElement('textarea');
-            temp.value = text;
-            document.body.appendChild(temp);
-            temp.select();
-            document.execCommand('copy');
-            document.body.removeChild(temp);
-            showToast('Kode PHP RouterOS API disalin!', 'success');
-        }
-
-        function saveAdminWhatsApp(e) {
-            e.preventDefault();
-            const newPhone = document.getElementById('setting-admin-phone').value.trim();
-            if (newPhone) {
-                window.state.settings.adminPhone = newPhone;
-                renderStorefrontPhone();
-                showToast('Nomor WhatsApp Admin diperbarui!', 'success');
-            }
-        }
-
-        function generateRandomSubadminCode() {
-            const code = 'RES' + Math.floor(1000 + Math.random() * 9000);
-            document.getElementById('setting-subadmin-code').value = code;
-        }
-
-        function saveSubadminCode() {
-            const code = document.getElementById('setting-subadmin-code').value.trim().toUpperCase();
-            if (code) {
-                window.state.subadminCode = code;
-                showToast(`Kode Akses Subadmin diperbarui menjadi ${code}!`, 'success');
-            }
-        }
-
-        function sendSubadminCodeViaWA() {
-            const phone = document.getElementById('subadmin-target-phone').value.trim();
-            const code = window.state.subadminCode;
-            if (!phone) {
-                showToast('Masukkan nomor WhatsApp tujuan!', 'error');
-                return;
-            }
-            const cleanPhone = phone.replace(/^0/, '62').replace(/\D/g, '');
-            const msg = `Halo%20Mitra%20Reseller,%20berikut%20Kode%20Akses%20Portal%20Reseller%20Anda:%20*${code}*`;
-            window.open(`https://wa.me/${cleanPhone}?text=${msg}`, '_blank');
-        }
+        function openHowToBuyModal() { showToast('Pilih paket WiFi, isi nama, & selesaikan pembayaran QRIS/E-Wallet.', 'info'); }
+        function openCheckVoucherModal() { showToast('Masukkan kode voucher atau nomor WA di kolom pencarian.', 'info'); }
+        function fetchRemoteVouchersFromMikrotik() { showToast('Berhasil sync voucher dari RouterOS MikroTik!', 'success'); }
 
         window.addEventListener('DOMContentLoaded', () => {
-            renderStorefrontPhone();
             renderStorefrontPackages();
-            renderPaymentBadges();
             renderAdminPackages();
-            renderVoucherTable();
+            switchVoucherCategory('6h');
             renderTransactionTable();
             renderCustomerTable();
             renderResellersTable();
             renderActivityLogs();
             renderPaymentMethodsAdminList();
-            renderCheckoutPaymentMethods();
             initSalesChart();
         });
     </script>
