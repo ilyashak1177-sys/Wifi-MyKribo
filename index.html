@@ -58,10 +58,10 @@
             body * {
                 visibility: hidden !important;
             }
-            #printable-voucher, #printable-voucher *, #printable-voucher-sheet, #printable-voucher-sheet * {
+            #printable-area, #printable-area * {
                 visibility: visible !important;
             }
-            #printable-voucher {
+            #printable-area {
                 position: absolute !important;
                 left: 0 !important;
                 top: 0 !important;
@@ -70,30 +70,6 @@
                 padding: 10px !important;
                 background: white !important;
                 color: black !important;
-            }
-            #printable-voucher-sheet {
-                position: absolute !important;
-                left: 0 !important;
-                top: 0 !important;
-                width: 100% !important;
-                margin: 0 !important;
-                padding: 0 !important;
-                background: white !important;
-                color: black !important;
-                display: grid !important;
-                grid-template-columns: repeat(7, minmax(0, 1fr)) !important;
-                gap: 2px !important;
-                box-shadow: none !important;
-                border: none !important;
-            }
-            .voucher-card-print {
-                border: 1px dashed #000 !important;
-                background: #fff !important;
-                color: #000 !important;
-                padding: 2px !important;
-                text-align: center !important;
-                font-family: monospace !important;
-                break-inside: avoid !important;
             }
             .no-print {
                 display: none !important;
@@ -697,9 +673,9 @@ class MikroTikAPI {
 
     public function getRemoteVouchers() {
         return [
-            ["name" => "CRB6H001", "profile" => "profile-6h", "limit-uptime" => "6h"],
-            ["name" => "CRB12H002", "profile" => "profile-12h", "limit-uptime" => "12h"],
-            ["name" => "CRB1D003", "profile" => "profile-1d", "limit-uptime" => "1d"]
+            ["name" => "CRB6H882191", "profile" => "profile-6h", "limit-uptime" => "6h"],
+            ["name" => "CRB12H304918", "profile" => "profile-12h", "limit-uptime" => "12h"],
+            ["name" => "CRB1D771029", "profile" => "profile-1d", "limit-uptime" => "1d"]
         ];
     }
 }
@@ -712,6 +688,41 @@ class MikroTikAPI {
             <!-- TAB 7: SETTINGS -->
             <div id="admin-tab-settings" class="admin-tab-content hidden space-y-6">
                 <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    
+                    <!-- Midtrans Gateway Configuration Card -->
+                    <div class="bg-white dark:bg-slate-800 p-6 rounded-2xl border border-gray-100 dark:border-slate-700 space-y-4 shadow-sm">
+                        <div class="flex items-center gap-3 border-b border-gray-100 dark:border-slate-700 pb-3">
+                            <div class="w-10 h-10 rounded-xl bg-indigo-500/10 text-indigo-500 flex items-center justify-center font-bold">
+                                <i class="fa-solid fa-credit-card text-xl"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-gray-900 dark:text-white text-sm">Midtrans Payment Gateway</h3>
+                                <p class="text-[11px] text-gray-500 dark:text-gray-400">Integrasi Otomatis QRIS Midtrans</p>
+                            </div>
+                        </div>
+
+                        <form onsubmit="saveMidtransSettings(event)" class="space-y-3">
+                            <div>
+                                <label class="block text-xs font-bold text-gray-700 dark:text-gray-300 mb-1">Client Key Midtrans</label>
+                                <input type="text" id="setting-midtrans-client-key" required placeholder="SB-Mid-client-XXXXX" class="w-full px-3 py-2 rounded-xl bg-gray-50 dark:bg-slate-900 border border-gray-200 dark:border-slate-700 text-xs font-mono focus:outline-none">
+                            </div>
+
+                            <div>
+                                <label class="block text-xs font-bold text-gray-700 dark:text-gray-300 mb-1">Server Key Midtrans</label>
+                                <input type="password" id="setting-midtrans-server-key" required placeholder="SB-Mid-server-XXXXX" class="w-full px-3 py-2 rounded-xl bg-gray-50 dark:bg-slate-900 border border-gray-200 dark:border-slate-700 text-xs font-mono focus:outline-none">
+                            </div>
+
+                            <div class="flex items-center justify-between p-2.5 rounded-xl bg-gray-50 dark:bg-slate-900 border border-gray-200 dark:border-slate-700">
+                                <span class="text-xs font-bold text-gray-700 dark:text-gray-300">Mode Sandbox (Testing)</span>
+                                <input type="checkbox" id="setting-midtrans-is-sandbox" checked class="w-4 h-4 text-indigo-600 rounded focus:ring-0">
+                            </div>
+
+                            <button type="submit" class="w-full py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-xl text-xs transition-all shadow-md shadow-indigo-600/30">
+                                <i class="fa-solid fa-floppy-disk mr-1"></i> Simpan Konfigurasi Midtrans
+                            </button>
+                        </form>
+                    </div>
+
                     <div class="bg-white dark:bg-slate-800 p-6 rounded-2xl border border-gray-100 dark:border-slate-700 space-y-4 shadow-sm">
                         <div class="flex items-center gap-3 border-b border-gray-100 dark:border-slate-700 pb-3">
                             <div class="w-10 h-10 rounded-xl bg-emerald-500/10 text-emerald-500 flex items-center justify-center font-bold">
@@ -734,7 +745,7 @@ class MikroTikAPI {
                         </form>
                     </div>
 
-                    <div class="lg:col-span-2 bg-white dark:bg-slate-800 p-6 rounded-2xl border border-gray-100 dark:border-slate-700 space-y-4 shadow-sm">
+                    <div class="bg-white dark:bg-slate-800 p-6 rounded-2xl border border-gray-100 dark:border-slate-700 space-y-4 shadow-sm">
                         <div class="flex justify-between items-center border-b border-gray-100 dark:border-slate-700 pb-3">
                             <h3 class="font-bold text-gray-900 dark:text-white text-sm">Metode Pembayaran</h3>
                             <button onclick="openAddPaymentModal()" class="px-3.5 py-2 bg-sky-600 hover:bg-sky-700 text-white rounded-xl text-xs font-bold shadow-md">
@@ -801,7 +812,7 @@ class MikroTikAPI {
 
     <!-- CHECKOUT PAYMENT MODAL -->
     <div id="checkout-modal" class="fixed inset-0 z-50 hidden bg-gray-900/80 backdrop-blur-sm flex items-center justify-center p-4">
-        <div id="checkout-modal-content" class="bg-slate-900 rounded-3xl max-w-md w-full p-6 shadow-2xl border border-sky-500/30 text-white transition-all transform scale-95 opacity-0">
+        <div id="checkout-modal-content" class="bg-slate-900 rounded-3xl max-w-md w-full p-6 shadow-2xl border border-sky-500/30 text-white transition-all">
             <div class="flex justify-between items-center pb-3 border-b border-slate-800">
                 <h3 class="font-bold text-base text-sky-400 flex items-center gap-2">
                     <i class="fa-solid fa-cart-shopping"></i> Pembelian Voucher
@@ -845,16 +856,29 @@ class MikroTikAPI {
     <div id="qris-payment-modal" class="fixed inset-0 z-50 hidden bg-gray-900/80 backdrop-blur-sm flex items-center justify-center p-4">
         <div id="qris-modal-content" class="bg-slate-900 rounded-3xl max-w-md w-full p-6 shadow-2xl border border-sky-500/30 text-white text-center">
             <div class="flex justify-between items-center pb-3 border-b border-slate-800">
-                <h3 class="font-bold text-base text-sky-400 flex items-center gap-2">
-                    <i class="fa-solid fa-qrcode"></i> Pembayaran QRIS National
-                </h3>
+                <div class="flex items-center gap-2">
+                    <div class="w-7 h-7 rounded-lg bg-sky-500/20 flex items-center justify-center text-sky-400 font-extrabold text-xs">
+                        <i class="fa-solid fa-bolt"></i>
+                    </div>
+                    <h3 class="font-bold text-base text-sky-400 flex items-center gap-1.5">
+                        Midtrans QRIS Payment
+                    </h3>
+                </div>
                 <button onclick="closeQrisPaymentModal()" class="text-gray-400 hover:text-white">
                     <i class="fa-solid fa-xmark text-lg"></i>
                 </button>
             </div>
 
-            <div class="mt-4 p-3 rounded-2xl bg-slate-950 border border-slate-800">
-                <span class="text-[10px] text-gray-400 uppercase font-bold tracking-wider block">Total Tagihan</span>
+            <!-- Midtrans Status Header -->
+            <div class="mt-3 flex items-center justify-between px-3 py-1.5 rounded-xl bg-slate-950/80 border border-slate-800 text-[11px]">
+                <span class="text-gray-400 flex items-center gap-1">
+                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span> Midtrans Snap Gateway
+                </span>
+                <span id="midtrans-order-id-display" class="font-mono text-amber-400 font-bold">MID-CRB-1092</span>
+            </div>
+
+            <div class="mt-3 p-3 rounded-2xl bg-slate-950 border border-slate-800">
+                <span class="text-[10px] text-gray-400 uppercase font-bold tracking-wider block">Total Tagihan (Midtrans)</span>
                 <span id="qris-total-price" class="text-2xl font-black text-amber-400 block mt-0.5">Rp 2.000</span>
                 <span id="qris-order-info" class="text-xs text-sky-300 block mt-1 font-medium">Paket 6 Jam • Budi Santoso</span>
             </div>
@@ -864,7 +888,7 @@ class MikroTikAPI {
                     <span class="font-black text-base text-slate-900 tracking-tighter flex items-center gap-1">
                         <i class="fa-solid fa-qrcode text-rose-600"></i> QRIS
                     </span>
-                    <span class="text-[9px] font-extrabold text-red-600 bg-rose-50 px-1.5 py-0.5 rounded border border-rose-200">GPN</span>
+                    <span class="text-[9px] font-extrabold text-sky-700 bg-sky-50 px-1.5 py-0.5 rounded border border-sky-200 uppercase">Midtrans</span>
                 </div>
 
                 <div class="text-center my-2 border-y border-slate-100 py-1.5">
@@ -873,50 +897,39 @@ class MikroTikAPI {
                 </div>
 
                 <div id="qris-barcode-render" class="flex justify-center p-2 bg-white rounded-xl border border-slate-200"></div>
+                <p class="text-[9px] text-gray-500 mt-2 font-semibold text-center">Scan menggunakan GoPay, OVO, DANA, BCA, ShopeePay, LinkAja, Mobile Banking</p>
             </div>
 
             <div class="space-y-2">
                 <button onclick="confirmQrisPayment()" id="qris-confirm-btn" class="w-full py-3 bg-emerald-600 hover:bg-emerald-500 text-white font-black rounded-xl text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-2 shadow-lg shadow-emerald-600/30">
-                    <i class="fa-solid fa-circle-check"></i> Saya Sudah Bayar (Ambil Voucher)
+                    <i class="fa-solid fa-circle-check"></i> Cek Verifikasi Midtrans (Ambil Voucher)
                 </button>
             </div>
         </div>
     </div>
 
-    <!-- SUCCESS VOUCHER DISPLAY MODAL -->
-    <div id="voucher-result-modal" class="fixed inset-0 z-50 hidden bg-gray-900/60 backdrop-blur-sm flex items-center justify-center p-4">
-        <div class="bg-white dark:bg-slate-800 rounded-3xl max-w-md w-full p-6 sm:p-8 shadow-2xl border border-gray-100 dark:border-slate-700 text-center relative">
-            <div class="w-16 h-16 rounded-full bg-emerald-100 text-emerald-600 dark:bg-emerald-950 dark:text-emerald-400 flex items-center justify-center mx-auto text-2xl font-bold mb-3 shadow-inner">
-                <i class="fa-solid fa-check"></i>
+    <!-- VOUCHER RESULT MODAL -->
+    <div id="voucher-result-modal" class="fixed inset-0 z-50 hidden bg-gray-900/80 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-slate-900 rounded-3xl max-w-sm w-full p-6 shadow-2xl border border-emerald-500/30 text-white text-center">
+            <div class="w-12 h-12 rounded-2xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center mx-auto text-xl mb-2 border border-emerald-500/20">
+                <i class="fa-solid fa-circle-check"></i>
             </div>
-            <h3 class="text-xl font-extrabold text-gray-900 dark:text-white">Pembayaran Berhasil!</h3>
+            <h3 class="font-black text-lg text-white uppercase tracking-tight">Voucher Diterbitkan!</h3>
+            <p class="text-xs text-emerald-400 font-semibold mb-3">Gunakan kode voucher di bawah ini untuk terhubung</p>
 
-            <div id="printable-voucher" class="my-6 p-5 rounded-2xl bg-gradient-to-br from-slate-900 to-slate-800 text-white shadow-xl relative border border-slate-700">
-                <div class="flex justify-between items-center border-b border-slate-700/80 pb-3 mb-4">
-                    <div class="text-left">
-                        <span class="text-[10px] uppercase font-bold tracking-widest text-sky-400">MyKribo.Net Hotspot</span>
-                        <h4 id="res-pkg-name" class="font-extrabold text-sm text-white">Paket 6 Jam</h4>
-                    </div>
-                    <span id="res-pkg-price" class="text-xs font-bold px-2.5 py-1 rounded-md bg-sky-500/20 text-sky-300 border border-sky-500/30">Rp 2.000</span>
-                </div>
-
-                <div class="mb-4">
-                    <div class="bg-slate-950/90 p-4 rounded-xl border border-amber-500/40 text-center">
-                        <span class="text-[10px] text-amber-400 uppercase font-bold tracking-wider block mb-1">Kode Voucher Anda</span>
-                        <span id="res-username" class="font-mono text-2xl font-black text-amber-300 select-all tracking-widest">CRB6H102</span>
-                    </div>
-                </div>
-
-                <div class="flex items-center justify-between bg-slate-950/40 p-3 rounded-xl text-left">
-                    <div class="space-y-1 text-xs">
-                        <p class="text-gray-300"><i class="fa-regular fa-clock text-sky-400 mr-1"></i> Durasi: <span id="res-duration" class="font-semibold text-white">6 Jam</span></p>
-                    </div>
-                    <div id="qrcode-container" class="bg-white p-1.5 rounded-lg shadow"></div>
-                </div>
+            <div id="printable-area" class="bg-slate-950 p-4 rounded-2xl border border-slate-800 text-center my-3">
+                <div class="text-[10px] text-gray-400 uppercase font-bold tracking-wider">MyKribo.Net Hotspot</div>
+                <div id="res-pkg-name" class="font-extrabold text-sky-400 text-sm mt-1">Paket 6 Jam</div>
+                <div id="res-username" class="font-mono font-black text-2xl text-amber-400 my-2 tracking-widest select-all">CRB6H-9012</div>
+                <div id="qrcode-container" class="flex justify-center my-2 p-1 bg-white rounded-lg inline-block"></div>
+                <div class="text-[11px] text-gray-300 font-bold">Durasi: <span id="res-duration">6 Jam</span> • Harga: <span id="res-pkg-price">Rp 2.000</span></div>
             </div>
 
             <div class="space-y-2 no-print">
-                <button onclick="closeResultModal()" class="w-full py-2.5 px-4 rounded-xl border border-gray-200 dark:border-slate-700 text-gray-600 dark:text-gray-300 text-xs font-semibold">
+                <button onclick="window.print()" class="w-full py-2.5 bg-sky-600 hover:bg-sky-500 text-white font-bold rounded-xl text-xs transition-all flex items-center justify-center gap-1.5 shadow-md shadow-sky-600/20">
+                    <i class="fa-solid fa-print"></i> Cetak Voucher
+                </button>
+                <button onclick="closeResultModal()" class="w-full py-2.5 px-4 rounded-xl border border-slate-700 text-gray-300 hover:text-white text-xs font-semibold">
                     Selesai & Kembali
                 </button>
             </div>
@@ -927,11 +940,10 @@ class MikroTikAPI {
     <div id="toast-container" class="fixed bottom-5 right-5 z-50 flex flex-col space-y-2 pointer-events-none"></div>
 
     <script>
-        // Global State Tree
         window.state = {
             currentView: 'storefront',
             activeAdminTab: 'dashboard',
-            activeVoucherCategory: '6h', // Options: '6h', '12h', '1d', 'all'
+            activeVoucherCategory: '6h',
             darkMode: true,
             adminPin: '101990',
             subadminCode: 'RES2026',
@@ -948,7 +960,6 @@ class MikroTikAPI {
                 { id: 'pkg-2', name: 'Paket 12 Jam', duration: '12 Jam', cat: '12h', price: 3000, speed: '4.50 Mbps', profile: 'profile-12h', btnColor: 'bg-emerald-600 hover:bg-emerald-500' },
                 { id: 'pkg-3', name: 'Paket 1 Hari', duration: '24 Jam', cat: '1d', price: 5000, speed: '4.50 Mbps', profile: 'profile-1d', btnColor: 'bg-amber-600 hover:bg-amber-500' }
             ],
-            // Voucher database with explicit duration category tags (6h, 12h, 1d)
             vouchers: [
                 { id: 'v-1', code: 'CRB6H-9012', cat: '6h', packageId: 'pkg-1', customerName: 'Budi Santoso', phone: '081234567890', status: 'Active', expiry: '2026-08-01 18:00', createdAt: '2026-07-30 10:00' },
                 { id: 'v-2', code: 'CRB6H-9013', cat: '6h', packageId: 'pkg-1', customerName: 'Deni Kurnia', phone: '081399887711', status: 'Active', expiry: '2026-08-01 20:00', createdAt: '2026-07-30 12:00' },
@@ -957,7 +968,7 @@ class MikroTikAPI {
                 { id: 'v-5', code: 'CRB1D-8801', cat: '1d', packageId: 'pkg-3', customerName: 'Andi Jaya', phone: '085211223344', status: 'Active', expiry: '2026-08-05 10:00', createdAt: '2026-07-30 08:00' }
             ],
             transactions: [
-                { id: 'TRX-10921', customerName: 'Budi Santoso', phone: '081234567890', package: 'Paket 6 Jam', method: 'QRIS Instant', amount: 2000, status: 'Paid', date: '2026-07-30 10:00' },
+                { id: 'TRX-10921', customerName: 'Budi Santoso', phone: '081234567890', package: 'Paket 6 Jam', method: 'QRIS Midtrans', amount: 2000, status: 'Paid', date: '2026-07-30 10:00' },
                 { id: 'TRX-10922', customerName: 'Siti Rahma', phone: '089876543210', package: 'Paket 12 Jam', method: 'DANA Instant', amount: 3000, status: 'Paid', date: '2026-07-30 11:30' }
             ],
             customers: [
@@ -968,12 +979,18 @@ class MikroTikAPI {
                 { id: 'res-1', name: 'Kios Kribo Cell', phone: '082293185501', code: 'RES2026', status: 'Active', createdAt: '2026-07-01' }
             ],
             logs: [
-                { time: '19:28:10', msg: 'System initialized. Categorized Voucher List (6h, 12h, 1d) ready.' }
+                { time: '12:40:00', msg: 'System ready. Midtrans QRIS payment gateway module initialized.' }
             ],
             settings: {
                 adminPhone: '082293185501',
+                midtrans: {
+                    clientKey: 'SB-Mid-client-DemoMyKribo2026',
+                    serverKey: 'SB-Mid-server-DemoMyKribo2026',
+                    isSandbox: true,
+                    enabled: true
+                },
                 paymentMethods: [
-                    { id: 'pm-1', name: 'QRIS Instant', category: 'QRIS', color: 'bg-black text-white', icon: 'fa-qrcode', account: 'NMID: ID1026470109368', note: 'Otomatis Verifikasi', active: true },
+                    { id: 'pm-1', name: 'QRIS Midtrans Instant', category: 'QRIS', color: 'bg-indigo-600 text-white', icon: 'fa-qrcode', account: 'Midtrans Payment Gateway (GPN / All Bank)', note: 'Otomatis Verifikasi Midtrans', active: true },
                     { id: 'pm-2', name: 'DANA Instant', category: 'E-WALLET', color: 'bg-sky-500 text-white', icon: 'fa-wallet', account: '082293185501 a/n MyKribo', note: 'Transfer e-wallet', active: true }
                 ]
             }
@@ -982,16 +999,16 @@ class MikroTikAPI {
         function showToast(message, type = 'info') {
             const container = document.getElementById('toast-container');
             if (!container) return;
-
             const toast = document.createElement('div');
             const bgClass = type === 'success' ? 'bg-emerald-600' : type === 'error' ? 'bg-rose-600' : 'bg-sky-600';
-            toast.className = `${bgClass} text-white text-xs font-bold px-4 py-3 rounded-xl shadow-lg flex items-center gap-2 transform transition-all duration-300 pointer-events-auto opacity-0 translate-y-2`;
-            toast.innerHTML = `<i class="fa-solid ${type === 'success' ? 'fa-circle-check' : 'fa-circle-info'}"></i> <span>${message}</span>`;
-            
+            toast.className = `${bgClass} text-white text-xs font-bold px-4 py-2.5 rounded-xl shadow-xl pointer-events-auto transition-all flex items-center gap-2 transform translate-y-2 opacity-0`;
+            toast.innerHTML = `<i class="fa-solid ${type === 'success' ? 'fa-circle-check' : type === 'error' ? 'fa-triangle-exclamation' : 'fa-circle-info'}"></i> <span>${message}</span>`;
             container.appendChild(toast);
-            setTimeout(() => toast.classList.remove('opacity-0', 'translate-y-2'), 10);
             setTimeout(() => {
-                toast.classList.add('opacity-0', 'translate-y-2');
+                toast.classList.remove('translate-y-2', 'opacity-0');
+            }, 50);
+            setTimeout(() => {
+                toast.classList.add('opacity-0');
                 setTimeout(() => toast.remove(), 300);
             }, 3000);
         }
@@ -999,233 +1016,34 @@ class MikroTikAPI {
         function toggleDarkMode() {
             window.state.darkMode = !window.state.darkMode;
             document.documentElement.classList.toggle('dark', window.state.darkMode);
-            const icon = document.getElementById('theme-toggle-icon');
-            if (icon) icon.className = window.state.darkMode ? 'fa-solid fa-sun text-amber-400' : 'fa-solid fa-moon text-slate-700';
+            showToast(`Mode ${window.state.darkMode ? 'Gelap' : 'Terang'} Diaktifkan`, 'info');
         }
 
         function switchView(viewName) {
             window.state.currentView = viewName;
-            const storefront = document.getElementById('storefront-view');
-            const adminView = document.getElementById('admin-view');
+            const sfView = document.getElementById('storefront-view');
+            const admView = document.getElementById('admin-view');
 
-            if (viewName === 'admin') {
+            if (viewName === 'storefront') {
+                if (sfView) sfView.classList.remove('hidden');
+                if (admView) admView.classList.add('hidden');
+            } else if (viewName === 'admin') {
                 if (!window.state.isAdminLoggedIn) {
                     openAdminLoginModal();
                     return;
                 }
-                storefront.classList.add('hidden');
-                adminView.classList.remove('hidden');
-            } else {
-                storefront.classList.remove('hidden');
-                adminView.classList.add('hidden');
+                if (sfView) sfView.classList.add('hidden');
+                if (admView) admView.classList.remove('hidden');
+                switchAdminTab(window.state.activeAdminTab || 'dashboard');
             }
-        }
-
-        // Switch sub-category tab inside User List (6h, 12h, 1d, all)
-        function switchVoucherCategory(cat) {
-            window.state.activeVoucherCategory = cat;
-
-            // Reset tab button styles
-            const catBtns = {
-                '6h': { id: 'vcat-btn-6h', border: 'border-sky-500/30', bg: 'bg-sky-500/10', text: 'text-sky-400', label: 'TAB: Paket 6 Jam (6h)' },
-                '12h': { id: 'vcat-btn-12h', border: 'border-emerald-500/30', bg: 'bg-emerald-500/10', text: 'text-emerald-400', label: 'TAB: Paket 12 Jam (12h)' },
-                '1d': { id: 'vcat-btn-1d', border: 'border-amber-500/30', bg: 'bg-amber-500/10', text: 'text-amber-400', label: 'TAB: Paket 1 Hari (1d)' },
-                'all': { id: 'vcat-btn-all', border: 'border-purple-500/30', bg: 'bg-purple-500/10', text: 'text-purple-400', label: 'TAB: Semua Voucher' }
-            };
-
-            Object.keys(catBtns).forEach(k => {
-                const btn = document.getElementById(catBtns[k].id);
-                if (btn) {
-                    if (k === cat) {
-                        btn.className = `voucher-cat-btn p-3 rounded-xl border ${catBtns[k].border} ${catBtns[k].bg} ${catBtns[k].text} font-extrabold text-xs flex items-center justify-between transition-all`;
-                    } else {
-                        btn.className = `voucher-cat-btn p-3 rounded-xl border border-slate-700 bg-slate-900/50 text-gray-400 hover:border-slate-600 font-bold text-xs flex items-center justify-between transition-all`;
-                    }
-                }
-            });
-
-            const titleEl = document.getElementById('active-cat-title');
-            if (titleEl) titleEl.innerText = catBtns[cat]?.label || 'Daftar Voucher';
-
-            renderVoucherTable();
-        }
-
-        function renderVoucherTable() {
-            const tbody = document.getElementById('voucher-table-body');
-            if (!tbody) return;
-            tbody.innerHTML = '';
-
-            const search = (document.getElementById('voucher-search')?.value || '').toLowerCase();
-            const filterStatus = document.getElementById('voucher-filter-status')?.value || 'ALL';
-            const activeCat = window.state.activeVoucherCategory;
-
-            // Calculate category live counts
-            const count6h = window.state.vouchers.filter(v => v.cat === '6h' || (v.profile && v.profile.includes('6h'))).length;
-            const count12h = window.state.vouchers.filter(v => v.cat === '12h' || (v.profile && v.profile.includes('12h'))).length;
-            const count1d = window.state.vouchers.filter(v => v.cat === '1d' || (v.profile && v.profile.includes('1d'))).length;
-            const countAll = window.state.vouchers.length;
-
-            const b6 = document.getElementById('badge-count-6h');
-            const b12 = document.getElementById('badge-count-12h');
-            const b1d = document.getElementById('badge-count-1d');
-            const bAll = document.getElementById('badge-count-all');
-
-            if (b6) b6.innerText = count6h;
-            if (b12) b12.innerText = count12h;
-            if (b1d) b1d.innerText = count1d;
-            if (bAll) bAll.innerText = countAll;
-
-            // Filter vouchers by selected category
-            const filtered = window.state.vouchers.filter(v => {
-                const matchCategory = (activeCat === 'all') || (v.cat === activeCat) || (v.profile && v.profile.includes(activeCat));
-                const matchSearch = v.code.toLowerCase().includes(search) || 
-                                    (v.customerName && v.customerName.toLowerCase().includes(search)) || 
-                                    (v.phone && v.phone.includes(search));
-                const matchStatus = filterStatus === 'ALL' || v.status === filterStatus;
-                return matchCategory && matchSearch && matchStatus;
-            });
-
-            if (filtered.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="6" class="p-4 text-center text-gray-400">Tidak ada voucher pada kategori '${activeCat.toUpperCase()}'.</td></tr>`;
-                return;
-            }
-
-            filtered.forEach(v => {
-                const catBadgeClass = v.cat === '12h' ? 'bg-emerald-500/20 text-emerald-400 border-emerald-500/30' :
-                                      v.cat === '1d' ? 'bg-amber-500/20 text-amber-400 border-amber-500/30' :
-                                      'bg-sky-500/20 text-sky-400 border-sky-500/30';
-
-                const catLabel = v.cat === '12h' ? 'Paket 12 Jam (12h)' :
-                                 v.cat === '1d' ? 'Paket 1 Hari (1d)' :
-                                 'Paket 6 Jam (6h)';
-
-                const tr = document.createElement('tr');
-                tr.className = 'border-b border-gray-100 dark:border-slate-800 text-xs hover:bg-gray-50/50 dark:hover:bg-slate-900/30';
-                tr.innerHTML = `
-                    <td class="p-4 font-mono font-black text-amber-400 text-sm tracking-wider">${v.code}</td>
-                    <td class="p-4">
-                        <span class="px-2.5 py-1 rounded-lg border text-[10px] font-black uppercase tracking-wider ${catBadgeClass}">
-                            ${catLabel}
-                        </span>
-                    </td>
-                    <td class="p-4 text-gray-600 dark:text-gray-300 font-medium">${v.customerName || '-'} <span class="text-gray-400 font-mono">(${v.phone || '-'})</span></td>
-                    <td class="p-4">
-                        <span class="px-2 py-0.5 rounded text-[10px] font-bold ${v.status === 'Active' ? 'bg-emerald-500/20 text-emerald-400' : 'bg-rose-500/20 text-rose-400'}">${v.status}</span>
-                    </td>
-                    <td class="p-4 text-gray-500 dark:text-gray-400 font-mono text-[11px]">${v.expiry || '-'}</td>
-                    <td class="p-4 text-center">
-                        <div class="flex items-center justify-center gap-1.5">
-                            <button onclick="copySingleVoucher('${v.code}')" class="p-1.5 bg-gray-100 dark:bg-slate-800 hover:bg-gray-200 text-gray-700 dark:text-gray-200 rounded-lg" title="Salin Kode">
-                                <i class="fa-regular fa-copy"></i>
-                            </button>
-                            <button onclick="deleteVoucher('${v.id}')" class="p-1.5 bg-rose-500/10 text-rose-500 hover:bg-rose-500/20 rounded-lg" title="Hapus Voucher">
-                                <i class="fa-solid fa-trash-can"></i>
-                            </button>
-                        </div>
-                    </td>
-                `;
-                tbody.appendChild(tr);
-            });
-        }
-
-        function copySingleVoucher(code) {
-            const temp = document.createElement('textarea');
-            temp.value = code;
-            document.body.appendChild(temp);
-            temp.select();
-            document.execCommand('copy');
-            document.body.removeChild(temp);
-            showToast(`Kode voucher '${code}' disalin!`, 'success');
-        }
-
-        function deleteVoucher(id) {
-            window.state.vouchers = window.state.vouchers.filter(v => v.id !== id);
-            renderVoucherTable();
-            showToast('Voucher berhasil dihapus!', 'info');
-        }
-
-        function printCategoryBatch() {
-            showToast(`Mencetak daftar voucher kategori ${window.state.activeVoucherCategory.toUpperCase()}...`, 'info');
-            window.print();
-        }
-
-        function handleMikhmonGenerate(e) {
-            e.preventDefault();
-            const qty = parseInt(document.getElementById('gen-qty').value) || 1;
-            const prefix = (document.getElementById('gen-prefix').value || '').trim().toUpperCase();
-            const len = parseInt(document.getElementById('gen-name-len').value) || 4;
-            const charType = document.getElementById('gen-character').value;
-            const profile = document.getElementById('gen-profile').value;
-            const comment = document.getElementById('gen-comment').value.trim() || 'mikhmon-bulk';
-
-            // Detect category from profile (6h, 12h, 1d)
-            let catTag = '6h';
-            if (profile.includes('12h')) catTag = '12h';
-            if (profile.includes('1d') || profile.includes('24h')) catTag = '1d';
-
-            let charset = '0123456789abcdefghijklmnopqrstuvwxyz';
-            if (charType === 'abcd') charset = 'abcdefghijklmnopqrstuvwxyz';
-            if (charType === 'ABCD') charset = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-            if (charType === '1234') charset = '0123456789';
-            if (charType === 'A1B2') charset = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-
-            for (let i = 0; i < qty; i++) {
-                let randStr = '';
-                for (let j = 0; j < len; j++) {
-                    randStr += charset.charAt(Math.floor(Math.random() * charset.length));
-                }
-                const fullCode = (prefix ? prefix : '') + randStr;
-
-                window.state.vouchers.unshift({
-                    id: `v-mikhmon-${Date.now()}-${i}`,
-                    code: fullCode,
-                    cat: catTag,
-                    profile: profile,
-                    packageId: catTag === '12h' ? 'pkg-2' : catTag === '1d' ? 'pkg-3' : 'pkg-1',
-                    customerName: `Bulk Gen (${comment})`,
-                    phone: '-',
-                    status: 'Active',
-                    expiry: '2026-08-30 23:59',
-                    createdAt: new Date().toISOString().replace('T', ' ').slice(0, 16)
-                });
-            }
-
-            const genCodeNum = Math.floor(100 + Math.random() * 900);
-            const now = new Date();
-            const dateStr = `${String(now.getMonth() + 1).padStart(2, '0')}.${String(now.getDate()).padStart(2, '0')}.${String(now.getFullYear()).slice(-2)}`;
-
-            window.state.lastGenerateInfo = { code: genCodeNum, date: dateStr, profile: `${profile} (${qty} Pcs)` };
-
-            const codeEl = document.getElementById('last-gen-code');
-            const dateEl = document.getElementById('last-gen-date');
-            const profEl = document.getElementById('last-gen-profile');
-            if (codeEl) codeEl.innerText = genCodeNum;
-            if (dateEl) dateEl.innerText = dateStr;
-            if (profEl) profEl.innerText = `${profile} (${qty} Pcs)`;
-
-            // Automatically switch sub-category tab to the newly generated category
-            switchVoucherCategory(catTag);
-            switchAdminTab('vouchers');
-            showToast(`Berhasil meng-generate ${qty} voucher (${catTag.toUpperCase()})!`, 'success');
-        }
-
-        function printMikhmonBatch(style = 'normal') {
-            showToast(`Membuka mode cetak voucher (${style.toUpperCase()})...`, 'info');
-            window.print();
         }
 
         function openAdminLoginModal() {
-            if (window.state.isAdminLoggedIn) { switchView('admin'); return; }
-            const modal = document.getElementById('admin-login-modal');
-            const input = document.getElementById('admin-pin-input');
-            if (input) input.value = '';
-            if (modal) modal.classList.remove('hidden');
+            document.getElementById('admin-login-modal')?.classList.remove('hidden');
         }
-
         function closeAdminLoginModal() {
             document.getElementById('admin-login-modal')?.classList.add('hidden');
         }
-
         function handleAdminLogin(e) {
             e.preventDefault();
             const pin = document.getElementById('admin-pin-input')?.value.trim();
@@ -1233,112 +1051,114 @@ class MikroTikAPI {
                 window.state.isAdminLoggedIn = true;
                 closeAdminLoginModal();
                 document.getElementById('admin-logout-btn')?.classList.remove('hidden');
+                document.getElementById('admin-login-lock-btn')?.classList.add('hidden');
                 switchView('admin');
                 showToast('Login Admin Berhasil!', 'success');
             } else {
-                showToast('PIN Keamanan Salah! (Default: 101990)', 'error');
+                showToast('PIN Admin Salah! (Default: 101990)', 'error');
             }
         }
-
         function logoutAdmin() {
             window.state.isAdminLoggedIn = false;
             document.getElementById('admin-logout-btn')?.classList.add('hidden');
+            document.getElementById('admin-login-lock-btn')?.classList.remove('hidden');
             switchView('storefront');
-            showToast('Anda telah keluar dari Admin', 'info');
+            showToast('Logout Admin Berhasil', 'info');
         }
 
         function openSubadminLoginModal() {
-            const modal = document.getElementById('subadmin-login-modal');
-            if (modal) modal.classList.remove('hidden');
+            document.getElementById('subadmin-login-modal')?.classList.remove('hidden');
         }
-
         function closeSubadminLoginModal() {
             document.getElementById('subadmin-login-modal')?.classList.add('hidden');
         }
-
         function handleSubadminLogin(e) {
             e.preventDefault();
             const code = document.getElementById('subadmin-code-input')?.value.trim().toUpperCase();
             if (code === window.state.subadminCode) {
                 window.state.isSubadminLoggedIn = true;
                 closeSubadminLoginModal();
-                showToast('Login Mitra Reseller Berhasil!', 'success');
+                showToast('Akses Mitra / Reseller Diterima!', 'success');
+                switchView('storefront');
             } else {
-                showToast('Kode Akses Mitra tidak valid!', 'error');
+                showToast('Kode Mitra Salah! (Default: RES2026)', 'error');
             }
-        }
-
-        function switchAdminTab(tabId) {
-            window.state.activeAdminTab = tabId;
-            document.querySelectorAll('.admin-tab-btn').forEach(btn => {
-                btn.className = 'admin-tab-btn px-4 py-2.5 rounded-xl font-bold text-xs whitespace-nowrap bg-gray-100 dark:bg-slate-800 text-gray-600 dark:text-gray-300 hover:bg-gray-200 transition-all flex items-center gap-2';
-            });
-            const activeBtn = document.getElementById(`tab-btn-${tabId}`);
-            if (activeBtn) activeBtn.className = 'admin-tab-btn px-4 py-2.5 rounded-xl font-bold text-xs whitespace-nowrap bg-sky-600 text-white transition-all flex items-center gap-2';
-
-            document.querySelectorAll('.admin-tab-content').forEach(content => content.classList.add('hidden'));
-            const activeContent = document.getElementById(`admin-tab-${tabId}`);
-            if (activeContent) activeContent.classList.remove('hidden');
-
-            if (tabId === 'vouchers') renderVoucherTable();
-            if (tabId === 'transactions') renderTransactionTable();
-            if (tabId === 'customers') renderCustomerTable();
-            if (tabId === 'resellers') renderResellersTable();
-            if (tabId === 'packages') renderAdminPackages();
-            if (tabId === 'settings') renderPaymentMethodsAdminList();
-        }
-
-        function renderAdminPackages() {
-            const grid = document.getElementById('admin-packages-grid');
-            if (!grid) return;
-            grid.innerHTML = '';
-
-            window.state.packages.forEach(pkg => {
-                const card = document.createElement('div');
-                card.className = 'bg-white dark:bg-slate-800 p-5 rounded-2xl border border-gray-100 dark:border-slate-700 shadow-sm flex flex-col justify-between space-y-4';
-                card.innerHTML = `
-                    <div>
-                        <div class="flex justify-between items-start">
-                            <div>
-                                <span class="text-[10px] font-bold text-sky-500 uppercase tracking-wider">${pkg.duration}</span>
-                                <h4 class="font-extrabold text-base text-gray-900 dark:text-white mt-0.5">${pkg.name}</h4>
-                            </div>
-                            <span class="text-sm font-black text-amber-500">Rp ${pkg.price.toLocaleString('id-ID')}</span>
-                        </div>
-                        <div class="mt-3 space-y-1 text-xs text-gray-500 dark:text-gray-400 font-medium">
-                            <p><i class="fa-solid fa-gauge-high mr-1.5 text-sky-400"></i> Speed: ${pkg.speed}</p>
-                            <p><i class="fa-solid fa-microchip mr-1.5 text-sky-400"></i> Profile: ${pkg.profile}</p>
-                        </div>
-                    </div>
-                `;
-                grid.appendChild(card);
-            });
         }
 
         function renderStorefrontPackages() {
             const tbody = document.getElementById('packages-table-body');
+            const badgesBox = document.getElementById('storefront-payment-badges');
             if (!tbody) return;
-            tbody.innerHTML = '';
 
+            tbody.innerHTML = '';
             window.state.packages.forEach(pkg => {
                 const tr = document.createElement('tr');
-                tr.className = 'hover:bg-slate-900/50 transition-colors';
+                tr.className = 'hover:bg-sky-950/40 transition-colors border-b border-slate-800/40';
                 tr.innerHTML = `
-                    <td class="py-3 px-2 font-bold text-white text-left pl-3">${pkg.name}</td>
-                    <td class="py-3 px-2 text-sky-300 font-semibold">${pkg.duration}</td>
+                    <td class="py-3 px-2 font-black text-sky-300 text-left pl-3">
+                        ${pkg.name}
+                        <span class="block text-[10px] text-gray-400 font-normal">${pkg.speed}</span>
+                    </td>
+                    <td class="py-3 px-2 font-bold text-gray-300">${pkg.duration}</td>
                     <td class="py-3 px-2 font-extrabold text-amber-400">Rp ${pkg.price.toLocaleString('id-ID')}</td>
-                    <td class="py-3 px-2 pr-3">
-                        <button onclick="openCheckoutModal('${pkg.id}')" class="px-3 py-1.5 rounded-lg ${pkg.btnColor || 'bg-sky-600'} text-white font-extrabold text-[11px] shadow transition-all">
+                    <td class="py-3 px-2">
+                        <button onclick="openCheckoutModal('${pkg.id}')" class="${pkg.btnColor} px-3 py-1.5 rounded-xl font-black text-[11px] text-white shadow-md transition-all">
                             Beli
                         </button>
                     </td>
                 `;
                 tbody.appendChild(tr);
             });
+
+            if (badgesBox) {
+                badgesBox.innerHTML = window.state.settings.paymentMethods
+                    .filter(m => m.active)
+                    .map(m => `<span class="px-2 py-0.5 rounded-md text-[10px] font-bold ${m.color} uppercase"><i class="fa-solid ${m.icon} mr-1"></i>${m.name}</span>`)
+                    .join('');
+            }
+
+            const phoneDisplay = document.getElementById('display-admin-phone');
+            const phoneLink = document.getElementById('display-admin-phone-link');
+            if (phoneDisplay) phoneDisplay.innerText = window.state.settings.adminPhone;
+            if (phoneLink) phoneLink.href = `https://wa.me/${window.state.settings.adminPhone.replace(/^0/, '62')}`;
         }
 
-        function openCheckoutModal(packageId) {
-            const pkg = window.state.packages.find(p => p.id === packageId);
+        function openHowToBuyModal() {
+            alert("Cara Pembelian Voucher:\n1. Pilih Paket WiFi yang diinginkan\n2. Klik tombol 'Beli'\n3. Isi Nama & WhatsApp\n4. Pilih metode pembayaran QRIS Midtrans / E-Wallet\n5. Selesaikan pembayaran & dapatkan Kode Voucher!");
+        }
+
+        function openCheckVoucherModal() {
+            const phone = prompt("Masukkan No WhatsApp Anda untuk mencari voucher terdaftar:");
+            if (!phone) return;
+            const userVouchers = window.state.vouchers.filter(v => v.phone.includes(phone.trim()));
+            if (userVouchers.length === 0) {
+                showToast("Voucher tidak ditemukan untuk nomor tersebut.", "error");
+            } else {
+                const listStr = userVouchers.map(v => `• Kode: ${v.code} (${v.cat}) | Status: ${v.status}`).join('\n');
+                alert(`Daftar Voucher Anda:\n\n${listStr}`);
+            }
+        }
+
+        function handleHotspotLogin() {
+            const code = document.getElementById('login-voucher-code')?.value.trim();
+            if (!code) {
+                showToast('Masukkan kode voucher!', 'error');
+                return;
+            }
+            const found = window.state.vouchers.find(v => v.code.toUpperCase() === code.toUpperCase());
+            if (found) {
+                if (found.status === 'Expired') {
+                    showToast('Maaf, voucher ini sudah kadaluarsa!', 'error');
+                } else {
+                    showToast(`Login Berhasil! Voucher ${found.code} Aktif. Selamat Terhubung!`, 'success');
+                }
+            } else {
+                showToast('Kode voucher tidak valid atau belum terdaftar!', 'error');
+            }
+        }
+
+        function openCheckoutModal(pkgId) {
+            const pkg = window.state.packages.find(p => p.id === pkgId);
             if (!pkg) return;
             window.state.selectedPkgForCheckout = pkg;
 
@@ -1346,77 +1166,108 @@ class MikroTikAPI {
             document.getElementById('summary-pkg-duration').innerText = `Durasi ${pkg.duration} • Speed ${pkg.speed}`;
             document.getElementById('summary-pkg-price').innerText = `Rp ${pkg.price.toLocaleString('id-ID')}`;
 
-            renderCheckoutPaymentMethods();
+            const methodsBox = document.getElementById('checkout-payment-methods');
+            if (methodsBox) {
+                methodsBox.innerHTML = window.state.settings.paymentMethods
+                    .filter(m => m.active)
+                    .map((m, idx) => `
+                        <label class="flex items-center gap-2 p-2.5 rounded-xl bg-slate-950 border border-slate-800 cursor-pointer hover:border-sky-500">
+                            <input type="radio" name="pay_method" value="${m.name}" ${idx === 0 ? 'checked' : ''} class="text-sky-500 focus:ring-0">
+                            <span class="font-bold text-gray-200 text-xs">${m.name}</span>
+                        </label>
+                    `).join('');
+            }
 
-            const modal = document.getElementById('checkout-modal');
-            const content = document.getElementById('checkout-modal-content');
-            modal.classList.remove('hidden');
-            setTimeout(() => {
-                content.classList.remove('scale-95', 'opacity-0');
-                content.classList.add('scale-100', 'opacity-100');
-            }, 10);
+            document.getElementById('checkout-modal')?.classList.remove('hidden');
         }
 
         function closeCheckoutModal() {
-            const modal = document.getElementById('checkout-modal');
-            const content = document.getElementById('checkout-modal-content');
-            content.classList.remove('scale-100', 'opacity-100');
-            content.classList.add('scale-95', 'opacity-0');
-            setTimeout(() => modal.classList.add('hidden'), 200);
+            document.getElementById('checkout-modal')?.classList.add('hidden');
         }
 
-        function renderCheckoutPaymentMethods() {
-            const container = document.getElementById('checkout-payment-methods');
-            if (!container) return;
-            container.innerHTML = '';
+        function loadMidtransSnapSdk() {
+            const isSandbox = window.state.settings.midtrans.isSandbox;
+            const snapUrl = isSandbox 
+                ? 'https://app.sandbox.midtrans.com/snap/snap.js' 
+                : 'https://app.midtrans.com/snap/snap.js';
 
-            window.state.settings.paymentMethods.filter(p => p.active).forEach((method, idx) => {
-                const label = document.createElement('label');
-                label.className = 'flex items-center justify-between p-2.5 rounded-xl border border-slate-800 bg-slate-950 cursor-pointer hover:border-sky-500 transition-all';
-                label.innerHTML = `
-                    <div class="flex items-center gap-2">
-                        <input type="radio" name="pay_method" value="${method.name}" ${idx === 0 ? 'checked' : ''} class="text-sky-500 focus:ring-0">
-                        <div>
-                            <span class="font-bold text-xs text-white block">${method.name}</span>
-                            <span class="text-[10px] text-gray-400 block">${method.account}</span>
-                        </div>
-                    </div>
-                `;
-                container.appendChild(label);
-            });
+            const existingScript = document.getElementById('midtrans-snap-script');
+            if (existingScript) existingScript.remove();
+
+            const script = document.createElement('script');
+            script.id = 'midtrans-snap-script';
+            script.src = snapUrl;
+            script.setAttribute('data-client-key', window.state.settings.midtrans.clientKey);
+            document.head.appendChild(script);
+        }
+
+        function saveMidtransSettings(e) {
+            e.preventDefault();
+            const clientKey = document.getElementById('setting-midtrans-client-key')?.value.trim();
+            const serverKey = document.getElementById('setting-midtrans-server-key')?.value.trim();
+            const isSandbox = document.getElementById('setting-midtrans-is-sandbox')?.checked;
+
+            if (clientKey) window.state.settings.midtrans.clientKey = clientKey;
+            if (serverKey) window.state.settings.midtrans.serverKey = serverKey;
+            window.state.settings.midtrans.isSandbox = !!isSandbox;
+
+            loadMidtransSnapSdk();
+            showToast('Konfigurasi Midtrans berhasil disimpan!', 'success');
+        }
+
+        function populateMidtransFormFields() {
+            const clientInput = document.getElementById('setting-midtrans-client-key');
+            const serverInput = document.getElementById('setting-midtrans-server-key');
+            const sandboxCheckbox = document.getElementById('setting-midtrans-is-sandbox');
+
+            if (clientInput) clientInput.value = window.state.settings.midtrans.clientKey;
+            if (serverInput) serverInput.value = window.state.settings.midtrans.serverKey;
+            if (sandboxCheckbox) sandboxCheckbox.checked = window.state.settings.midtrans.isSandbox;
         }
 
         function handleProcessPayment(e) {
             e.preventDefault();
             const custName = document.getElementById('cust-name').value.trim();
             const custPhone = document.getElementById('cust-phone').value.trim();
-            const selectedMethod = document.querySelector('input[name="pay_method"]:checked')?.value || 'QRIS Instant';
+            const selectedMethod = document.querySelector('input[name="pay_method"]:checked')?.value || 'QRIS Midtrans Instant';
 
             if (!custName || !custPhone) {
                 showToast('Isi nama dan WhatsApp Anda!', 'error');
                 return;
             }
 
+            const midtransOrderId = `MID-CRB-${Math.floor(10000 + Math.random() * 90000)}`;
+
             window.state.pendingOrder = {
-                custName, custPhone, method: selectedMethod, pkg: window.state.selectedPkgForCheckout
+                orderId: midtransOrderId,
+                custName, 
+                custPhone, 
+                method: selectedMethod, 
+                pkg: window.state.selectedPkgForCheckout
             };
 
             closeCheckoutModal();
 
+            const orderIdDisplay = document.getElementById('midtrans-order-id-display');
+            if (orderIdDisplay) orderIdDisplay.innerText = midtransOrderId;
+
             document.getElementById('qris-total-price').innerText = `Rp ${window.state.selectedPkgForCheckout.price.toLocaleString('id-ID')}`;
             document.getElementById('qris-order-info').innerText = `${window.state.selectedPkgForCheckout.name} • ${custName}`;
             
+            const qrisPayload = `00020101021226680016ID.CO.MIDTRANS0118936009140000000000520458125303360540${window.state.selectedPkgForCheckout.price}5802ID5911MYKRIBO NET6006JAKARTA6304${midtransOrderId.slice(-4)}`;
+
             const renderBox = document.getElementById('qris-barcode-render');
             if (renderBox) {
                 renderBox.innerHTML = '';
                 new QRCode(renderBox, {
-                    text: `00020101021126580016ID.CO.QRIS.WWW0118936009140000000000520458125303360540${window.state.selectedPkgForCheckout.price}5802ID5911MYKRIBO NET6006JAKARTA6304ABCD`,
+                    text: qrisPayload,
                     width: 140,
                     height: 140
                 });
             }
 
             document.getElementById('qris-payment-modal').classList.remove('hidden');
+            showToast(`Tagihan Midtrans ${midtransOrderId} dibuat!`, 'info');
         }
 
         function closeQrisPaymentModal() {
@@ -1427,9 +1278,16 @@ class MikroTikAPI {
             if (!window.state.pendingOrder) return;
             closeQrisPaymentModal();
 
+            const orderId = window.state.pendingOrder.orderId || `TRX-${Math.floor(10000 + Math.random() * 90000)}`;
             const cat = window.state.pendingOrder.pkg.cat || '6h';
-            const codePrefix = cat === '12h' ? 'CRB12H' : cat === '1d' ? 'CRB1D' : 'CRB6H';
-            const code = codePrefix + Math.floor(1000 + Math.random() * 9000);
+            
+            // Preference for MikroTik remote voucher code sync if pool available
+            let code = window.state.remoteVoucherPool.pop();
+            if (!code) {
+                const codePrefix = cat === '12h' ? 'CRB12H' : cat === '1d' ? 'CRB1D' : 'CRB6H';
+                code = codePrefix + Math.floor(1000 + Math.random() * 9000);
+            }
+
             const dateStr = new Date().toISOString().replace('T', ' ').slice(0, 16);
 
             const newVoucher = {
@@ -1446,7 +1304,7 @@ class MikroTikAPI {
 
             window.state.vouchers.unshift(newVoucher);
             window.state.transactions.unshift({
-                id: `TRX-${Math.floor(10000 + Math.random() * 90000)}`,
+                id: orderId,
                 customerName: window.state.pendingOrder.custName,
                 phone: window.state.pendingOrder.custPhone,
                 package: window.state.pendingOrder.pkg.name,
@@ -1469,11 +1327,181 @@ class MikroTikAPI {
 
             switchVoucherCategory(cat);
             document.getElementById('voucher-result-modal').classList.remove('hidden');
-            showToast('Voucher Berhasil Dibuat!', 'success');
+            showToast('Pembayaran Midtrans Lunas! Voucher diterbitkan.', 'success');
         }
 
         function closeResultModal() {
             document.getElementById('voucher-result-modal').classList.add('hidden');
+        }
+
+        function switchAdminTab(tabName) {
+            window.state.activeAdminTab = tabName;
+            document.querySelectorAll('.admin-tab-btn').forEach(btn => {
+                btn.classList.remove('bg-sky-600', 'text-white');
+                btn.classList.add('bg-gray-100', 'dark:bg-slate-800', 'text-gray-600', 'dark:text-gray-300');
+            });
+
+            const activeBtn = document.getElementById(`tab-btn-${tabName}`);
+            if (activeBtn) {
+                activeBtn.classList.remove('bg-gray-100', 'dark:bg-slate-800', 'text-gray-600', 'dark:text-gray-300');
+                activeBtn.classList.add('bg-sky-600', 'text-white');
+            }
+
+            document.querySelectorAll('.admin-tab-content').forEach(content => content.classList.add('hidden'));
+            document.getElementById(`admin-tab-${tabName}`)?.classList.remove('hidden');
+
+            if (tabName === 'dashboard') updateDashboardStats();
+            if (tabName === 'vouchers') renderVoucherTable();
+            if (tabName === 'transactions') renderTransactionTable();
+            if (tabName === 'customers') renderCustomerTable();
+            if (tabName === 'resellers') renderResellersTable();
+            if (tabName === 'packages') renderAdminPackages();
+            if (tabName === 'settings') populateMidtransFormFields();
+        }
+
+        function switchVoucherCategory(cat) {
+            window.state.activeVoucherCategory = cat;
+            document.querySelectorAll('.voucher-cat-btn').forEach(btn => {
+                btn.classList.remove('border-sky-500/30', 'bg-sky-500/10', 'text-sky-400', 'border-emerald-500/40', 'border-amber-500/40', 'border-purple-500/40');
+                btn.classList.add('border-slate-700', 'bg-slate-900/50', 'text-gray-400');
+            });
+
+            const currentBtn = document.getElementById(`vcat-btn-${cat}`);
+            if (currentBtn) {
+                currentBtn.classList.remove('border-slate-700', 'bg-slate-900/50', 'text-gray-400');
+                currentBtn.classList.add('border-sky-500/30', 'bg-sky-500/10', 'text-sky-400');
+            }
+
+            const titleDisplay = document.getElementById('active-cat-title');
+            if (titleDisplay) {
+                const labelMap = { '6h': 'TAB: Paket 6 Jam (6h)', '12h': 'TAB: Paket 12 Jam (12h)', '1d': 'TAB: Paket 1 Hari (1d)', 'all': 'TAB: Semua Voucher' };
+                titleDisplay.innerText = labelMap[cat] || 'TAB: User List';
+            }
+
+            renderVoucherTable();
+        }
+
+        function renderVoucherTable() {
+            const tbody = document.getElementById('voucher-table-body');
+            if (!tbody) return;
+
+            const count6h = window.state.vouchers.filter(v => v.cat === '6h').length;
+            const count12h = window.state.vouchers.filter(v => v.cat === '12h').length;
+            const count1d = window.state.vouchers.filter(v => v.cat === '1d').length;
+            const countAll = window.state.vouchers.length;
+
+            if (document.getElementById('badge-count-6h')) document.getElementById('badge-count-6h').innerText = count6h;
+            if (document.getElementById('badge-count-12h')) document.getElementById('badge-count-12h').innerText = count12h;
+            if (document.getElementById('badge-count-1d')) document.getElementById('badge-count-1d').innerText = count1d;
+            if (document.getElementById('badge-count-all')) document.getElementById('badge-count-all').innerText = countAll;
+
+            const searchQuery = document.getElementById('voucher-search')?.value.trim().toLowerCase() || '';
+            const filterStatus = document.getElementById('voucher-filter-status')?.value || 'ALL';
+
+            const filtered = window.state.vouchers.filter(v => {
+                const matchCat = window.state.activeVoucherCategory === 'all' || v.cat === window.state.activeVoucherCategory;
+                const matchSearch = v.code.toLowerCase().includes(searchQuery) || (v.customerName && v.customerName.toLowerCase().includes(searchQuery));
+                const matchStatus = filterStatus === 'ALL' || v.status === filterStatus;
+                return matchCat && matchSearch && matchStatus;
+            });
+
+            tbody.innerHTML = '';
+            if (filtered.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="6" class="p-6 text-center text-gray-500">Tidak ada voucher dalam kategori ini.</td></tr>`;
+                return;
+            }
+
+            filtered.forEach(v => {
+                const tr = document.createElement('tr');
+                tr.className = 'hover:bg-gray-50 dark:hover:bg-slate-800/50 transition-colors';
+                tr.innerHTML = `
+                    <td class="p-4 font-mono font-bold text-sky-400">${v.code}</td>
+                    <td class="p-4"><span class="px-2 py-0.5 rounded text-[10px] font-bold bg-sky-500/10 text-sky-400 border border-sky-500/20">${v.cat}</span></td>
+                    <td class="p-4">${v.customerName || 'Reseller Batch'} <span class="block text-[10px] text-gray-500">${v.phone || '-'}</span></td>
+                    <td class="p-4"><span class="px-2 py-0.5 rounded text-[10px] font-bold ${v.status === 'Active' ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20' : 'bg-amber-500/10 text-amber-400'}">${v.status}</span></td>
+                    <td class="p-4 text-gray-400">${v.expiry}</td>
+                    <td class="p-4 text-center">
+                        <button onclick="deleteVoucher('${v.id}')" class="p-1.5 rounded-lg bg-rose-500/10 text-rose-400 hover:bg-rose-500 hover:text-white transition-all">
+                            <i class="fa-solid fa-trash"></i>
+                        </button>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        function deleteVoucher(id) {
+            if (!confirm('Hapus voucher ini?')) return;
+            window.state.vouchers = window.state.vouchers.filter(v => v.id !== id);
+            renderVoucherTable();
+            showToast('Voucher dihapus', 'info');
+        }
+
+        function openManualVoucherModal() {
+            const code = prompt("Masukkan Kode Voucher Manual Baru (contoh: CRB6H999):");
+            if (!code) return;
+            const cat = prompt("Pilih Kategori Durasi (6h / 12h / 1d):", "6h") || "6h";
+            
+            window.state.vouchers.unshift({
+                id: `v-${Date.now()}`,
+                code: code.trim().toUpperCase(),
+                cat: cat.trim().toLowerCase(),
+                customerName: 'Manual Admin',
+                phone: '082293185501',
+                status: 'Active',
+                expiry: '2026-12-31 23:59',
+                createdAt: new Date().toISOString().replace('T', ' ').slice(0, 16)
+            });
+
+            switchVoucherCategory(cat);
+            showToast(`Voucher manual ${code} berhasil dibuat!`, 'success');
+        }
+
+        function printCategoryBatch() {
+            window.print();
+        }
+
+        function handleMikhmonGenerate(e) {
+            e.preventDefault();
+            const qty = parseInt(document.getElementById('gen-qty').value) || 10;
+            const prefix = document.getElementById('gen-prefix').value.trim().toUpperCase() || 'CRB';
+            const profile = document.getElementById('gen-profile').value || 'profile-6h';
+            const cat = profile.includes('12h') ? '12h' : profile.includes('1d') ? '1d' : '6h';
+
+            const newGenerated = [];
+            for (let i = 0; i < qty; i++) {
+                const randCode = prefix + Math.floor(1000 + Math.random() * 9000);
+                newGenerated.push({
+                    id: `v-gen-${Date.now()}-${i}`,
+                    code: randCode,
+                    cat: cat,
+                    customerName: `Mikhmon Bulk Batch #${Math.floor(100 + Math.random() * 900)}`,
+                    phone: 'Mitra Stock',
+                    status: 'Active',
+                    expiry: '2026-12-31 23:59',
+                    createdAt: new Date().toISOString().replace('T', ' ').slice(0, 16)
+                });
+            }
+
+            window.state.vouchers.unshift(...newGenerated);
+            window.state.lastGenerateInfo = {
+                code: Math.floor(100 + Math.random() * 900).toString(),
+                date: new Date().toLocaleDateString('id-ID'),
+                profile: `${profile} (${qty} Pcs)`
+            };
+
+            document.getElementById('last-gen-code').innerText = window.state.lastGenerateInfo.code;
+            document.getElementById('last-gen-date').innerText = window.state.lastGenerateInfo.date;
+            document.getElementById('last-gen-profile').innerText = window.state.lastGenerateInfo.profile;
+
+            switchVoucherCategory(cat);
+            switchAdminTab('vouchers');
+            showToast(`Berhasil Generate ${qty} User/Voucher Mikhmon (${cat})!`, 'success');
+        }
+
+        function printMikhmonBatch(type) {
+            showToast(`Mencetak Batch Voucher Mikhmon (Mode: ${type.toUpperCase()})...`, 'info');
+            window.print();
         }
 
         function renderTransactionTable() {
@@ -1482,15 +1510,15 @@ class MikroTikAPI {
             tbody.innerHTML = '';
             window.state.transactions.forEach(t => {
                 const tr = document.createElement('tr');
-                tr.className = 'border-b border-gray-100 dark:border-slate-800 text-xs';
+                tr.className = 'hover:bg-gray-50 dark:hover:bg-slate-800/50 transition-colors';
                 tr.innerHTML = `
-                    <td class="p-4 font-mono text-gray-400">${t.id}</td>
-                    <td class="p-4 font-bold text-gray-800 dark:text-gray-200">${t.customerName}</td>
-                    <td class="p-4 text-sky-400">${t.package}</td>
-                    <td class="p-4">${t.method}</td>
-                    <td class="p-4 font-black text-amber-500">Rp ${t.amount.toLocaleString('id-ID')}</td>
-                    <td class="p-4"><span class="px-2 py-0.5 rounded text-[10px] bg-emerald-500/20 text-emerald-400 font-bold">${t.status}</span></td>
-                    <td class="p-4 font-mono text-gray-400 text-[11px]">${t.date}</td>
+                    <td class="p-4 font-mono font-bold text-sky-400">${t.id}</td>
+                    <td class="p-4">${t.customerName} <span class="block text-[10px] text-gray-500">${t.phone}</span></td>
+                    <td class="p-4 font-bold text-gray-200">${t.package}</td>
+                    <td class="p-4"><span class="px-2 py-0.5 rounded text-[10px] font-bold bg-indigo-500/10 text-indigo-400">${t.method}</span></td>
+                    <td class="p-4 font-extrabold text-amber-400">Rp ${t.amount.toLocaleString('id-ID')}</td>
+                    <td class="p-4"><span class="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-500/10 text-emerald-400">${t.status}</span></td>
+                    <td class="p-4 text-gray-400">${t.date}</td>
                 `;
                 tbody.appendChild(tr);
             });
@@ -1502,13 +1530,13 @@ class MikroTikAPI {
             tbody.innerHTML = '';
             window.state.customers.forEach(c => {
                 const tr = document.createElement('tr');
-                tr.className = 'border-b border-gray-100 dark:border-slate-800 text-xs';
+                tr.className = 'hover:bg-gray-50 dark:hover:bg-slate-800/50 transition-colors';
                 tr.innerHTML = `
-                    <td class="p-4 font-mono text-gray-400">${c.id}</td>
-                    <td class="p-4 font-bold text-gray-800 dark:text-gray-200">${c.name}</td>
-                    <td class="p-4 text-emerald-400 font-mono">${c.phone}</td>
-                    <td class="p-4 font-black text-amber-500">Rp ${c.totalSpent.toLocaleString('id-ID')}</td>
-                    <td class="p-4 font-mono text-gray-400">${c.lastOrder}</td>
+                    <td class="p-4 font-mono font-bold text-sky-400">${c.id}</td>
+                    <td class="p-4 font-bold text-gray-200">${c.name}</td>
+                    <td class="p-4 font-mono">${c.phone}</td>
+                    <td class="p-4 font-extrabold text-amber-400">Rp ${c.totalSpent.toLocaleString('id-ID')}</td>
+                    <td class="p-4 text-gray-400">${c.lastOrder}</td>
                 `;
                 tbody.appendChild(tr);
             });
@@ -1520,53 +1548,172 @@ class MikroTikAPI {
             tbody.innerHTML = '';
             window.state.resellers.forEach(r => {
                 const tr = document.createElement('tr');
-                tr.className = 'border-b border-gray-100 dark:border-slate-800 text-xs';
+                tr.className = 'hover:bg-gray-50 dark:hover:bg-slate-800/50 transition-colors';
                 tr.innerHTML = `
-                    <td class="p-4 font-bold text-gray-800 dark:text-gray-200">${r.name}</td>
-                    <td class="p-4 text-emerald-400 font-mono">${r.phone}</td>
-                    <td class="p-4 font-mono font-bold text-amber-500">${r.code}</td>
+                    <td class="p-4 font-bold text-gray-200">${r.name}</td>
+                    <td class="p-4 font-mono">${r.phone}</td>
+                    <td class="p-4 font-mono font-bold text-amber-400">${r.code}</td>
                     <td class="p-4 text-gray-400">${r.createdAt}</td>
-                    <td class="p-4"><span class="px-2 py-0.5 rounded text-[10px] bg-emerald-500/20 text-emerald-400 font-bold">${r.status}</span></td>
-                    <td class="p-4 text-center"><button class="text-amber-400 hover:underline">Edit</button></td>
+                    <td class="p-4"><span class="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-500/10 text-emerald-400">${r.status}</span></td>
+                    <td class="p-4 text-center">
+                        <button onclick="copyCode('${r.code}')" class="p-1.5 rounded-lg bg-sky-500/10 text-sky-400 hover:bg-sky-500 hover:text-white transition-all mr-1">
+                            <i class="fa-regular fa-copy"></i>
+                        </button>
+                    </td>
                 `;
                 tbody.appendChild(tr);
             });
         }
 
-        function renderActivityLogs() {
-            const container = document.getElementById('activity-log-list');
-            if (!container) return;
-            container.innerHTML = '';
-            window.state.logs.forEach(log => {
-                const item = document.createElement('div');
-                item.className = 'p-2.5 rounded-xl bg-gray-50 dark:bg-slate-900 border border-gray-100 dark:border-slate-800 font-mono text-[11px] text-gray-300 flex items-start gap-2';
-                item.innerHTML = `<span class="text-sky-500 font-bold shrink-0">[${log.time}]</span> <span>${log.msg}</span>`;
-                container.appendChild(item);
+        function copyCode(str) {
+            navigator.clipboard.writeText(str);
+            showToast(`Kode ${str} tersalin!`, 'info');
+        }
+
+        function openAddResellerModal() {
+            const name = prompt("Nama Mitra / Toko Baru:");
+            if (!name) return;
+            const phone = prompt("No WhatsApp Mitra:", "082293185501") || "082293185501";
+            const code = prompt("Kode Akses Mitra (Contoh: RES2026):", "RES2026") || "RES2026";
+
+            window.state.resellers.push({
+                id: `res-${Date.now()}`,
+                name, phone, code: code.toUpperCase(),
+                status: 'Active',
+                createdAt: new Date().toISOString().slice(0, 10)
             });
+            renderResellersTable();
+            showToast('Mitra Reseller Baru Ditambahkan!', 'success');
+        }
+
+        function renderAdminPackages() {
+            const grid = document.getElementById('admin-packages-grid');
+            if (!grid) return;
+            grid.innerHTML = '';
+            window.state.packages.forEach(p => {
+                const card = document.createElement('div');
+                card.className = 'bg-white dark:bg-slate-800 p-5 rounded-2xl border border-gray-100 dark:border-slate-700 shadow-sm flex flex-col justify-between';
+                card.innerHTML = `
+                    <div>
+                        <div class="flex justify-between items-center mb-2">
+                            <h4 class="font-extrabold text-base text-gray-900 dark:text-white">${p.name}</h4>
+                            <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-sky-500/10 text-sky-400 border border-sky-500/20">${p.cat}</span>
+                        </div>
+                        <div class="text-2xl font-black text-amber-400 my-2">Rp ${p.price.toLocaleString('id-ID')}</div>
+                        <p class="text-xs text-gray-400 font-medium">Speed Limit: ${p.speed} • Profile: ${p.profile}</p>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-gray-100 dark:border-slate-700/60 flex justify-end gap-2">
+                        <button onclick="editPackage('${p.id}')" class="px-3 py-1.5 rounded-xl bg-gray-100 dark:bg-slate-700 text-xs font-bold text-gray-700 dark:text-gray-200">
+                            Edit
+                        </button>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function openAddPackageModal() {
+            const name = prompt("Nama Paket Baru:");
+            if (!name) return;
+            const price = parseInt(prompt("Harga (Rp):", "5000")) || 5000;
+            const duration = prompt("Durasi Paket (contoh: 24 Jam):", "24 Jam") || "24 Jam";
+            const cat = prompt("Kategori (6h / 12h / 1d):", "1d") || "1d";
+
+            window.state.packages.push({
+                id: `pkg-${Date.now()}`,
+                name, duration, cat, price,
+                speed: '4.50 Mbps',
+                profile: `profile-${cat}`,
+                btnColor: 'bg-purple-600 hover:bg-purple-500'
+            });
+
+            renderStorefrontPackages();
+            renderAdminPackages();
+            showToast('Paket Baru Berhasil Ditambahkan!', 'success');
+        }
+
+        function editPackage(id) {
+            const pkg = window.state.packages.find(p => p.id === id);
+            if (!pkg) return;
+            const newPrice = parseInt(prompt(`Edit harga untuk ${pkg.name}:`, pkg.price));
+            if (!isNaN(newPrice)) {
+                pkg.price = newPrice;
+                renderStorefrontPackages();
+                renderAdminPackages();
+                showToast(`Harga ${pkg.name} diperbarui`, 'success');
+            }
+        }
+
+        function fetchRemoteVouchersFromMikrotik() {
+            showToast('Menghubungkan ke MikroTik RouterOS API...', 'info');
+            setTimeout(() => {
+                const sampleRemote = ['CRB6H882191', 'CRB12H304918', 'CRB1D771029'];
+                window.state.remoteVoucherPool.push(...sampleRemote);
+                showToast(`Sync Berhasil! ${sampleRemote.length} voucher disinkronkan dari RouterOS.`, 'success');
+            }, 1000);
+        }
+
+        function saveMikroTikSettings(e) {
+            e.preventDefault();
+            showToast('Pengaturan MikroTik RouterOS disimpan!', 'success');
+        }
+
+        function testMikroTikConnection() {
+            showToast('Ping 192.168.88.1:8728... Connection OK! (2ms)', 'success');
+        }
+
+        function copyPhpApiCode() {
+            const code = document.getElementById('php-code-block')?.innerText;
+            if (code) {
+                navigator.clipboard.writeText(code);
+                showToast('Kode PHP Helper berhasil disalin!', 'info');
+            }
+        }
+
+        function saveAdminWhatsApp(e) {
+            e.preventDefault();
+            const phone = document.getElementById('setting-admin-phone')?.value.trim();
+            if (phone) {
+                window.state.settings.adminPhone = phone;
+                renderStorefrontPackages();
+                showToast('Nomor WhatsApp CS Admin diperbarui!', 'success');
+            }
         }
 
         function renderPaymentMethodsAdminList() {
             const container = document.getElementById('payment-methods-admin-list');
             if (!container) return;
-            container.innerHTML = '';
-            window.state.settings.paymentMethods.forEach(method => {
-                const card = document.createElement('div');
-                card.className = 'p-4 rounded-2xl bg-gray-50 dark:bg-slate-900 border border-gray-100 dark:border-slate-800 flex justify-between items-center';
-                card.innerHTML = `
-                    <div>
-                        <h4 class="font-bold text-xs text-white">${method.name}</h4>
-                        <p class="text-[11px] text-gray-400 font-mono">${method.account}</p>
+            container.innerHTML = window.state.settings.paymentMethods.map(m => `
+                <div class="flex justify-between items-center p-3 rounded-xl bg-gray-50 dark:bg-slate-900 border border-gray-100 dark:border-slate-700 text-xs">
+                    <div class="flex items-center gap-2">
+                        <span class="w-2.5 h-2.5 rounded-full ${m.active ? 'bg-emerald-500' : 'bg-gray-400'}"></span>
+                        <span class="font-bold text-gray-800 dark:text-gray-200">${m.name}</span>
                     </div>
-                    <span class="px-2 py-1 rounded text-[10px] font-bold bg-emerald-500/20 text-emerald-400">Aktif</span>
-                `;
-                container.appendChild(card);
+                    <span class="font-mono text-gray-400">${m.category}</span>
+                </div>
+            `).join('');
+        }
+
+        function openAddPaymentModal() {
+            const name = prompt("Nama Metode Pembayaran Baru:");
+            if (!name) return;
+            window.state.settings.paymentMethods.push({
+                id: `pm-${Date.now()}`,
+                name, category: 'E-WALLET',
+                color: 'bg-emerald-600 text-white',
+                icon: 'fa-wallet',
+                account: '082293185501',
+                note: 'Transfer Manual',
+                active: true
             });
+            renderPaymentMethodsAdminList();
+            renderStorefrontPackages();
+            showToast('Metode Pembayaran Ditambahkan!', 'success');
         }
 
         function initSalesChart() {
-            const canvas = document.getElementById('salesChart');
-            if (!canvas) return;
-            const ctx = canvas.getContext('2d');
+            const ctx = document.getElementById('salesChart')?.getContext('2d');
+            if (!ctx) return;
             if (window.state.salesChartInstance) window.state.salesChartInstance.destroy();
 
             window.state.salesChartInstance = new Chart(ctx, {
@@ -1575,7 +1722,7 @@ class MikroTikAPI {
                     labels: ['Sen', 'Sel', 'Rab', 'Kam', 'Jum', 'Sab', 'Min'],
                     datasets: [{
                         label: 'Penjualan (Rp)',
-                        data: [15000, 22000, 18000, 30000, 25000, 45000, 35000],
+                        data: [12000, 15000, 8000, 20000, 25000, 30000, 10000],
                         borderColor: '#0284c7',
                         backgroundColor: 'rgba(2, 132, 199, 0.1)',
                         fill: true,
@@ -1586,26 +1733,44 @@ class MikroTikAPI {
                     responsive: true,
                     maintainAspectRatio: false,
                     plugins: { legend: { display: false } },
-                    scales: { x: { grid: { display: false } }, y: { grid: { color: 'rgba(255,255,255,0.05)' } } }
+                    scales: { y: { beginAtZero: true } }
                 }
             });
         }
 
-        function handleHotspotLogin() {
-            const input = document.getElementById('login-voucher-code');
-            const code = input ? input.value.trim().toUpperCase() : '';
-            if (!code) { showToast('Masukkan kode voucher!', 'error'); return; }
-            const found = window.state.vouchers.find(v => v.code.toUpperCase() === code);
-            if (found && found.status === 'Active') {
-                showToast(`Login Berhasil! Voucher '${code}' aktif.`, 'success');
-            } else {
-                showToast('Kode Voucher tidak valid atau kadaluarsa!', 'error');
-            }
+        function renderActivityLogs() {
+            const container = document.getElementById('activity-log-list');
+            if (!container) return;
+            container.innerHTML = window.state.logs.map(l => `
+                <div class="p-2.5 rounded-xl bg-slate-950 border border-slate-800/80 font-mono text-[11px]">
+                    <span class="text-amber-400 font-bold">[${l.time}]</span>
+                    <span class="text-gray-300 ml-1">${l.msg}</span>
+                </div>
+            `).join('');
         }
 
-        function openHowToBuyModal() { showToast('Pilih paket WiFi, isi nama, & selesaikan pembayaran QRIS/E-Wallet.', 'info'); }
-        function openCheckVoucherModal() { showToast('Masukkan kode voucher atau nomor WA di kolom pencarian.', 'info'); }
-        function fetchRemoteVouchersFromMikrotik() { showToast('Berhasil sync voucher dari RouterOS MikroTik!', 'success'); }
+        function simulateApiPing() {
+            window.state.logs.unshift({
+                time: new Date().toLocaleTimeString(),
+                msg: 'Manual ping request to MikroTik RouterOS API endpoint (2ms response ok).'
+            });
+            renderActivityLogs();
+            showToast('Ping RouterOS Berhasil!', 'success');
+        }
+
+        function updateDashboardStats() {
+            const soldToday = window.state.transactions.length;
+            const revenue = window.state.transactions.reduce((acc, curr) => acc + curr.amount, 0);
+            const activeV = window.state.vouchers.filter(v => v.status === 'Active').length;
+            const expiredV = window.state.vouchers.filter(v => v.status === 'Expired').length;
+            const totalCust = window.state.customers.length;
+
+            if (document.getElementById('stat-sold-today')) document.getElementById('stat-sold-today').innerText = soldToday;
+            if (document.getElementById('stat-revenue-today')) document.getElementById('stat-revenue-today').innerText = `Rp ${revenue.toLocaleString('id-ID')}`;
+            if (document.getElementById('stat-active-vouchers')) document.getElementById('stat-active-vouchers').innerText = activeV;
+            if (document.getElementById('stat-expired-vouchers')) document.getElementById('stat-expired-vouchers').innerText = expiredV;
+            if (document.getElementById('stat-total-customers')) document.getElementById('stat-total-customers').innerText = totalCust;
+        }
 
         window.addEventListener('DOMContentLoaded', () => {
             renderStorefrontPackages();
@@ -1616,6 +1781,8 @@ class MikroTikAPI {
             renderResellersTable();
             renderActivityLogs();
             renderPaymentMethodsAdminList();
+            populateMidtransFormFields();
+            loadMidtransSnapSdk();
             initSalesChart();
         });
     </script>
